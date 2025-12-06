@@ -1,152 +1,202 @@
+/* Reset dan font */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #fff5f0;
-  color: #333;
+    font-family: 'Poppins', sans-serif;
+    background-color: #2b1b0e; /* dark coffee base */
+    color: #f5e9d3; /* cream text */
 }
 
+/* Navbar */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 30px;
-  background: #ff0066;
-  color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: rgba(43,27,14,0.9);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
-
 .navbar a {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 20px;
+    color: #f5e9d3;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 600;
+}
+.navbar a:hover {
+    color: #ffcc66; /* accent cream */
 }
 
+/* Hero Section */
 .hero {
-  text-align: center;
-  padding: 100px 20px;
-  background: url('assets/gal1.jpg') center/cover no-repeat;
-  color: #fff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #3b2615; /* darker coffee overlay */
+    position: relative;
 }
-
+.hero::after {
+    content: '';
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.3); /* subtle overlay for contrast */
+    z-index:1;
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #f5e9d3;
+}
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    color: #e0d6c3;
+}
 .btn-primary {
-  background: #ff0066;
-  color: #fff;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background 0.3s;
+    padding: 10px 25px;
+    background-color: #ffcc66;
+    color: #2b1b0e;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
 }
-
 .btn-primary:hover {
-  background: #e60057;
+    background-color: #e6b84d;
 }
 
-.promo-grid, .menu-grid, .gallery-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  padding: 20px;
+/* Promo Section */
+.promo-section {
+    padding: 80px 50px;
+    background-color: #3b2615;
+}
+.promo-section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #ffcc66;
+}
+.promo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+.promo-card {
+    background-color: #2b1b0e;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+.promo-card:hover {
+    transform: translateY(-10px);
+}
+.promo-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.promo-card h3 {
+    margin: 15px 0 5px;
+    color: #ffcc66;
+}
+.promo-card p {
+    margin-bottom: 15px;
+    color: #f5e9d3;
 }
 
-.promo-card, .menu-item {
-  background: #fff0f5;
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
-  width: 200px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+/* Menu Section */
+.menu-section {
+    padding: 80px 50px;
+}
+.menu-section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #ffcc66;
+}
+.menu-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+.menu-item {
+    background-color: #2b1b0e;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 200px;
+    text-align: center;
+}
+.menu-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.menu-item h4 {
+    margin: 15px 0 5px;
+    color: #ffcc66;
+}
+.menu-item p {
+    margin-bottom: 15px;
+    color: #f5e9d3;
 }
 
-.promo-card img, .menu-item img, .gallery-grid img {
-  width: 100%;
-  border-radius: 10px;
+/* Gallery Section */
+.gallery-section {
+    padding: 80px 50px;
+    background-color: #3b2615;
+}
+.gallery-section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #ffcc66;
+}
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+.gallery-grid img {
+    width: 220px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
-.promo-card:hover, .menu-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+/* Footer */
+footer {
+    padding: 20px 50px;
+    text-align: center;
+    background-color: #2b1b0e;
+    color: #e0d6c3;
 }
 
+/* Music Button */
 #music-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  font-size: 1.5rem;
-  background: #ff0066;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  padding: 10px;
-  cursor: pointer;
-  z-index: 9999;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 1.5rem;
+    background: #ffcc66;
+    color: #2b1b0e;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 9999;
 }
-
-/* Contact Section */
-.contact-section {
-  background: linear-gradient(135deg, #ffe6f0, #fff0f5);
-  padding: 60px 20px;
-  text-align: center;
-}
-
-.contact-section h2 {
-  font-size: 2.5rem;
-  color: #ff0066;
-  margin-bottom: 10px;
-}
-
-.contact-subtitle {
-  font-size: 1.1rem;
-  margin-bottom: 40px;
-  color: #333;
-}
-
-.contact-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-}
-
-.contact-card {
-  background: #fff;
-  padding: 30px 20px;
-  border-radius: 15px;
-  width: 250px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.contact-card i {
-  color: #ff0066;
-  margin-bottom: 15px;
-}
-
-.contact-card h3 {
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.contact-card p {
-  color: #666;
-  font-size: 0.95rem;
-}
-
-.contact-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-}
-
-.contact-card .btn-primary {
-  display: inline-block;
-  margin-top: 10px;
-  background: #ff0066;
-  color: #fff;
-  padding: 10px 15px;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: background 0.3s ease;
-}
-
-.contact-card .btn-primary:hover {
-  background: #e60057;
+#music-toggle:hover {
+    background-color: #e6b84d;
 }
