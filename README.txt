@@ -11,4 +11,4 @@ How to deploy:
 1. Create a GitHub repository named: shandoz-cafe.github.io
 2. Upload all files preserving the folder structure.
 3. Ensure index.html is in the root.
-4. Wait ~1 minute, then open: https://shandoz-cafe.github.io
+4. Wait ~1 minute, then open: https://shandoz-cafe.github.io/SHANDO-Z/
