@@ -22,7 +22,7 @@ body {
 .hero {
   text-align: center;
   padding: 100px 20px;
-  background: url('gal1.jpg') center/cover no-repeat;
+  background: url('assets/gal1.jpg') center/cover no-repeat;
   color: #fff;
 }
 
@@ -32,6 +32,11 @@ body {
   padding: 10px 20px;
   text-decoration: none;
   border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.btn-primary:hover {
+  background: #e60057;
 }
 
 .promo-grid, .menu-grid, .gallery-grid {
@@ -49,11 +54,17 @@ body {
   text-align: center;
   width: 200px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .promo-card img, .menu-item img, .gallery-grid img {
   width: 100%;
   border-radius: 10px;
+}
+
+.promo-card:hover, .menu-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
 #music-toggle {
@@ -68,4 +79,74 @@ body {
   padding: 10px;
   cursor: pointer;
   z-index: 9999;
+}
+
+/* Contact Section */
+.contact-section {
+  background: linear-gradient(135deg, #ffe6f0, #fff0f5);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 2.5rem;
+  color: #ff0066;
+  margin-bottom: 10px;
+}
+
+.contact-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.contact-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.contact-card {
+  background: #fff;
+  padding: 30px 20px;
+  border-radius: 15px;
+  width: 250px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card i {
+  color: #ff0066;
+  margin-bottom: 15px;
+}
+
+.contact-card h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.contact-card p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.contact-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+}
+
+.contact-card .btn-primary {
+  display: inline-block;
+  margin-top: 10px;
+  background: #ff0066;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.contact-card .btn-primary:hover {
+  background: #e60057;
 }
