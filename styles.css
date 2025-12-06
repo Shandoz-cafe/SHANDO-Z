@@ -109,3 +109,32 @@ body {
   border-radius: 5px;
   text-decoration: none;
 }
+/* Grid default untuk desktop */
+.promo-grid, .menu-grid, .gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+/* Responsive untuk HP */
+@media screen and (max-width: 768px) {
+  .promo-grid, .menu-grid, .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    padding: 10px;
+  }
+  .promo-card, .menu-item {
+    font-size: 0.9rem;
+  }
+  .hero .hero-content h1 {
+    font-size: 1.5rem;
+  }
+  .hero .hero-content p {
+    font-size: 1rem;
+  }
+  .navbar nav a {
+    margin-left: 10px;
+    font-size: 0.9rem;
+  }
+}
