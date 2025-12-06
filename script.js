@@ -4,7 +4,7 @@ links.forEach(link => {
   link.addEventListener('click', function(e){
     e.preventDefault();
     const target = document.querySelector(this.getAttribute('href'));
-    target.scrollIntoView({behavior: 'smooth'});
+    if(target) target.scrollIntoView({ behavior: 'smooth' });
   });
 });
 
@@ -33,7 +33,7 @@ const observer = new IntersectionObserver(entries => {
       entry.target.style.opacity = '1';
     }
   });
-},{threshold:0.1});
+}, { threshold: 0.1 });
 
 promoCards.forEach(card => {
   card.style.transform = 'translateY(50px)';
