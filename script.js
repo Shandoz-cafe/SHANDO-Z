@@ -8,8 +8,8 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
 // Musik autoplay setelah scroll pertama
 const bgm = document.getElementById('bgm');
-let isPlaying = false;
 const toggle = document.getElementById('music-toggle');
+let isPlaying = false;
 
 function startMusic() {
     if (!isPlaying) {
