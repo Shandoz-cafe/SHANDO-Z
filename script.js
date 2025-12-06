@@ -6,14 +6,32 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
-// Music toggle
+// Music autoplay after first scroll
 const bgm = document.getElementById('bgm');
+let isPlaying = false;
 const toggle = document.getElementById('music-toggle');
-let isPlaying = true;
+
+function startMusic() {
+  if (!isPlaying) {
+    bgm.play().catch(e => console.log('Autoplay blocked, user must interact.'));
+    isPlaying = true;
+    toggle.textContent = '🔊';
+    window.removeEventListener('scroll', startMusic);
+  }
+}
+window.addEventListener('scroll', startMusic, { once: true });
+
+// Music toggle button
 toggle.addEventListener('click', () => {
-  if (isPlaying) { bgm.pause(); toggle.textContent = '🔇'; }
-  else { bgm.play(); toggle.textContent = '🔊'; }
-  isPlaying = !isPlaying;
+  if(isPlaying){
+    bgm.pause();
+    toggle.textContent = '🔇';
+    isPlaying = false;
+  } else {
+    bgm.play();
+    toggle.textContent = '🔊';
+    isPlaying = true;
+  }
 });
 
 // Promo card animation
