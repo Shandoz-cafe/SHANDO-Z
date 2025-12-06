@@ -1,83 +1,111 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: #3b2e2e; /* Coffee dark cream */
-  color: #f5f5dc;
+  background-color: #4b3621; /* Coffee dark cream */
+  color: #fff;
 }
 
-/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
-  background-color: #2a1f1f;
+  padding: 10px 30px;
+  background: rgba(0,0,0,0.7);
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 100;
 }
-.navbar a {
-  color: #f5f5dc;
-  margin-left: 30px; /* lebih longgar */
+
+.navbar .logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.navbar nav a {
+  color: #fff;
+  margin-left: 20px;
   text-decoration: none;
   font-weight: 600;
 }
-.navbar a:hover { color: #d4a373; }
-.logo { cursor: pointer; font-weight: bold; }
 
-/* Logo sign timbul */
-.logo-sign {
-  text-shadow: 2px 2px 5px #000;
-}
-
-/* Hero */
 .hero {
+  height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 80vh;
-  background: linear-gradient(to right, #3c2f2f, #2e1f1f);
+  align-items: center;
   text-align: center;
+  background: linear-gradient(135deg, #4b3621, #362c1f);
 }
 
-/* Promo grid dua baris */
+.hero .btn-primary {
+  display: inline-block;
+  padding: 10px 25px;
+  margin-top: 20px;
+  background: #ff6f61;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .promo-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-  justify-content: center;
-  margin-top: 30px;
-}
-@media(max-width: 900px){
-  .promo-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media(max-width: 600px){
-  .promo-grid { grid-template-columns: 1fr; }
+  padding: 20px;
 }
 
-/* Contact card modern */
-.contact-section {
-  padding: 100px 20px;
-  text-align: center;
-  min-height: 100vh;
-  position: relative;
-  background-color: #2e1f1f;
-}
-.contact-section .contact-card {
-  background: rgba(212, 163, 115, 0.1);
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-  display: inline-block;
-}
-.contact-buttons a {
-  display: inline-block;
-  padding: 15px 30px;
-  margin: 10px;
-  background-color: #d4a373;
-  color: #fff;
+.promo-card {
+  background: rgba(0,0,0,0.5);
   border-radius: 10px;
-  text-decoration: none;
-  font-weight: 600;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s;
 }
-.contact-buttons a:hover { background-color: #b5835a; transform: translateY(-3px); }
+
+.promo-card:hover {
+  transform: translateY(-10px);
+}
+
+.menu-grid, .gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.menu-item, .gallery-grid img {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#music-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 1.5rem;
+  background: #ff0066;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.contact-section {
+  padding: 50px 30px;
+  text-align: center;
+  background: rgba(0,0,0,0.6);
+  margin: 20px;
+  border-radius: 15px;
+}
+.contact-section a.btn-primary {
+  background: #25d366;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+}
