@@ -4,78 +4,119 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shando’z Café</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <!-- Background Music -->
-  <audio autoplay loop>
-    <source src="assets/music/bg-music.mp3" type="audio/mpeg" />
-  </audio>
-
   <!-- NAVBAR -->
-  <header>
-    <nav class="navbar">
-      <div class="logo">Shando’z Café</div>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#menu">Menu</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+  <header class="navbar">
+    <div class="logo">Shando’z Café</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#promo">Promo</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <!-- HERO SECTION -->
+  <!-- HERO -->
   <section id="home" class="hero">
-    <div class="hero-text">
-      <h1>Welcome to Shando’z Café</h1>
-      <p>The Finest Coffee & Cozy Place In Town</p>
-      <a href="#menu" class="btn">Explore Menu</a>
+    <div class="hero-content">
+      <h1>Coffee. Comfort. Community.</h1>
+      <p>Your favorite cozy café in town.</p>
+      <a href="#menu" class="btn-primary">Explore Menu</a>
+    </div>
+  </section>
+
+  <!-- PROMO SECTION -->
+  <section id="promo" class="promo-section">
+    <h2>Promo Hari Ini</h2>
+    <div class="promo-grid">
+      <div class="promo-card">
+        <img src="assets/img/promo1.jpg" />
+        <h3>Buy 1 Get 1 Coffee</h3>
+        <p>Berlaku setiap hari Senin.</p>
+      </div>
+      <div class="promo-card">
+        <img src="assets/img/promo2.jpg" />
+        <h3>Diskon 20% All Menu</h3>
+        <p>Setiap pembelian di atas 100k.</p>
+      </div>
+      <div class="promo-card">
+        <img src="assets/img/promo3.jpg" />
+        <h3>Free Snack</h3>
+        <p>Khusus dine-in mulai 19.00–22.00.</p>
+      </div>
+      <div class="promo-card">
+        <img src="assets/img/promo4.jpg" />
+        <h3>Happy Hour Drinks</h3>
+        <p>Diskon 30% pukul 15.00–17.00.</p>
+      </div>
+      <div class="promo-card">
+        <img src="assets/img/promo5.jpg" />
+        <h3>Member Card Bonus</h3>
+        <p>Gratis 1 minuman setiap 8 pembelian.</p>
+      </div>
+    </div>
+      <div class="promo-card">
+        <img src="assets/img/promo2.jpg" />
+        <h3>Diskon 20% All Menu</h3>
+        <p>Setiap pembelian di atas 100k.</p>
+      </div>
+      <div class="promo-card">
+        <img src="assets/img/promo3.jpg" />
+        <h3>Free Snack</h3>
+        <p>Khusus dine-in mulai 19.00–22.00.</p>
+      </div>
     </div>
   </section>
 
   <!-- MENU SECTION -->
   <section id="menu" class="menu-section">
-    <h2>Our Menu</h2>
+    <h2>Daftar Menu</h2>
     <div class="menu-grid">
-      <div class="menu-card"><img src="assets/img/coffee1.jpg" /><h3>Caramel Latte</h3><p>IDR 25.000</p></div>
-      <div class="menu-card"><img src="assets/img/coffee2.jpg" /><h3>Hazelnut Coffee</h3><p>IDR 23.000</p></div>
-      <div class="menu-card"><img src="assets/img/food1.jpg" /><h3>French Fries</h3><p>IDR 18.000</p></div>
-      <div class="menu-card"><img src="assets/img/food2.jpg" /><h3>Beef Burger</h3><p>IDR 35.000</p></div>
+      <div class="menu-item"><img src="assets/img/coffee1.jpg"><h4>Caramel Latte</h4><p>IDR 25.000</p></div>
+      <div class="menu-item"><img src="assets/img/coffee2.jpg"><h4>Cappuccino</h4><p>IDR 22.000</p></div>
+      <div class="menu-item"><img src="assets/img/food1.jpg"><h4>French Fries</h4><p>IDR 18.000</p></div>
+      <div class="menu-item"><img src="assets/img/food2.jpg"><h4>Chicken Wings</h4><p>IDR 28.000</p></div>
     </div>
   </section>
 
-  <!-- GALLERY -->
+  <!-- GALLERY SECTION -->
   <section id="gallery" class="gallery-section">
-    <h2>Gallery</h2>
+    <h2>Gallery Café</h2>
     <div class="gallery-grid">
-      <img src="assets/img/gal1.jpg" />
-      <img src="assets/img/gal2.jpg" />
-      <img src="assets/img/gal3.jpg" />
-      <img src="assets/img/gal4.jpg" />
+      <img src="assets/img/gal1.jpg">
+      <img src="assets/img/gal2.jpg">
+      <img src="assets/img/gal3.jpg">
+      <img src="assets/img/gal4.jpg">
     </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="about-section">
-    <h2>About Us</h2>
-    <p>Shando’z Café adalah tempat nongkrong cozy dengan vibes modern, menyediakan kopi premium, makanan ringan, dan suasana yang nyaman untuk bekerja maupun santai.</p>
   </section>
 
   <!-- CONTACT -->
   <section id="contact" class="contact-section">
-    <h2>Contact Us</h2>
-    <p>Lokasi: Jl. Contoh No. 123, Indonesia</p>
+    <h2>Hubungi Kami</h2>
+    <p>Lokasi: Jl. Banceuy Permai C3 No.88 Sumur Bandung</p>
     <p>Jam Operasional: 10.00–23.00</p>
-    <a class="btn" href="https://wa.me/6281234567890" target="_blank">Order via WhatsApp</a>
+    <a href="https://wa.me/6285706370841" class="btn-primary">Order via WhatsApp</a>
   </section>
 
   <footer>
     <p>© 2025 Shando’z Café. All Rights Reserved.</p>
   </footer>
+
+  <audio id="bgm" src="Valir Phoenix.mp3" autoplay loop hidden></audio>
+  <script>
+    const bgm = document.getElementById('bgm');
+    bgm.volume = 1.0;
+  </script>
+  <audio id="bgm" src="Valir Phoenix.mp3" autoplay loop hidden></audio>
+  <script>
+    const bgm = document.getElementById('bgm');
+    bgm.volume = 1.0;
+  </script>
 </body>
 </html>
