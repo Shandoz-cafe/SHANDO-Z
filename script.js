@@ -6,35 +6,35 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
-// Music autoplay after first scroll
+// Musik autoplay setelah scroll pertama
 const bgm = document.getElementById('bgm');
 let isPlaying = false;
 const toggle = document.getElementById('music-toggle');
 
 function startMusic() {
-  if (!isPlaying) {
-    bgm.play().catch(e => console.log('Autoplay blocked, user must interact.'));
-    isPlaying = true;
-    toggle.textContent = '🔊';
-    window.removeEventListener('scroll', startMusic);
-  }
+    if (!isPlaying) {
+        bgm.play().catch(e => console.log('Autoplay diblokir, klik tombol untuk memulai'));
+        isPlaying = true;
+        toggle.textContent = '🔊';
+        window.removeEventListener('scroll', startMusic);
+    }
 }
 window.addEventListener('scroll', startMusic, { once: true });
 
-// Music toggle button
+// Tombol toggle musik
 toggle.addEventListener('click', () => {
-  if(isPlaying){
-    bgm.pause();
-    toggle.textContent = '🔇';
-    isPlaying = false;
-  } else {
-    bgm.play();
-    toggle.textContent = '🔊';
-    isPlaying = true;
-  }
+    if(isPlaying){
+        bgm.pause();
+        toggle.textContent = '🔇';
+        isPlaying = false;
+    } else {
+        bgm.play();
+        toggle.textContent = '🔊';
+        isPlaying = true;
+    }
 });
 
-// Promo card animation
+// Animasi promo card
 document.querySelectorAll('.promo-card').forEach(card => {
   card.style.transform = 'translateY(30px)';
   card.style.opacity = '0';
