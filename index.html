@@ -1,75 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shando’z Café & Coffee Bar</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shando'z Café & Coffee Bar</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<header class="navbar">
-  <div class="logo" onclick="location.href='#home'">Shando’z Café & Coffee Bar</div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#promo">Promo</a>
-    <a href="#menu">Menu</a>
-    <a href="#gallery">Gallery</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-</header>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo" id="logo">Shando'z Café & Coffee Bar</div>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#promo">Promo</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a href="qponpromo.html">Qpon</a>
+    </nav>
+  </header>
 
-<section id="home" class="hero">
+  <!-- HERO (VIDEO BACKGROUND) -->
+  <section id="home" class="hero">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="qponpromo.mp4" type="video/mp4">
+      <!-- fallback image if browser blocks video -->
+    </video>
 
-  <!-- 🔥 VIDEO BACKGROUND -->
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="qponpromo.mp4" type="video/mp4">
-  </video>
+    <div class="hero-overlay"></div>
 
-  <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <h1 class="hero-title">Shando'z Café & Coffee Bar</h1>
+      <p class="hero-sub">Coffee. Comfort. Community.</p>
+      <a class="btn-cta" href="#menu">Explore Menu</a>
+    </div>
+  </section>
 
-  <div class="hero-content">
-    <h1>Shando'z Cafe & Coffee Bar</h1>
-    <p>Your favorite cozy café in town.</p>
-    <a href="#menu" class="btn-primary">Explore Menu</a>
+  <!-- PROMO (2 rows grid) -->
+  <section id="promo" class="promo-section">
+    <div class="container">
+      <h2 class="section-title">Promo Spesial</h2>
+      <div class="promo-grid">
+        <div class="promo-card"><img src="promo1.jpg" alt="promo1"></div>
+        <div class="promo-card"><img src="promo2.jpg" alt="promo2"></div>
+        <div class="promo-card"><img src="promo3.jpg" alt="promo3"></div>
+        <div class="promo-card"><img src="promo4.jpg" alt="promo4"></div>
+        <div class="promo-card"><img src="promo5.jpg" alt="promo5"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU (7 items, no desc/price) -->
+  <section id="menu" class="menu-section">
+    <div class="container">
+      <h2 class="section-title">Our Menu</h2>
+      <div class="menu-grid">
+        <div class="menu-item" data-media="menu1.jpg"><img src="menu1.jpg" alt="menu1"></div>
+        <div class="menu-item" data-media="menu2.jpg"><img src="menu2.jpg" alt="menu2"></div>
+        <div class="menu-item" data-media="menu3.jpg"><img src="menu3.jpg" alt="menu3"></div>
+        <div class="menu-item" data-media="menu4.jpg"><img src="menu4.jpg" alt="menu4"></div>
+        <div class="menu-item" data-media="menu5.jpg"><img src="menu5.jpg" alt="menu5"></div>
+        <div class="menu-item" data-media="menu6.jpg"><img src="menu6.jpg" alt="menu6"></div>
+        <div class="menu-item" data-media="menu7.jpg"><img src="menu7.jpg" alt="menu7"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="gallery-section">
+    <div class="container">
+      <h2 class="section-title">Gallery</h2>
+      <div class="gallery-grid">
+        <img class="lightbox-trigger" src="gal1.jpg" alt="gal1" data-full="gal1.jpg">
+        <img class="lightbox-trigger" src="gal2.jpg" alt="gal2" data-full="gal2.jpg">
+        <img class="lightbox-trigger" src="gal3.jpg" alt="gal3" data-full="gal3.jpg">
+        <img class="lightbox-trigger" src="gal4.jpg" alt="gal4" data-full="gal4.jpg">
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX (hidden) -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button id="lightbox-close" class="lightbox-close" aria-label="Close">✕</button>
+    <img id="lightbox-img" src="" alt="">
   </div>
 
-</section>
+  <!-- CONTACT PREVIEW (link to contact.html) -->
+  <section id="contact-preview" class="contact-preview">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <p>Jl. Banceuy Permai C3 No.88, Sumur Bandung — 10.00–23.00</p>
+      <div class="contact-row">
+        <a class="btn-contact" href="https://wa.me/6285706370841" target="_blank">WhatsApp</a>
+        <a class="btn-contact" href="contact.html">Detail Kontak</a>
+      </div>
+    </div>
+  </section>
 
-<section id="promo" class="promo-section">
-  <h2>Promo Everyday</h2>
-  <div class="promo-grid">
-    <div class="promo-card"><img src="promo1.jpg" alt=""><h3>Paket Kenyang 1</h3><p>Berlaku setiap hari Senin.</p></div>
-    <div class="promo-card"><img src="promo2.jpg" alt=""><h3>Paket Kenyang 2</h3><p>Setiap pembelian di atas 100k</p></div>
-    <div class="promo-card"><img src="promo3.jpg" alt=""><h3>Paket Kenyang 3</h3><p>Khusus dine-in 19.00–22.00</p></div>
-    <div class="promo-card"><img src="promo4.jpg" alt=""><h3>Paket Kenyang 4</h3><p>Diskon 30% pukul 15.00–17.00</p></div>
-    <div class="promo-card"><img src="promo5.jpg" alt=""><h3>Paket Kenyang 5</h3><p>Gratis 1 minuman setiap 8 pembelian</p></div>
-  </div>
-</section>
+  <!-- AUDIO (user-controlled but script will try to start politely) -->
+  <audio id="bgm" src="Valir Phoenix.mp3" loop preload="auto"></audio>
+  <button id="music-toggle" class="music-toggle" aria-label="Toggle music">🔇</button>
 
-<section id="menu" class="menu-section">
-  <h2>Daftar Menu</h2>
-  <div class="menu-grid">
-    <div class="menu-item"><img src="coffee1.jpg" alt=""><h4>Caramel Latte</h4><p>IDR 25.000</p></div>
-    <div class="menu-item"><img src="coffee2.jpg" alt=""><h4>Cappuccino</h4><p>IDR 22.000</p></div>
-    <div class="menu-item"><img src="food1.jpg" alt=""><h4>French Fries</h4><p>IDR 18.000</p></div>
-    <div class="menu-item"><img src="food2.jpg" alt=""><h4>Chicken Wings</h4><p>IDR 28.000</p></div>
-  </div>
-</section>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-left">© 2025 Shando'z Café & Coffee Bar</div>
+      <div class="footer-right">
+        <a href="qponpromo.html" class="footer-link">Qpon Promo</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+    </div>
+  </footer>
 
-<section id="gallery" class="gallery-section">
-  <h2>Gallery Café</h2>
-  <div class="gallery-grid">
-    <img src="gal1.jpg" alt="">
-    <img src="gal2.jpg" alt="">
-    <img src="gal3.jpg" alt="">
-    <img src="gal4.jpg" alt="">
-  </div>
-</section>
-
-<audio id="bgm" src="Valir Phoenix.mp3" loop></audio>
-<button id="music-toggle">🔊</button>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
