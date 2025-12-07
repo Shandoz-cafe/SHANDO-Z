@@ -1,0 +1,20 @@
+{
+  "name": "Shando'z Café & Coffee Bar",
+  "short_name": "Shando'z Café",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#1c1613",
+  "theme_color": "#d6b585",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
