@@ -27,6 +27,45 @@
 
 <!-- CSS -->
 <link rel="stylesheet" href="styles.css" />
+
+<style>
+/* === FLOATING WHATSAPP === */
+.wa-floating {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 55px;
+  height: 55px;
+  background: #25D366;
+  border-radius: 50%;
+  color: white;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 999;
+}
+
+/* === MUSIC BUTTON FIX === */
+.music-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 95px;
+  width: 55px;
+  height: 55px;
+  background: #222;
+  color: white;
+  border-radius: 50%;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  border: none;
+}
+</style>
 </head>
 <body>
 
@@ -51,7 +90,7 @@
   <div class="hero-inner">
     <h1 class="hero-title">Shando'z Café & Coffee Bar</h1>
     <p class="hero-sub">Coffee · Comfort · Community</p>
-    <a class="btn-cta" href="#menu">Explore Menu</a>
+    <a class="btn-cta" href="#menu" id="exploreMenuBtn">Explore Menu</a>
   </div>
 </section>
 
@@ -123,8 +162,12 @@
   </div>
 </section>
 
+<!-- MUSIC -->
 <audio id="bgm" src="Valir Phoenix.mp3" loop preload="auto"></audio>
 <button id="music-toggle" class="music-toggle">🔇</button>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/6285706370841" class="wa-floating" target="_blank">💬</a>
 
 <footer class="site-footer">
   <div class="container">
@@ -134,10 +177,33 @@
 </footer>
 
 <script src="script.js"></script>
+
 <script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js");
+// === MUSIK AUTO PLAY SAAT CLICK EXPLORE MENU ===
+const bgm = document.getElementById("bgm");
+const musicBtn = document.getElementById("music-toggle");
+
+document.getElementById("exploreMenuBtn").addEventListener("click", () => {
+  bgm.muted = false;
+  bgm.play().catch(()=>{});
+  musicBtn.textContent = "🔊";
+});
+
+// === TOGGLE MUSIK ===
+musicBtn.addEventListener("click", () => {
+  if (bgm.paused) {
+    bgm.play();
+    musicBtn.textContent = "🔊";
+  } else {
+    bgm.pause();
+    musicBtn.textContent = "🔇";
   }
+});
+
+// SERVICE WORKER
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
 </script>
 
 </body>
