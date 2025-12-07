@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Shando'z Café & Coffee Bar</title>
 
-<!-- SEO + SHARE PREVIEW -->
+<!-- SHARE PREVIEW -->
 <meta name="description" content="Shando'z Café & Coffee Bar – Coffee · Comfort · Community">
 
 <meta property="og:title" content="Shando'z Café & Coffee Bar">
@@ -29,7 +29,7 @@
 <link rel="stylesheet" href="styles.css" />
 
 <style>
-/* === FLOATING WHATSAPP === */
+/* FLOATING WHATSAPP */
 .wa-floating {
   position: fixed;
   bottom: 25px;
@@ -48,8 +48,8 @@
   z-index: 999;
 }
 
-/* === MUSIC BUTTON FIX === */
-.music-toggle {
+/* MUSIC BUTTON */
+#music-toggle {
   position: fixed;
   bottom: 25px;
   right: 95px;
@@ -145,13 +145,13 @@
 </section>
 
 <!-- LIGHTBOX -->
-<div id="lightbox" class="lightbox" aria-hidden="true">
+<div id="lightbox" class="lightbox">
   <button id="lightbox-close" class="lightbox-close">✕</button>
   <img id="lightbox-img" src="">
 </div>
 
-<!-- CONTACT PREVIEW -->
-<section id="contact-preview" class="contact-preview">
+<!-- CONTACT -->
+<section id="contact-preview">
   <div class="container">
     <h2 class="section-title">Contact Us</h2>
     <p class="muted">Jl. Banceuy Permai C3 No.88, Sumur Bandung · 10.00–23.00</p>
@@ -164,7 +164,7 @@
 
 <!-- MUSIC -->
 <audio id="bgm" src="Valir Phoenix.mp3" loop preload="auto"></audio>
-<button id="music-toggle" class="music-toggle">🔇</button>
+<button id="music-toggle">🔇</button>
 
 <!-- FLOATING WA -->
 <a href="https://wa.me/6285706370841" class="wa-floating" target="_blank">💬</a>
@@ -176,31 +176,32 @@
   </div>
 </footer>
 
+<!-- MAIN SCRIPT -->
 <script src="script.js"></script>
 
 <script>
-// === MUSIK AUTO PLAY SAAT CLICK EXPLORE MENU ===
+// === AUTO PLAY MUSIK SAAT CLICK EXPLORE MENU ===
 const bgm = document.getElementById("bgm");
-const musicBtn = document.getElementById("music-toggle");
+const playBtn = document.getElementById("music-toggle");
 
 document.getElementById("exploreMenuBtn").addEventListener("click", () => {
   bgm.muted = false;
   bgm.play().catch(()=>{});
-  musicBtn.textContent = "🔊";
+  playBtn.textContent = "🔊";
 });
 
 // === TOGGLE MUSIK ===
-musicBtn.addEventListener("click", () => {
+playBtn.addEventListener("click", () => {
   if (bgm.paused) {
     bgm.play();
-    musicBtn.textContent = "🔊";
+    playBtn.textContent = "🔊";
   } else {
     bgm.pause();
-    musicBtn.textContent = "🔇";
+    playBtn.textContent = "🔇";
   }
 });
 
-// SERVICE WORKER
+// === SERVICE WORKER ===
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js");
 }
