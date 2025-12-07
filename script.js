@@ -113,3 +113,23 @@ qs('.menu-carousel').addEventListener('touchend', e=>{
     update();
   }
 });
+
+const shareBtn = document.getElementById("shareBtn");
+
+if (navigator.share) {
+  shareBtn.addEventListener("click", async () => {
+    try {
+      await navigator.share({
+        title: "Shando'z Café & Coffee Bar",
+        text: "Coffee · Comfort · Community",
+        url: "https://shandozcafe.site"
+      });
+    } catch (err) {
+      console.log("Share canceled", err);
+    }
+  });
+} else {
+  shareBtn.addEventListener("click", () => {
+    alert("Fitur share tidak didukung di perangkat ini.");
+  });
+}
