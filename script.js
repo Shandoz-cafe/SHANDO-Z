@@ -87,7 +87,12 @@ function updateCarousel(){
   // pre-load adjacent images (helps large JPG)
   const prev = slides[(currentIndex-1+slides.length)%slides.length];
   const next = slides[(currentIndex+1)%slides.length];
-  [prev,next].forEach(s=>{ const img = s.querySelector('img'); if(img && img.dataset && img.dataset.src){ img.src = img.dataset.src; }});
+  [prev,next].forEach(s=>{ 
+    const img = s.querySelector('img'); 
+    if(img && img.dataset && img.dataset.src){ 
+      img.src = img.dataset.src; 
+    }
+  });
 }
 if(slides.length && dotsWrap){
   dotsWrap.innerHTML = slides.map((_,i)=> `<span class="carousel-dot ${i===0?'active':''}" data-i="${i}"></span>`).join('');
@@ -108,7 +113,8 @@ if(swipeZone){
     if(!moved) return;
     const dx = e.changedTouches[0].clientX - startX;
     if(Math.abs(dx) < 30) return;
-    if(dx < 0) { currentIndex = (currentIndex+1)%slides.length; } else { currentIndex = (currentIndex-1+slides.length)%slides.length; }
+    if(dx < 0) { currentIndex = (currentIndex+1)%slides.length; } 
+    else { currentIndex = (currentIndex-1+slides.length)%slides.length; }
     updateCarousel();
   });
 }
