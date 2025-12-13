@@ -101,11 +101,11 @@ window.addEventListener('load', () => {
 
     ctx.fillStyle='#fff';
     ctx.font='18px sans-serif';
-    ctx.fillText("Tunjukkan kode ini untuk klaim promo di Shando'z Café.",40,220);
+    ctx.fillText("Tunjukkan kode ini untuk klaim promo PAKET KENYANG di Shando'z Café.",40,220);
 
     ctx.fillStyle='#dcdcdc';
     ctx.font='16px sans-serif';
-    ctx.fillText('Berlaku sampai: 31 Dec ' + (new Date().getFullYear()), 40, 280);
+    ctx.fillText('Berlaku sampai: 31 Dec (www.shandozcafe.site) ' + (new Date().getFullYear()), 40, 280);
 
     const url=c.toDataURL('image/png');
     const a=document.createElement('a');
