@@ -244,12 +244,12 @@ body{
 /* posisi & arah keluar */
 #tree-left{
   left: 12px;
-  --exit-x: -220px;
+  --exit-x: -260px;
 }
 
 #tree-right{
   right: 12px;
-  --exit-x: 220px;
+  --exit-x: 260px;
 }
 
 /* animasi */
@@ -264,11 +264,11 @@ body{
   }
   100%{
     opacity: 0;
-    transform: translateX(var(--exit-x)) scale(0.9);
+    transform: translateX(var(--exit-x)) scale(0.85);
   }
 }
 
-/* desktop lebih santai */
+/* desktop lebih lama */
 @media (min-width:768px){
   .tree{
     animation-duration: 8s;
