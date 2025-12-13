@@ -226,25 +226,54 @@ body{
 .dot{width:10px;height:10px;background:rgba(255,255,255,0.12);border-radius:50%;border:none;cursor:pointer}
 .dot.active{background:var(--cream)}
 
-/* CHRISTMAS DECOR */
-.tree {
+/* ===============================
+   CHRISTMAS TREE – AUTO EXIT
+================================ */
+.tree{
   position: fixed;
+  top: 120px;
   width: 110px;
   z-index: 9000;
-  animation: floatTree 4s ease-in-out infinite;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,.6));
   pointer-events: none;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,.6));
+
+  --exit-x: 0px;
+  animation: treeExit 6s ease-in-out forwards;
 }
 
-#tree-left { left: 12px; top: 120px; animation-delay: .2s; }
-#tree-right { right: 12px; top: 120px; animation-delay: .6s; }
-
-@keyframes floatTree {
-  0% { transform: translateY(0) }
-  50% { transform: translateY(-16px) }
-  100% { transform: translateY(0) }
+/* posisi & arah keluar */
+#tree-left{
+  left: 12px;
+  --exit-x: -220px;
 }
 
+#tree-right{
+  right: 12px;
+  --exit-x: 220px;
+}
+
+/* animasi */
+@keyframes treeExit{
+  0%{
+    opacity: 1;
+    transform: translate(0,0) scale(1);
+  }
+  70%{
+    opacity: 1;
+    transform: translateY(-12px) scale(1);
+  }
+  100%{
+    opacity: 0;
+    transform: translateX(var(--exit-x)) scale(0.9);
+  }
+}
+
+/* desktop lebih santai */
+@media (min-width:768px){
+  .tree{
+    animation-duration: 8s;
+  }
+}
 /* Kado full-width di bagian bawah */
 .gift {
   position: fixed;
