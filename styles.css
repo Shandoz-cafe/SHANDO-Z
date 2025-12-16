@@ -526,3 +526,53 @@ body{
   border-radius:2px;
   }
 
+/* =================================================
+   SCROLL CINEMATIC EFFECT (GLOBAL)
+================================================= */
+
+/* HERO PARALLAX */
+.hero{
+  overflow:hidden;
+}
+
+.hero-video{
+  will-change: transform;
+  transition: transform .12s linear;
+}
+
+/* =================================
+   STAGGER TEXT (HALUS & PREMIUM)
+================================= */
+.stagger span{
+  display:inline-block;
+  opacity:0;
+  transform: translateY(22px);
+  transition:
+    opacity .6s ease,
+    transform .6s ease;
+}
+
+.stagger.show span{
+  opacity:1;
+  transform: translateY(0);
+}
+
+.stagger span{
+  transition-delay: calc(var(--i) * 0.06s);
+}
+
+/* =================================
+   SCROLL FADE-UP (ALL SECTION)
+================================= */
+.reveal{
+  opacity:0;
+  transform: translateY(45px);
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+.reveal.show{
+  opacity:1;
+  transform: translateY(0);
+}
