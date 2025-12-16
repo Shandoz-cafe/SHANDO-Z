@@ -345,7 +345,7 @@ hamburgerBtn?.addEventListener("click", () => {
   if(burger && menu){
     burger.addEventListener('click', ()=>{
       menu.classList.toggle('show');
-    });
+    }); 
 
     // AUTO CLOSE MENU WHEN LINK CLICKED
     menu.querySelectorAll('a').forEach(link=>{
