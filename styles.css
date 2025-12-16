@@ -489,3 +489,21 @@ body{
   .nav-links a{font-size:16px}
 }
 
+/* CONTACT LOGO */
+.contact-logo{
+  display:flex;
+  justify-content:center;
+  margin-bottom:16px;
+}
+
+.contact-logo img{
+  height:60px;
+  width:auto;
+  opacity:.95;
+}
+
+@media (min-width:768px){
+  .contact-logo img{
+    height:72px;
+  }
+}
