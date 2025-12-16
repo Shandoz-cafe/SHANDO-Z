@@ -507,3 +507,26 @@ body{
     height:72px;
   }
 }
+
+/* ABOUT LOGO */
+.about-logo{
+  position: relative;
+  z-index: 6;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.about-logo img{
+  height: 70px;
+  width: auto;
+  opacity: 0.95;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.45));
+}
+
+/* mobile */
+@media (max-width:480px){
+  .about-logo img{
+    height: 52px;
+  }
+}
