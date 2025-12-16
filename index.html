@@ -2,169 +2,151 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Maintenance – Shando’z Café</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shando’z Café — Maintenance</title>
 
 <style>
 :root{
   --bg:#1c1613;
   --cream:#e6c899;
+  --card:#2a221e;
 }
-
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-  margin:0;
-  font-family: system-ui, Arial;
-  background: radial-gradient(circle at top, #2a221e, #0e0b09);
+  font-family:system-ui,Arial;
+  background:radial-gradient(circle at top,#2a221e,#1c1613);
   color:var(--cream);
+  height:100vh;
   overflow:hidden;
-  text-align:center;
 }
 
-/* TOP BRAND BAR */
-.brand-bar{
+/* NAV */
+.navbar{
   position:fixed;
-  top:0;
-  left:0;
-  right:0;
+  top:0;left:0;right:0;
   height:64px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   background:rgba(0,0,0,.55);
   backdrop-filter:blur(10px);
-  z-index:20;
-}
-
-.brand-bar img{
-  height:42px;
-  object-fit:contain;
-}
-
-/* UI */
-#ui{
-  position:fixed;
-  top:76px;
-  left:50%;
-  transform:translateX(-50%);
-  background:rgba(0,0,0,.45);
-  backdrop-filter:blur(8px);
-  padding:10px 18px;
-  border-radius:12px;
   display:flex;
-  gap:18px;
-  font-weight:700;
+  align-items:center;
+  padding:0 18px;
   z-index:10;
 }
+.logo img{height:44px}
 
-#game{
-  position:relative;
-  width:100vw;
-  height:100vh;
-  padding-top:120px;
+/* CENTER TEXT */
+.center{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  pointer-events:none;
+}
+.center h1{
+  font-size:38px;
+  letter-spacing:1px;
+}
+.center p{
+  opacity:.85;
+  margin-top:8px;
 }
 
+/* BUG */
 .bug{
   position:absolute;
   font-size:38px;
   cursor:pointer;
-  animation: pop .15s ease;
   user-select:none;
+  animation:float 6s linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(110vh)}
+  to{transform:translateY(-120px)}
 }
 
-@keyframes pop{
-  from{transform:scale(.5)}
-  to{transform:scale(1)}
-}
-
-h1{
-  margin:90px 0 6px;
-  font-size:26px;
-}
-
-p{opacity:.75}
-
-#footer{
+/* SCORE */
+.score{
   position:fixed;
-  bottom:14px;
-  width:100%;
-  text-align:center;
+  bottom:20px;
+  right:20px;
+  background:rgba(0,0,0,.55);
+  padding:12px 16px;
+  border-radius:12px;
+  font-weight:700;
+}
+
+/* HINT */
+.hint{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  opacity:.7;
   font-size:14px;
-  opacity:.65;
 }
 </style>
 </head>
 
 <body>
 
-<!-- BRAND -->
-<div class="brand-bar">
-  <img src="logoshan.png" alt="Shando’z Café & Coffee Bar">
+<!-- NAV -->
+<div class="navbar">
+  <div class="logo">
+    <img src="logoshan.png" alt="Shando'z">
+  </div>
 </div>
 
-<!-- SCORE -->
-<div id="ui">
-  <div>🐜 Skor: <span id="score">0</span></div>
-  <div>⏱️ <span id="time">30</span>s</div>
+<!-- TEXT -->
+<div class="center">
+  <h1>🚧 Site Lagi Diperbaiki</h1>
+  <p>Sambil nunggu, hancurin serangganya 😈</p>
 </div>
 
-<h1>🔧 Website Maintenance</h1>
-<p>Sambil nunggu kopi siap, basmi serangganya ☕</p>
+<div class="score">🪳 Dihancurin: <span id="score">0</span></div>
+<div class="hint">Tap serangga untuk mulai 🎵</div>
 
-<div id="game"></div>
-
-<div id="footer">
-  Shando’z Café & Coffee Bar
-</div>
+<!-- AUDIO -->
+<audio id="bgm" src="cozycoffeehouse.mp3" loop></audio>
+<audio id="clickSound" src="click.mp3"></audio>
 
 <script>
-const game = document.getElementById("game");
-const scoreEl = document.getElementById("score");
-const timeEl = document.getElementById("time");
-
 let score = 0;
-let time = 30;
-let playing = true;
-
-const bugs = ["🐜","🪳","🦟","🐞"];
+let musicStarted = false;
 
 function spawnBug(){
-  if(!playing) return;
-
   const bug = document.createElement("div");
   bug.className = "bug";
-  bug.textContent = bugs[Math.floor(Math.random()*bugs.length)];
-
-  bug.style.left = Math.random()*(window.innerWidth - 50) + "px";
-  bug.style.top = (Math.random()*(window.innerHeight - 200) + 120) + "px";
+  bug.textContent = ["🪳","🦟","🪰"][Math.floor(Math.random()*3)];
+  bug.style.left = Math.random()*90 + "vw";
+  bug.style.animationDuration = 4 + Math.random()*4 + "s";
 
   bug.onclick = () => {
     score++;
-    scoreEl.textContent = score;
+    document.getElementById("score").textContent = score;
+
+    // SOUND
+    document.getElementById("clickSound").currentTime = 0;
+    document.getElementById("clickSound").play();
+
+    // AUTO PLAY MUSIC (ANTI AUTOPLAY BLOCK)
+    if(!musicStarted){
+      document.getElementById("bgm").volume = 0.6;
+      document.getElementById("bgm").play();
+      musicStarted = true;
+    }
+
     bug.remove();
   };
 
-  game.appendChild(bug);
-  setTimeout(() => bug.remove(), 1800);
+  document.body.appendChild(bug);
+
+  setTimeout(()=>bug.remove(),8000);
 }
 
-const bugInterval = setInterval(spawnBug, 650);
-
-const timer = setInterval(()=>{
-  time--;
-  timeEl.textContent = time;
-
-  if(time <= 0){
-    playing = false;
-    clearInterval(bugInterval);
-    clearInterval(timer);
-    game.innerHTML = `
-      <h1>☕ Maintenance Selesai!</h1>
-      <p>Skor kamu: <b>${score}</b></p>
-      <p>Shando’z Café akan segera kembali</p>
-    `;
-  }
-},1000);
+setInterval(spawnBug,900);
 </script>
 
 </body>
-  </html>
+</html>
