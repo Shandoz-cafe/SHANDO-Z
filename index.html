@@ -1,78 +1,213 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shando'z Mario Premium – Under Maintenance</title>
+<title>Shando’z Café — Menu</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#1c1613;color:#f5e6c8;font-family:system-ui,Arial;overflow:hidden}.header{position:fixed;top:0;left:0;right:0;height:64px;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);display:flex;align-items:center;padding:0 16px;z-index:20} .header img{height:42px} .header span{margin-left:12px;font-weight:700}
+:root{
+  --bg:#1c1613;
+  --cream:#e6c899;
+  --card:#2a221e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,Arial;
+  background:radial-gradient(circle at top,#2a221e,#1c1613);
+  color:var(--cream);
+  height:100vh;
+  overflow:hidden;
+}
 
-.ui{position:fixed;top:70px;left:0;right:0;display:flex;justify-content:space-around;font-weight:700;font-size:14px;z-index:20}
+/* NAV */
+.navbar{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:64px;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(10px);
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+  z-index:10;
+}
+.logo img{height:44px}
 
-canvas{display:block;margin:120px auto 0;background:linear-gradient(#6b4a32,#2a1a14);border-radius:14px}
+/* CENTER TEXT */
+.center{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  pointer-events:none;
+}
+.center h1{font-size:38px}
+.center p{opacity:.85;margin-top:8px}
 
-.controls{position:fixed;bottom:18px;left:0;right:0;display:flex;justify-content:center;gap:16px;z-index:20} .btn{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;user-select:none}
+/* BUG */
+.bug{
+  position:absolute;
+  font-size:38px;
+  cursor:pointer;
+  user-select:none;
+  animation:float linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(110vh)}
+  to{transform:translateY(-120px)}
+}
 
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:50} .overlay.show{display:flex} .card{background:#2a221e;padding:28px 22px;border-radius:16px;text-align:center;max-width:300px} .card h2{margin-bottom:12px} .card button{margin-top:12px;padding:10px 14px;border:none;border-radius:10px;font-weight:700} </style>
+/* SCORE */
+.score{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:rgba(0,0,0,.55);
+  padding:12px 16px;
+  border-radius:12px;
+  font-weight:700;
+}
 
+/* HINT */
+.hint{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  opacity:.7;
+  font-size:14px;
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99;
+}
+.popup.show{display:flex}
+.popup-card{
+  background:var(--card);
+  padding:26px 22px;
+  border-radius:16px;
+  text-align:center;
+  max-width:300px;
+  box-shadow:0 10px 40px rgba(0,0,0,.6);
+}
+.popup-card h2{margin-bottom:8px}
+.popup-card p{opacity:.85;font-size:14px}
+.popup-card a, .popup-card button{
+  display:block;
+  margin-top:12px;
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:700;
+  border:none;
+  text-decoration:none;
+  cursor:pointer;
+}
+.popup-card a{
+  background:var(--cream);
+  color:#231812;
+}
+.popup-card button{
+  background:transparent;
+  color:var(--cream);
+  border:1px solid rgba(255,255,255,.15);
+}
+</style>
 </head>
-<body><div class="header"><img src="logoshan.png"><span>Site Under Maintenance</span></div>
-<div class="ui">
-  <div>❤️ <span id="life">3</span></div>
-  <div>Score: <span id="score">0</span></div>
-  <div>Level: <span id="level">1</span></div>
-</div><canvas id="game" width="360" height="520"></canvas>
 
-<div class="controls">
-  <div class="btn" id="left">◀</div>
-  <div class="btn" id="jump">▲</div>
-  <div class="btn" id="right">▶</div>
-</div><div id="gameOver" class="overlay"><div class="card"><h2>Game Over</h2><p>Maintenance still ongoing ☕</p><button onclick="location.reload()">Restart</button></div></div>
-<div id="igUnlock" class="overlay"><div class="card"><h2>Bonus Unlocked 🎉</h2><p>Follow us on Instagram</p><button onclick="window.open('https://instagram.com','_blank')">Open Instagram</button></div></div><audio id="bgm" src="cozycoffeehouse.mp3" loop></audio> <audio id="jumpSound" src="click.mp3"></audio> <audio id="coinSound" src="click.mp3"></audio>
+<body>
+
+<!-- NAV -->
+<div class="navbar">
+  <div class="logo">
+    <img src="logoshan.png" alt="Shando'z">
+  </div>
+</div>
+
+<!-- TEXT -->
+<div class="center">
+  <h1>🚧 Website Lagi Diperbaiki (under maintenance</h1>
+  <p>Sambil nunggu, hancurin serangganya 😈</p>
+</div>
+
+<div class="score">🪳 Dihancurin: <span id="score">0</span></div>
+<div class="hint"> </div>
+
+<!-- INSTAGRAM UNLOCK -->
+<div id="igPopup" class="popup">
+  <div class="popup-card">
+    <h2>📸 Instagram Unlocked</h2>
+    <p>Follow Shando’z Café<br>buat info promo & menu terbaru ☕</p>
+
+    <a href="https://www.instagram.com/shandozcafeandcoffeebar?igsh=M3F5cWdrbms0aGRr" target="_blank">
+      Buka Instagram
+    </a>
+
+    <button onclick="closeIG()">Nanti aja</button>
+  </div>
+</div>
+
+<!-- AUDIO -->
+<audio id="bgm" src="cozycoffeehouse.mp3" loop></audio>
+<audio id="clickSound" src="click.mp3"></audio>
 
 <script>
-const c=document.getElementById('game'),ctx=c.getContext('2d');
-const bgm=document.getElementById('bgm');
-const jumpSound=document.getElementById('jumpSound');
-const coinSound=document.getElementById('coinSound');
+let score = 0;
+let musicStarted = false;
+let igUnlocked = false;
 
-let started=false,score=0,level=1,life=3;
-const scoreEl=scoreSpan=document.getElementById('score');
-const levelEl=document.getElementById('level');
-const lifeEl=document.getElementById('life');
+function spawnBug(){
+  const bug = document.createElement("div");
+  bug.className = "bug";
+  bug.textContent = ["🪳","🦟","🪰"][Math.floor(Math.random()*3)];
+  bug.style.left = Math.random()*90 + "vw";
+  bug.style.animationDuration = 4 + Math.random()*4 + "s";
 
-const player={x:160,y:430,w:26,h:26,vy:0,on:false,boost:false};
-const gravity=.6;
-let platforms,coins,enemies;
+  bug.onclick = () => {
+    score++;
+    document.getElementById("score").textContent = score;
 
-function buildLevel(){
- platforms=[{x:0,y:470,w:360,h:50},{x:40,y:380,w:100,h:14},{x:200,y:320,w:120,h:14},{x:80,y:260,w:120,h:14}];
- coins=[{x:70,y:350,r:6,c:false},{x:240,y:290,r:6,c:false},{x:140,y:230,r:6,c:false}];
- enemies=[{x:180,y:444,w:22,h:22,d:1}];
+    // SOUND
+    const click = document.getElementById("clickSound");
+    click.currentTime = 0;
+    click.play();
+
+    // MUSIC
+    if(!musicStarted){
+      const bgm = document.getElementById("bgm");
+      bgm.volume = 0.6;
+      bgm.play();
+      musicStarted = true;
+    }
+
+    // UNLOCK IG
+    if(score >= 15 && !igUnlocked){
+      document.getElementById("igPopup").classList.add("show");
+      igUnlocked = true;
+    }
+
+    bug.remove();
+  };
+
+  document.body.appendChild(bug);
+  setTimeout(()=>bug.remove(),8000);
 }
-buildLevel();
 
-function startAudio(){if(!started){bgm.volume=.6;bgm.play().catch(()=>{});started=true}}
-function jump(){startAudio();if(player.on){player.vy=player.boost?-16:-12;player.on=false;jumpSound.play().catch(()=>{})}}
-
-left.onpointerdown=()=>player.l=true;
-right.onpointerdown=()=>player.r=true;
-jumpBtn=jump;
-document.body.onpointerup=()=>{player.l=false;player.r=false};
-
-function update(){
- if(player.l)player.x-=player.boost?4:3;
- if(player.r)player.x+=player.boost?4:3;
- player.vy+=gravity;player.y+=player.vy;player.on=false;
- platforms.forEach(p=>{if(player.x<p.x+p.w&&player.x+player.w>p.x&&player.y+player.h<p.y+player.vy+2&&player.y+player.h+player.vy>=p.y){player.y=p.y-player.h;player.vy=0;player.on=true}});
- coins.forEach(o=>{if(!o.c&&Math.hypot(player.x-o.x,player.y-o.y)<20){o.c=true;score+=10;coinSound.play().catch(()=>{});scoreEl.textContent=score;if(score>=100)document.getElementById('igUnlock').classList.add('show')}});
- enemies.forEach(e=>{e.x+=e.d*1.2;if(e.x<0||e.x+e.w>c.width)e.d*=-1;if(player.x<e.x+e.w&&player.x+player.w>e.x&&player.y<e.y+e.h&&player.y+player.h>e.y){if(player.vy>0){score+=20;e.y=999}else{life--;lifeEl.textContent=life;player.x=160;player.y=430;player.vy=0;if(life<=0)document.getElementById('gameOver').classList.add('show')}}});
- if(coins.every(o=>o.c)){level++;levelEl.textContent=level;player.boost=true;buildLevel();player.x=160;player.y=430}
- player.x=Math.max(0,Math.min(c.width-player.w,player.x));
+function closeIG(){
+  document.getElementById("igPopup").classList.remove("show");
 }
 
-function draw(){ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle='#e74c3c';ctx.fillRect(player.x,player.y,player.w,player.h);ctx.fillStyle='#c9a56a';platforms.forEach(p=>ctx.fillRect(p.x,p.y,p.w,p.h));ctx.fillStyle='#f1c40f';coins.forEach(o=>{if(!o.c){ctx.beginPath();ctx.arc(o.x,o.y,o.r,0,Math.PI*2);ctx.fill()}});ctx.fillStyle='#6b3e26';enemies.forEach(e=>ctx.fillRect(e.x,e.y,e.w,e.h))}
+setInterval(spawnBug,900);
+</script>
 
-(function loop(){update();draw();requestAnimationFrame(loop)})();
-</script></body>
+</body>
   </html>
