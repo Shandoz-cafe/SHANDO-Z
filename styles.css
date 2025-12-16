@@ -44,10 +44,21 @@ body{
 }
 
 /* LOGO */
-.logo {
-  color: #fff;
-  font-size: 20px;
-  font-weight: 800;
+.logo{
+  display: flex;
+  align-items: center;
+}
+
+.logo img{
+  height: 30px;
+  width: auto;
+  display: block;
+}
+
+@media (min-width:768px){
+  .logo img{
+    height: 38px;
+  }
 }
 
 /* DESKTOP NAV */
