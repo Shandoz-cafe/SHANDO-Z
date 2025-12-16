@@ -325,3 +325,33 @@ const mobileMenu = qs("#mobileMenu");
 hamburgerBtn?.addEventListener("click", () => {
   mobileMenu.classList.toggle("show");
 });
+
+/* ===============================
+   NAVBAR SCROLL + MOBILE AUTO CLOSE
+================================ */
+(function(){
+  const navbar = document.querySelector('.navbar');
+  const menu = document.getElementById('mobileMenu');
+  const burger = document.getElementById('hamburgerBtn');
+
+  if(!navbar) return;
+
+  // SCROLL EFFECT
+  window.addEventListener('scroll', ()=>{
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // HAMBURGER TOGGLE
+  if(burger && menu){
+    burger.addEventListener('click', ()=>{
+      menu.classList.toggle('show');
+    });
+
+    // AUTO CLOSE MENU WHEN LINK CLICKED
+    menu.querySelectorAll('a').forEach(link=>{
+      link.addEventListener('click', ()=>{
+        menu.classList.remove('show');
+      });
+    });
+  }
+})();
