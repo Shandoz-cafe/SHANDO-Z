@@ -50,14 +50,16 @@ body{
 }
 
 .logo img{
-  height: 44px;      /* sebelumnya 36px → ini bikin kelihatan */
+  height: 48px;          /* MOBILE – pas */
   width: auto;
-  display: block;
+  max-width: 220px;     /* biar ga kepanjangan */
+  object-fit: contain;
 }
 
 @media (min-width:768px){
   .logo img{
-    height: 56px;    /* desktop lebih gagah */
+    height: 60px;       /* DESKTOP */
+    max-width: 260px;
   }
 }
 
@@ -487,46 +489,4 @@ body{
   .hero-title{font-size:26px}
   .about-hero h1{font-size:34px}
   .nav-links a{font-size:16px}
-}
-
-/* CONTACT LOGO */
-.contact-logo{
-  display:flex;
-  justify-content:center;
-  margin-bottom:16px;
-}
-
-.contact-logo img{
-  height:60px;
-  width:auto;
-  opacity:.95;
-}
-
-@media (min-width:768px){
-  .contact-logo img{
-    height:72px;
-  }
-}
-
-/* ABOUT LOGO */
-.about-logo{
-  position: relative;
-  z-index: 6;
-  margin-bottom: 12px;
-  display: flex;
-  justify-content: center;
-}
-
-.about-logo img{
-  height: 70px;
-  width: auto;
-  opacity: 0.95;
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,.45));
-}
-
-/* mobile */
-@media (max-width:480px){
-  .about-logo img{
-    height: 52px;
-  }
 }
