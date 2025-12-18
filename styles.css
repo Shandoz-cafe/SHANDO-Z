@@ -44,19 +44,15 @@ body{
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-}
-
 .logo img{
-  height:36px;
-  width:auto;
-  display:block;
+  height: 44px;      /* sebelumnya 36px → ini bikin kelihatan */
+  width: auto;
+  display: block;
 }
 
 @media (min-width:768px){
   .logo img{
-    height:48px;
+    height: 56px;    /* desktop lebih gagah */
   }
 }
 
