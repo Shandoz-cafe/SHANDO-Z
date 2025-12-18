@@ -362,3 +362,44 @@ function closeLB(){
   lbImg.src = "";
   document.body.style.overflow = "";
      }
+
+/* =====================================
+   SAFE LIGHTBOX FIX (NO CONFLICT)
+===================================== */
+(function safeLightbox(){
+  const lightbox = document.getElementById("lightbox");
+  const img = document.getElementById("lightbox-img");
+  const closeBtn = document.querySelector(".lb-close");
+
+  if(!lightbox || !img) return;
+
+  document.querySelectorAll(".lightbox-trigger").forEach(el=>{
+    el.style.cursor = "zoom-in";
+    el.addEventListener("click",()=>{
+      img.src = el.dataset.full || el.src;
+      lightbox.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  function closeLB(){
+    lightbox.style.display = "none";
+    img.src = "";
+    document.body.style.overflow = "";
+  }
+
+  closeBtn?.addEventListener("click", closeLB);
+
+  lightbox.addEventListener("click", e=>{
+    if(e.target === lightbox) closeLB();
+  });
+
+  /* swipe down close (mobile) */
+  let startY = 0;
+  img.addEventListener("touchstart", e=>{
+    startY = e.touches[0].clientY;
+  });
+  img.addEventListener("touchend", e=>{
+    if(e.changedTouches[0].clientY - startY > 120) closeLB();
+  });
+})();
