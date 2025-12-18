@@ -43,15 +43,26 @@ body{
   gap: 12px;
 }
 
-.logo img{
-  height: 44px;      /* sebelumnya 36px → ini bikin kelihatan */
-  width: auto;
-  display: block;
+/* ABOUT LOGO */
+.about-logo{
+  position: relative;
+  z-index: 6;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
 }
 
-@media (min-width:768px){
-  .logo img{
-    height: 56px;    /* desktop lebih gagah */
+.about-logo img{
+  height: 70px;
+  width: auto;
+  opacity: 0.95;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.45));
+}
+
+/* mobile */
+@media (max-width:480px){
+  .about-logo img{
+    height: 52px;
   }
 }
 
