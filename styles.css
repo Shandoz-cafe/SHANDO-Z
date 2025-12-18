@@ -43,26 +43,20 @@ body{
   gap: 12px;
 }
 
-/* ABOUT LOGO */
-.about-logo{
-  position: relative;
-  z-index: 6;
-  margin-bottom: 12px;
-  display: flex;
-  justify-content: center;
+.logo{
+  display:flex;
+  align-items:center;
 }
 
-.about-logo img{
-  height: 70px;
-  width: auto;
-  opacity: 0.95;
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,.45));
+.logo img{
+  height:36px;
+  width:auto;
+  display:block;
 }
 
-/* mobile */
-@media (max-width:480px){
-  .about-logo img{
-    height: 52px;
+@media (min-width:768px){
+  .logo img{
+    height:48px;
   }
 }
 
