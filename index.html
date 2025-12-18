@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shando’z Café — Maintenance</title>
+
+<style>
+:root{
+  --bg:#1c1613;
+  --cream:#e6c899;
+  --card:#2a221e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,Arial;
+  background:radial-gradient(circle at top,#2a221e,#1c1613);
+  color:var(--cream);
+  height:100vh;
+  overflow:hidden;
+}
+
+/* NAV */
+.navbar{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:64px;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(10px);
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+  z-index:10;
+}
+.logo img{height:44px}
+
+/* CENTER TEXT */
+.center{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  pointer-events:none;
+}
+.center h1{font-size:38px}
+.center p{opacity:.85;margin-top:8px}
+
+/* BUG */
+.bug{
+  position:absolute;
+  font-size:38px;
+  cursor:pointer;
+  user-select:none;
+  animation:float linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(110vh)}
+  to{transform:translateY(-120px)}
+}
+
+/* SCORE */
+.score{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:rgba(0,0,0,.55);
+  padding:12px 16px;
+  border-radius:12px;
+  font-weight:700;
+}
+
+/* HINT */
+.hint{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  opacity:.7;
+  font-size:14px;
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99;
+}
+.popup.show{display:flex}
+.popup-card{
+  background:var(--card);
+  padding:26px 22px;
+  border-radius:16px;
+  text-align:center;
+  max-width:300px;
+  box-shadow:0 10px 40px rgba(0,0,0,.6);
+}
+.popup-card h2{margin-bottom:8px}
+.popup-card p{opacity:.85;font-size:14px}
+.popup-card a, .popup-card button{
+  display:block;
+  margin-top:12px;
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:700;
+  border:none;
+  text-decoration:none;
+  cursor:pointer;
+}
+.popup-card a{
+  background:var(--cream);
+  color:#231812;
+}
+.popup-card button{
+  background:transparent;
+  color:var(--cream);
+  border:1px solid rgba(255,255,255,.15);
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="navbar">
+  <div class="logo">
+    <img src="logoshan.png" alt="Shando'z">
+  </div>
+</div>
+
+<!-- TEXT -->
+<div class="center">
+  <h1>🚧 Site Lagi Diperbaiki</h1>
+  <p>Sambil nunggu, hancurin serangganya 😈</p>
+</div>
+
+<div class="score">🪳 Dihancurin: <span id="score">0</span></div>
+<div class="hint">Tap serangga untuk mulai 🎵</div>
+
+<!-- INSTAGRAM UNLOCK -->
+<div id="igPopup" class="popup">
+  <div class="popup-card">
+    <h2>📸 Instagram Unlocked</h2>
+    <p>Follow Shando’z Café<br>buat info promo & menu terbaru ☕</p>
+
+    <a href="https://instagram.com/shandoz" target="_blank">
+      Buka Instagram
+    </a>
+
+    <button onclick="closeIG()">Nanti aja</button>
+  </div>
+</div>
+
+<!-- AUDIO -->
+<audio id="bgm" src="cozycoffeehouse.mp3" loop></audio>
+<audio id="clickSound" src="click.mp3"></audio>
+
+<script>
+let score = 0;
+let musicStarted = false;
+let igUnlocked = false;
+
+function spawnBug(){
+  const bug = document.createElement("div");
+  bug.className = "bug";
+  bug.textContent = ["🪳","🦟","🪰"][Math.floor(Math.random()*3)];
+  bug.style.left = Math.random()*90 + "vw";
+  bug.style.animationDuration = 4 + Math.random()*4 + "s";
+
+  bug.onclick = () => {
+    score++;
+    document.getElementById("score").textContent = score;
+
+    // SOUND
+    const click = document.getElementById("clickSound");
+    click.currentTime = 0;
+    click.play();
+
+    // MUSIC
+    if(!musicStarted){
+      const bgm = document.getElementById("bgm");
+      bgm.volume = 0.6;
+      bgm.play();
+      musicStarted = true;
+    }
+
+    // UNLOCK IG
+    if(score >= 15 && !igUnlocked){
+      document.getElementById("igPopup").classList.add("show");
+      igUnlocked = true;
+    }
+
+    bug.remove();
+  };
+
+  document.body.appendChild(bug);
+  setTimeout(()=>bug.remove(),8000);
+}
+
+function closeIG(){
+  document.getElementById("igPopup").classList.remove("show");
+}
+
+setInterval(spawnBug,900);
+</script>
+
+</body>
+  </html>
