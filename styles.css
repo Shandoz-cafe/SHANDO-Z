@@ -44,10 +44,16 @@ body{
 }
 
 /* LOGO */
-.logo {
-  color: #fff;
-  font-size: 20px;
-  font-weight: 800;
+.logo img{
+  height: 36px;   /* lebih besar di mobile */
+  width: auto;
+  display: block;
+}
+
+@media (min-width:768px){
+  .logo img{
+    height: 48px; /* desktop */
+  }
 }
 
 /* DESKTOP NAV */
