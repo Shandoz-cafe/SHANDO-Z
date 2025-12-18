@@ -325,3 +325,40 @@ const mobileMenu = qs("#mobileMenu");
 hamburgerBtn?.addEventListener("click", () => {
   mobileMenu.classList.toggle("show");
 });
+
+// MENU LIGHTBOX
+const lb = document.getElementById("lightbox");
+const lbImg = document.getElementById("lightboxImg");
+const closeBtn = document.querySelector(".lb-close");
+
+// OPEN
+document.querySelectorAll(".lightbox-trigger").forEach(img=>{
+  img.addEventListener("click",()=>{
+    lbImg.src = img.src;
+    lb.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  });
+});
+
+// CLOSE BUTTON
+closeBtn.onclick = closeLB;
+
+// TAP BACKGROUND
+lb.addEventListener("click",e=>{
+  if(e.target === lb) closeLB();
+});
+
+// SWIPE DOWN (MOBILE)
+let startY = 0;
+lbImg.addEventListener("touchstart",e=>{
+  startY = e.touches[0].clientY;
+});
+lbImg.addEventListener("touchend",e=>{
+  if(e.changedTouches[0].clientY - startY > 120) closeLB();
+});
+
+function closeLB(){
+  lb.style.display = "none";
+  lbImg.src = "";
+  document.body.style.overflow = "";
+     }
