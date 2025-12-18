@@ -459,3 +459,28 @@ function closeLB(){
     if(endY - startY > 120) closeLB();
   });
 })();
+
+/* =====================================================
+   SCROLL REVEAL – GLOBAL (NO HTML EDIT)
+===================================================== */
+(function scrollReveal(){
+  const items = document.querySelectorAll(
+    "section, .hero, .promo-section, .menu-section, .gallery-section, .about-section, .contact-section"
+  );
+
+  if(!items.length) return;
+
+  const reveal = () => {
+    const trigger = window.innerHeight * 0.85;
+
+    items.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if(top < trigger){
+        el.classList.add("reveal");
+      }
+    });
+  };
+
+  window.addEventListener("scroll", reveal);
+  window.addEventListener("load", reveal);
+})();
