@@ -581,29 +581,3 @@ body{
   }
   }
 
-/* ===============================
-   GLOBAL SCROLL REVEAL EFFECT
-================================ */
-section,
-.hero,
-.promo-section,
-.menu-section,
-.gallery-section,
-.about-section,
-.contact-section {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity .9s ease, transform .9s ease;
-  will-change: transform, opacity;
-}
-
-section.reveal,
-.hero.reveal,
-.promo-section.reveal,
-.menu-section.reveal,
-.gallery-section.reveal,
-.about-section.reveal,
-.contact-section.reveal {
-  opacity: 1;
-  transform: translateY(0);
-}
