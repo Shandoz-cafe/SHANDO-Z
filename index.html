@@ -4,30 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>FlappyBird - Under Maintenance</title>
+    <title>FlappyBird - Coffee Shop Edition</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Squada+One&display=swap" rel="stylesheet">
     <style>
+        body {
+            margin: 0; padding: 20px;
+            background: linear-gradient(135deg, #D2B48C 0%, #8B4513 30%, #DEB887 70%, #F4A460 100%);
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            font-family: 'Squada One', cursive; overflow-x: hidden;
+        }
+        #canvas { 
+            border: 4px solid #8B4513; border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(139,69,19,0.4);
+            background: linear-gradient(to bottom, #F5DEB3 0%, #D2B48C 50%, #DEB887 100%);
+            display: block; margin-bottom: 20px;
+        }
+        #logo-bottom {
+            width: 120px; height: 120px; border-radius: 20px;
+            border: 4px solid #8B4513; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            object-fit: cover;
+        }
         .maintenance-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 30%, #D2691E 70%, #D2B48C 100%);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 9999; color: white; font-family: 'Squada One', cursive; text-align: center;
-            cursor: pointer;
+            z-index: 9999; color: #2F1B14; font-family: 'Squada One', cursive; text-align: center;
+            cursor: pointer; backdrop-filter: blur(5px);
         }
-        #logo { width: 180px; height: 180px; border-radius: 50%; border: 6px solid rgba(255,255,255,0.4);
-            margin-bottom: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); object-fit: cover; transition: transform 0.3s ease; }
-        #logo:hover { transform: scale(1.05); }
-        h1 { font-size: 42px; margin-bottom: 20px; text-shadow: 3px 3px 0px rgba(0,0,0,0.7); animation: glow 2s ease-in-out infinite alternate; }
-        .status { font-size: 24px; padding: 20px 30px; background: rgba(255,255,255,0.15); border-radius: 25px;
-            border: 3px solid rgba(255,215,0,0.5); backdrop-filter: blur(15px); margin: 20px 0; animation: pulse 2s infinite; }
-        .coming-soon { font-size: 18px; opacity: 0.9; }
-        @keyframes glow { from { text-shadow: 3px 3px 0px rgba(0,0,0,0.7), 0 0 20px rgba(255,255,255,0.5); } to { text-shadow: 3px 3px 0px rgba(0,0,0,0.7), 0 0 30px rgba(255,215,0,0.8); } }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+        #logo-top { 
+            width: 200px; height: 200px; border-radius: 50%; border: 8px solid rgba(255,215,0,0.6);
+            margin-bottom: 30px; box-shadow: 0 25px 50px rgba(139,69,19,0.6); object-fit: cover; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        #logo-top:hover { transform: scale(1.08); box-shadow: 0 30px 60px rgba(139,69,19,0.8); }
+        h1 { 
+            font-size: 48px; margin-bottom: 25px; 
+            background: linear-gradient(45deg, #FFD700, #FFA500); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); animation: glow 2s ease-in-out infinite alternate;
+        }
+        .status { 
+            font-size: 26px; padding: 25px 40px; 
+            background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,215,0,0.2));
+            border: 4px solid #DAA520; border-radius: 30px; backdrop-filter: blur(20px);
+            margin: 25px 0; box-shadow: 0 15px 35px rgba(0,0,0,0.2); animation: pulse 2s infinite;
+        }
+        .coming-soon { font-size: 20px; color: #8B4513; font-weight: bold; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); }
+        @keyframes glow { from { filter: drop-shadow(0 0 10px rgba(255,215,0,0.5)); } to { filter: drop-shadow(0 0 20px rgba(255,165,0,0.8)); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+        .click-hint { position: absolute; bottom: 40px; font-size: 18px; animation: bounce 2s infinite; color: #8B4513; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-12px); } 60% { transform: translateY(-6px); } }
     </style>
 </head>
 <body>
-    <!-- AUDIO BACKGROUND -->
+    <!-- MUSIC -->
     <audio id="bgMusic" loop preload="auto">
         <source src="cozycoffeehouse.mp3" type="audio/mpeg">
     </audio>
@@ -35,32 +66,34 @@
     <!-- GAME CANVAS -->
     <canvas id="canvas" width="276" height="414"></canvas>
     
+    <!-- LOGO DI BAWAH GAME -->
+    <img id="logo-bottom" src="logoshan.png" alt="Shan Logo">
+    
     <!-- MAINTENANCE OVERLAY -->
     <div class="maintenance-overlay" onclick="hideMaintenance()">
-        <img id="logo" src="logoshan.png" alt="Your Logo">
-        <h1>FLAPPY BIRD</h1>
+        <!-- LOGO DI ATAS (BESAR) -->
+        <img id="logo-top" src="logoshan.png" alt="Shan Logo">
+        <h1>☕ FLAPPY BIRD ☕</h1>
         <div class="status">
             🔧 UNDER MAINTENANCE 🔧<br>
             <small>Web akan segera rilis!</small>
         </div>
         <div class="coming-soon">
-            Made by SHANDO'Z] © 2026
+            Made by SHANDO'Z © 2026
         </div>
+        <div class="click-hint">☕ Klik untuk main sementara ☕</div>
     </div>
 
     <script src="game.js"></script>
     <script>
-        // BACKGROUND MUSIC
+        // COFFEE SHOP MUSIC
         const bgMusic = document.getElementById('bgMusic');
-        
-        // AUTO PLAY (klik pertama user interaction)
         document.addEventListener('click', function playMusic() {
-            bgMusic.volume = 0.3;  // Volume 30%
-            bgMusic.play().catch(e => console.log('Autoplay blocked'));
+            bgMusic.volume = 0.25;
+            bgMusic.play().catch(e => console.log('Audio ready'));
             document.removeEventListener('click', playMusic);
         }, { once: true });
         
-        // LOOP FOREVER
         bgMusic.addEventListener('ended', () => {
             bgMusic.currentTime = 0;
             bgMusic.play();
@@ -71,7 +104,7 @@
             document.querySelector('.maintenance-overlay').style.display = 'none';
         }
         
-        // SPASI KEYBOARD
+        // KEYBOARD
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space') {
                 e.preventDefault();
