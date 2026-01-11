@@ -1,158 +1,83 @@
 <!DOCTYPE html><html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Website Under Maintenance</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, #ffecd2, #fcb69f);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .container {
-      background: #fff;
-      max-width: 420px;
-      width: 100%;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-    h1 { margin-top: 0; font-size: 24px; }
-    p { color: #555; }
-    .hud {
-      position: fixed;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 16px;
-      background: rgba(255,255,255,0.9);
-      padding: 8px 14px;
-      border-radius: 20px;
-      font-weight: bold;
-      z-index: 3;
-    }
-    .play-area {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      z-index: 1;
-    }
-    .fruit {
-      position: absolute;
-      top: -50px;
-      font-size: 36px;
-      cursor: pointer;
-      user-select: none;
-      animation: fall linear forwards;
-    }
-    @keyframes fall {
-      to { transform: translateY(110vh); }
-    }
-    .footer { margin-top: 20px; font-size: 12px; color: #999; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Under Maintenance – HORROR NIGHTMARE</title>
+<style>
+body{margin:0;overflow:hidden;font-family:'Trebuchet MS',Arial;background:radial-gradient(circle at top,#300,#000);color:#eee}
+body.shake{animation:shake .3s}
+@keyframes shake{0%{transform:translate(0)}25%{transform:translate(6px,6px)}50%{transform:translate(-6px,6px)}75%{transform:translate(6px,-6px)}100%{transform:translate(0)}}.flicker{animation:flicker 3s infinite} @keyframes flicker{0%,18%,22%,25%,53%,57%,100%{opacity:1}20%,24%,55%{opacity:.2}}
+
+.fog{position:fixed;inset:0;pointer-events:none;z-index:1; background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"/></filter><rect width="200" height="200" filter="url(%23n)" opacity="0.08"/></svg>');}
+
+.hud{position:fixed;top:10px;left:50%;transform:translateX(-50%);display:flex;gap:18px; background:rgba(0,0,0,.7);padding:8px 16px;border-radius:20px;z-index:6;border:1px solid #700}
+
+.container{position:fixed;bottom:28px;left:50%;transform:translateX(-50%); background:rgba(0,0,0,.7);padding:14px 22px;border-radius:16px;z-index:5;border:1px solid #600}
+
+.play-area{position:fixed;inset:0;z-index:2}
+
+.bug{position:absolute;top:-60px;font-size:40px;cursor:pointer; filter:drop-shadow(0 0 10px rgba(255,0,0,.6));animation:fall linear forwards} @keyframes fall{to{transform:translateY(130vh)}}
+
+.blood{position:absolute;color:#900;font-size:24px;animation:blood .6s forwards;pointer-events:none} @keyframes blood{0%{opacity:1;transform:scale(.5)}100%{opacity:0;transform:scale(1.6) translateY(25px)}}
+
+.jumpscare{position:fixed;inset:0;background:black;display:none;z-index:20; align-items:center;justify-content:center;font-size:120px} .jumpscare.show{display:flex}
+
+.gameover{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:30;display:none;align-items:center;justify-content:center;text-align:center} .gameover.show{display:flex} </style>
+
 </head>
-<body>  <div class="play-area" id="playArea"></div>  <div class="hud">
-    <div>Skor: <span id="score">0</span></div>
-    <div>⏱ <span id="time">30</span>s</div>
-    <div>🏆 <span id="highScore">0</span></div>
-  </div>  <div class="container">
-    <h1>🚧 Under Maintenance</h1>
-    <p>Sambil nunggu web online lagi,<br>pencet serangga yang jatuh 🦋🐞</p>
-    <div class="footer">Hati-hati sama 💣</div>
-  </div>  <script>
-    const bugSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAAA/////wAAAP//AAD///8AAP///wAA');
-    const bombSound = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAAAAP//AAD//wAA');
-    const bgMusic = new Audio('data:audio/wav;base64,UklGRkAAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAAA');
-    bgMusic.loop = true;
-    bgMusic.volume = 0.3;
-    window.addEventListener('click', () => bgMusic.play(), { once: true });('click', () => bgMusic.play(), { once: true });base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAAA/////wAAAP//AAD///8AAP///wAA');
-    const fruits = ['🦋','🐞','🪲','🦟','🪰','🕷️','🐝'];
-    const bomb = '💣';
-    const playArea = document.getElementById('playArea');
-    const scoreEl = document.getElementById('score');
-    const timeEl = document.getElementById('time');
-    const highScoreEl = document.getElementById('highScore');
+<body class="flicker">
+<div class="fog"></div><div class="hud">
+ <div>💀 <span id="score">0</span></div>
+ <div>⏱ <span id="time">60</span>s</div>
+ <div>🚨 Miss: <span id="miss">0</span>/5</div>
+</div><div class="play-area" id="playArea"></div><div class="container">UNDER MAINTENANCE<br><small>NIGHTMARE MODE</small></div><div class="jumpscare" id="jumpscare">👹</div><div class="gameover" id="gameover">
+ <div>
+  <h1>☠ NIGHTMARE ☠</h1>
+  <p>Kau tidak seharusnya bertahan selama ini.</p>
+  <button onclick="location.reload()">Restart</button>
+ </div>
+</div><script>
+const bugs=['🪳','🕷️','🦂','🦟','🪰','🐛'];
+const bomb='💀';
+const playArea=document.getElementById('playArea');
+const scoreEl=document.getElementById('score');
+const timeEl=document.getElementById('time');
+const missEl=document.getElementById('miss');
+const jumpscare=document.getElementById('jumpscare');
+const gameover=document.getElementById('gameover');
 
-    let score = 0;
-    let timeLeft = 30;
-    let gameInterval;
-    let spawnInterval;
+let score=0,time=60,miss=0;
+let spawnRate=700; // makin cepat
 
-    let highScore = localStorage.getItem('fruitHighScore') || 0;
-    highScoreEl.textContent = highScore;
+const bugSound=new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAAA/////wAA');
+const bombSound=new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAAAAP//AAD//wAA');
+const scream=new Audio('data:audio/wav;base64,UklGRkAAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAAA');
+const bg=new Audio('data:audio/wav;base64,UklGRkAAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAAA');bg.loop=true;bg.volume=.25;
+window.addEventListener('click',()=>bg.play(),{once:true});
 
-    function spawnItem() {
-      const item = document.createElement('div');
-      item.className = 'fruit';
+function blood(x,y){const b=document.createElement('div');b.className='blood';b.textContent='🩸';b.style.left=x+'px';b.style.top=y+'px';playArea.appendChild(b);setTimeout(()=>b.remove(),600)}
 
-      const isBomb = Math.random() < 0.2;
-      item.textContent = isBomb ? bomb : fruits[Math.floor(Math.random() * fruits.length)];
+function doJumpscare(){jumpscare.classList.add('show');scream.play();setTimeout(()=>jumpscare.classList.remove('show'),250)}
 
-      item.style.left = Math.random() * (window.innerWidth - 40) + 'px';
-      item.style.animationDuration = (3000 + Math.random() * 2000) + 'ms';
+function spawn(){const el=document.createElement('div');el.className='bug';
+ const isBomb=Math.random()<.2;el.textContent=isBomb?bomb:bugs[Math.floor(Math.random()*bugs.length)];
+ el.style.left=Math.random()*(innerWidth-40)+'px';el.style.animationDuration=1500+Math.random()*2000+'ms';
+ el.onclick=e=>{if(isBomb){bombSound.play();document.body.classList.add('shake');setTimeout(()=>document.body.classList.remove('shake'),300);score=0;doJumpscare()}
+ else{bugSound.play();score++}
+ blood(e.clientX,e.clientY);scoreEl.textContent=score;el.remove()};
+ el.onanimationend=()=>{miss++;missEl.textContent=miss;if(miss>=5)endGame();el.remove()};
+ playArea.appendChild(el)}
 
-      item.addEventListener('click', () => {
-        if (isBomb) {
-          bombSound.currentTime = 0;
-          bombSound.play();
-          score = 0;
-        } else {
-          bugSound.currentTime = 0;
-          bugSound.play();
-          score++;
-        }
-        scoreEl.textContent = score;
-        item.remove();
-      });
+function endGame(){clearInterval(spawner);clearInterval(timer);gameover.classList.add('show')}
 
-      item.addEventListener('animationend', () => item.remove());
-      playArea.appendChild(item);
-    }
+let spawner=setInterval(spawn,spawnRate);
 
-    function startGame() {
-      spawnInterval = setInterval(spawnItem, 700);
-      gameInterval = setInterval(() => {
-        timeLeft--;
-        timeEl.textContent = timeLeft;
+// Nightmare escalation
+setInterval(()=>{
+ if(spawnRate>300){spawnRate-=50;clearInterval(spawner);spawner=setInterval(spawn,spawnRate)}
+ if(Math.random()<.3)doJumpscare();
+},5000);
 
-        if (timeLeft <= 0) {
-          endGame();
-        }
-      }, 1000);
-    }
-
-    function endGame() {
-      clearInterval(spawnInterval);
-      clearInterval(gameInterval);
-      playArea.innerHTML = '';
-
-      if (score > highScore) {
-        highScore = score;
-        localStorage.setItem('fruitHighScore', highScore);
-        highScoreEl.textContent = highScore;
-      }
-
-      alert('Waktu habis! Skor kamu: ' + score);
-      resetGame();
-    }
-
-    function resetGame() {
-      score = 0;
-      timeLeft = 30;
-      scoreEl.textContent = 0;
-      timeEl.textContent = 30;
-      startGame();
-    }
-
-    startGame();
-  </script></body>
+const timer=setInterval(()=>{time--;timeEl.textContent=time;if(time<=0)endGame()},1000);
+</script></body>
 </html>
