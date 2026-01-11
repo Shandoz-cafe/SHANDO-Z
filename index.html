@@ -27,11 +27,18 @@
     }
     h1 { margin-top: 0; font-size: 24px; }
     p { color: #555; }
-    .stats {
+    .hud {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      justify-content: space-between;
+      gap: 16px;
+      background: rgba(255,255,255,0.9);
+      padding: 8px 14px;
+      border-radius: 20px;
       font-weight: bold;
-      margin: 12px 0;
+      z-index: 3;
     }
     .play-area {
       position: absolute;
@@ -53,18 +60,21 @@
     .footer { margin-top: 20px; font-size: 12px; color: #999; }
   </style>
 </head>
-<body>  <div class="play-area" id="playArea"></div>  <div class="container">
+<body>  <div class="play-area" id="playArea"></div>  <div class="hud">
+    <div>Skor: <span id="score">0</span></div>
+    <div>⏱ <span id="time">30</span>s</div>
+    <div>🏆 <span id="highScore">0</span></div>
+  </div>  <div class="container">
     <h1>🚧 Under Maintenance</h1>
-    <p>Sambil nunggu web online lagi,<br>main game buah jatuh dulu 🍉</p><div class="stats">
-  <div>Skor: <span id="score">0</span></div>
-  <div>⏱ <span id="time">30</span>s</div>
-</div>
-
-<div>🏆 High Score: <span id="highScore">0</span></div>
-
-<div class="footer">Hati-hati sama 💣</div>
-
+    <p>Sambil nunggu web online lagi,<br>main game buah jatuh dulu 🍉</p>
+    <div class="footer">Hati-hati sama 💣</div>
   </div>  <script>
+    const fruitSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAAA/////wAAAP//AAD///8AAP///wAA');
+    const bombSound = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAAAAP//AAD//wAA');
+    const bgMusic = new Audio('data:audio/wav;base64,UklGRkAAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAAA');
+    bgMusic.loop = true;
+    bgMusic.volume = 0.3;
+    window.addEventListener('click', () => bgMusic.play(), { once: true });base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAAA/////wAAAP//AAD///8AAP///wAA');
     const fruits = ['🍎','🍌','🍉','🍇','🍊','🍓','🍍','🥭','🍒'];
     const bomb = '💣';
     const playArea = document.getElementById('playArea');
@@ -92,8 +102,12 @@
 
       item.addEventListener('click', () => {
         if (isBomb) {
+          bombSound.currentTime = 0;
+          bombSound.play();
           score = 0;
         } else {
+          fruitSound.currentTime = 0;
+          fruitSound.play();
           score++;
         }
         scoreEl.textContent = score;
