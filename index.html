@@ -1,102 +1,404 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Under Maintenance – INSANE NIGHTMARE</title>
-<style>
-body{margin:0;overflow:hidden;font-family:'Trebuchet MS',Arial;background:radial-gradient(circle at top,#220,#000);color:#eee}
-body.shake{animation:shake .25s}
-@keyframes shake{0%{transform:translate(0)}25%{transform:translate(8px,8px)}50%{transform:translate(-8px,8px)}75%{transform:translate(8px,-8px)}100%{transform:translate(0)}}.flicker{animation:flicker 2.5s infinite} @keyframes flicker{0%,19%,22%,26%,54%,58%,100%{opacity:1}21%,25%,56%{opacity:.15}}
-
-.fog{position:fixed;inset:0;pointer-events:none;z-index:1;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="3"/></filter><rect width="200" height="200" filter="url(%23n)" opacity="0.09"/></svg>');}
-
-.hud{position:fixed;top:10px;left:50%;transform:translateX(-50%);display:flex;gap:16px;background:rgba(0,0,0,.75);padding:8px 16px;border-radius:20px;z-index:6;border:1px solid #900}
-
-.play-area{position:fixed;inset:0;z-index:2}
-
-.bug{ position:absolute; top:-70px; font-size:42px; cursor:pointer; filter:drop-shadow(0 0 12px rgba(255,0,0,.7)); animation:fall linear forwards; z-index:4; }
-
-/* hitbox lebih besar & enak dipencet */ .bug::before{ content:""; position:absolute; inset:-20px; }
-
-@keyframes fall{to{transform:translateY(140vh)}}
-
-.blood{position:absolute;font-size:26px;color:#b00;animation:blood .55s forwards;pointer-events:none} @keyframes blood{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.9) translateY(30px)}}
-
-.jumpscare{position:fixed;inset:0;background:black;display:none;z-index:20;align-items:center;justify-content:center;font-size:140px} .jumpscare.show{display:flex}
-
-.fakecrash{position:fixed;inset:0;background:black;color:#0f0;display:none;z-index:25;align-items:center;justify-content:center;font-family:monospace} .fakecrash.show{display:flex}
-
-.gameover{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:30;display:none;align-items:center;justify-content:center;text-align:center} .gameover.show{display:flex} </style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Sedang Maintenance - Temple Run 2!</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #87CEEB, #98D8C8, #74C69D);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        canvas {
+            display: block;
+            border: 3px solid #2c3e50;
+            box-shadow: 0 0 30px rgba(0,0,0,0.4);
+            border-radius: 10px;
+        }
+        #message {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: #2c3e50;
+            z-index: 10;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #2c3e50;
+            text-align: center;
+            z-index: 10;
+        }
+        #restart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 30px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 20;
+            display: none;
+        }
+    </style>
 </head>
-<body class="flicker">
-<div class="fog"></div><div class="hud">
- <div>💀 <span id="score">0</span></div>
- <div>⏱ <span id="time">90</span>s</div>
- <div>🚨 Miss: <span id="miss">0</span>/7</div>
- <div>🏆 <span id="hi">0</span></div>
-</div><div class="play-area" id="playArea"></div><div class="jumpscare" id="jumpscare">👹</div>
-<div class="fakecrash" id="fakecrash">SYSTEM ERROR</div><div class="gameover" id="gameover">
- <div>
-  <h1>☠ INSANE ☠</h1>
-  <p>Kamu tidak seharusnya bertahan.</p>
-  <button onclick="location.reload()">Restart</button>
- </div>
-</div><script>
-const bugs=['🪳','🕷️','🦂','🦟','🪰','🐛'];
-const bomb='💀';
-const playArea=document.getElementById('playArea');
-const scoreEl=document.getElementById('score');
-const timeEl=document.getElementById('time');
-const missEl=document.getElementById('miss');
-const hiEl=document.getElementById('hi');
-const jumpscare=document.getElementById('jumpscare');
-const fakecrash=document.getElementById('fakecrash');
-const gameover=document.getElementById('gameover');
+<body>
+    <div id="message">
+        <h1>🛠️ Website Sedang Maintenance 🛠️</h1>
+        <p>Main Temple Run 2 dulu! <strong>SPACE</strong> lompat, <strong>DOWN</strong> slide, <strong>A/D</strong> left/right.</p>
+    </div>
+    <canvas id="gameCanvas" width="800" height="450"></canvas>
+    <div id="controls">
+        <p>Score: <span id="score">0</span> | Coins: <span id="coins">0</span></p>
+    </div>
+    <button id="restart" onclick="restartGame()">Main Lagi</button>
 
-let score=0,time=90,miss=0;let spawnRate=520;let multiSpawn=1;
-let hi=localStorage.getItem('insaneHigh')||0;hiEl.textContent=hi;
+    <script>
+        class Game {
+            constructor() {
+                this.canvas = document.getElementById('gameCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.reset();
+                this.keys = {};
+                this.lanes = [150, 300, 450];
+                this.currentLane = 1;
+                this.monkeyX = 0;
+                this.initControls();
+                this.gameLoop();
+            }
 
-const bugSound=new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAAA/////wAA');
-const bombSound=new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAAAAP//AAD//wAA');
-const scream=new Audio('data:audio/wav;base64,UklGRkAAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAAA');
-const bg=new Audio('data:audio/wav;base64,UklGRkAAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAAA');bg.loop=true;bg.volume=.25;
-window.addEventListener('click',()=>bg.play(),{once:true});
+            reset() {
+                this.player = {
+                    x: 200,
+                    y: 320,
+                    width: 40,
+                    height: 60,
+                    laneOffset: 0,
+                    vy: 0,
+                    sliding: false,
+                    slideTimer: 0,
+                    boost: 0,
+                    shield: false
+                };
+                this.obstacles = [];
+                this.coins = [];
+                this.monkeyX = -200;
+                this.score = 0;
+                this.coinsCollected = 0;
+                this.speed = 4;
+                this.gameOver = false;
+                this.spawnTimer = 0;
+                this.monkeySpeed = 2;
+                updateUI(0, 0);
+            }
 
-function blood(x,y){const b=document.createElement('div');b.className='blood';b.textContent='🩸';b.style.left=x+'px';b.style.top=y+'px';playArea.appendChild(b);setTimeout(()=>b.remove(),550)}
-function doJumpscare(){jumpscare.classList.add('show');scream.play();setTimeout(()=>jumpscare.classList.remove('show'),220)}
-function doFakeCrash(){fakecrash.classList.add('show');setTimeout(()=>fakecrash.classList.remove('show'),350)}
+            initControls() {
+                document.addEventListener('keydown', (e) => {
+                    this.keys[e.code] = true;
+                    if (e.code === 'Space' && this.player.y >= 320) {
+                        this.player.vy = -18;
+                    }
+                });
+                document.addEventListener('keyup', (e) => {
+                    this.keys[e.code] = false;
+                });
+            }
 
-function spawnOne(){
- const el=document.createElement('div');
- el.className='bug';
- el.style.touchAction='manipulation';(){const el=document.createElement('div');el.className='bug';
- const isBomb=Math.random()<.25;el.textContent=isBomb?bomb:bugs[Math.floor(Math.random()*bugs.length)];
- el.style.left=Math.random()*(innerWidth-40)+'px';el.style.animationDuration=1200+Math.random()*1800+'ms';
- el.addEventListener('pointerdown', e => {
-      e.preventDefault();if(isBomb){bombSound.play();document.body.classList.add('shake');setTimeout(()=>document.body.classList.remove('shake'),250);score=0;doJumpscare()}
- else{bugSound.play();score++}
- blood(e.clientX,e.clientY);scoreEl.textContent=score;el.remove()
-    });()};
- el.onanimationend=()=>{miss++;missEl.textContent=miss;if(miss>=7)endGame();el.remove()};
- playArea.appendChild(el)}
+            update() {
+                if (this.gameOver) return;
 
-function spawn(){for(let i=0;i<multiSpawn;i++)spawnOne()}
+                // Player movement
+                if (this.keys['ArrowLeft'] || this.keys['KeyA']) {
+                    if (this.currentLane > 0) this.currentLane--;
+                }
+                if (this.keys['ArrowRight'] || this.keys['KeyD']) {
+                    if (this.currentLane < 2) this.currentLane++;
+                }
+                if (this.keys['ArrowDown'] || this.keys['KeyS']) {
+                    this.player.sliding = true;
+                    this.player.slideTimer = 20;
+                }
 
-function endGame(){clearInterval(spawner);clearInterval(timer);
- if(score>hi){hi=score;localStorage.setItem('insaneHigh',hi)}
- gameover.classList.add('show')}
+                this.player.laneOffset = (this.player.laneOffset + 0.3) % (Math.PI * 2);
 
-let spawner=setInterval(spawn,spawnRate);
+                this.player.vy += 1;
+                this.player.y += this.player.vy;
+                if (this.player.y > 320) {
+                    this.player.y = 320;
+                    this.player.vy = 0;
+                }
 
-// INSANE escalation
-setInterval(()=>{
- if(spawnRate>220){spawnRate-=40;clearInterval(spawner);spawner=setInterval(spawn,spawnRate)}
- if(multiSpawn<3)multiSpawn++;
- if(Math.random()<.4)doJumpscare();
- if(Math.random()<.25)doFakeCrash();
-},4500);
+                if (this.player.sliding) {
+                    this.player.slideTimer--;
+                    this.player.height = 30;
+                    this.player.y += 30;
+                    if (this.player.slideTimer <= 0) {
+                        this.player.sliding = false;
+                        this.player.height = 60;
+                        this.player.y -= 30;
+                    }
+                }
 
-const timer=setInterval(()=>{time--;timeEl.textContent=time;if(time<=0)endGame()},1000);
-</script></body>
+                this.player.x = this.lanes[this.currentLane];
+
+                // Scrolling
+                this.monkeyX += this.monkeySpeed;
+                this.score += this.speed;
+                this.speed += 0.001;
+                this.monkeySpeed += 0.0005;
+
+                if (this.boost > 0) {
+                    this.speed *= 1.5;
+                    this.boost--;
+                }
+
+                // Spawn obstacles and coins
+                this.spawnTimer += this.speed;
+                if (this.spawnTimer > 100 - this.score / 200) {
+                    this.spawnTimer = 0;
+                    const lane = Math.floor(Math.random() * 3);
+                    if (Math.random() < 0.6) {
+                        this.obstacles.push({
+                            x: this.lanes[lane],
+                            y: 360,
+                            width: 40 + Math.random() * 20,
+                            height: 50 + Math.random() * 30,
+                            type: Math.random() < 0.5 ? 'rock' : 'fire'
+                        });
+                    } else {
+                        this.coins.push({
+                            x: this.lanes[lane] + 10,
+                            y: 280 - Math.random() * 100,
+                            width: 20,
+                            height: 20,
+                            collected: false
+                        });
+                    }
+                }
+
+                // Update obstacles and coins
+                this.obstacles.forEach((obs, i) => {
+                    obs.x -= this.speed;
+                    if (obs.x < -100) this.obstacles.splice(i, 1);
+                });
+
+                this.coins.forEach((coin, i) => {
+                    coin.x -= this.speed;
+                    if (coin.x < -100) this.coins.splice(i, 1);
+                });
+
+                // Collision
+                this.obstacles.forEach(obs => {
+                    if (Math.abs(this.player.x - obs.x) < 40 && Math.abs(this.player.y - (360 - obs.height)) < 60) {
+                        if (this.player.shield) {
+                            this.player.shield = false;
+                        } else {
+                            this.gameOver = true;
+                            document.getElementById('restart').style.display = 'block';
+                        }
+                    }
+                });
+
+                this.coins.forEach(coin => {
+                    if (!coin.collected && Math.abs(this.player.x - coin.x) < 30 && Math.abs(this.player.y - coin.y) < 30) {
+                        coin.collected = true;
+                        this.coinsCollected++;
+                        updateUI(this.score, this.coinsCollected);
+                    }
+                });
+
+                // Monkey catch up
+                if (this.monkeyX > this.player.x - 100) {
+                    this.gameOver = true;
+                    document.getElementById('restart').style.display = 'block';
+                }
+
+                updateUI(Math.floor(this.score), this.coinsCollected);
+            }
+
+            draw() {
+                this.ctx.clearRect(0, 0, 800, 450);
+
+                // Background parallax
+                const bgGradient = this.ctx.createLinearGradient(0, 0, 0, 450);
+                bgGradient.addColorStop(0, '#87CEEB');
+                bgGradient.addColorStop(0.5, '#98D8C8');
+                bgGradient.addColorStop(1, '#74C69D');
+                this.ctx.fillStyle = bgGradient;
+                this.ctx.fillRect(0, 0, 800, 450);
+
+                // Clouds
+                this.ctx.fillStyle = 'rgba(255,255,255,0.8)';
+                for (let i = 0; i < 6; i++) {
+                    const x = (this.score * 0.2 + i * 200) % 800;
+                    this.ctx.beginPath();
+                    this.ctx.arc(x, 60 + (i % 2)*30, 30, 0, Math.PI*2);
+                    this.ctx.arc(x+25, 60 + (i % 2)*30, 35, 0, Math.PI*2);
+                    this.ctx.arc(x+50, 60 + (i % 2)*30, 30, 0, Math.PI*2);
+                    this.ctx.fill();
+                }
+
+                // Ground
+                this.ctx.fillStyle = '#27ae60';
+                this.ctx.fillRect(0, 370, 800, 80);
+                this.ctx.fillStyle = '#2ecc71';
+                for (let i = 0; i < 25; i++) {
+                    const x = (this.score * 2 + i * 40) % 800;
+                    this.ctx.fillRect(x, 385, 35, 8);
+                }
+
+                // Player
+                this.ctx.save();
+                this.ctx.translate(this.player.x, this.player.y);
+                // Shadow
+                this.ctx.fillStyle = 'rgba(0,0,0,0.2)';
+                this.ctx.fillRect(-20, 30, 40, 20);
+
+                // Body
+                if (!this.player.sliding) {
+                    // Legs running
+                    this.ctx.fillStyle = '#34495e';
+                    this.ctx.fillRect(-15, 20, 8, 25);
+                    this.ctx.fillRect(7, 20 - Math.sin(this.player.laneOffset)*5, 8, 25);
+                    // Torso
+                    this.ctx.fillStyle = '#3498db';
+                    this.ctx.fillRect(-18, 0, 36, 30);
+                    // Arms
+                    this.ctx.fillStyle = '#f39c12';
+                    this.ctx.fillRect(-25, 5 - Math.sin(this.player.laneOffset)*3, 15, 20);
+                    this.ctx.fillRect(10, 5 + Math.sin(this.player.laneOffset)*3, 15, 20);
+                    // Head
+                    this.ctx.fillStyle = '#f1c40f';
+                    this.ctx.beginPath();
+                    this.ctx.arc(0, -20, 15, 0, Math.PI*2);
+                    this.ctx.fill();
+                } else {
+                    // Sliding pose
+                    this.ctx.fillStyle = '#3498db';
+                    this.ctx.fillRect(-20, 10, 40, 25);
+                    this.ctx.fillStyle = '#f1c40f';
+                    this.ctx.beginPath();
+                    this.ctx.arc(0, -10, 12, 0, Math.PI*2);
+                    this.ctx.fill();
+                }
+                this.ctx.restore();
+
+                if (this.player.shield) {
+                    this.ctx.save();
+                    this.ctx.translate(this.player.x, this.player.y);
+                    this.ctx.strokeStyle = '#00ff00';
+                    this.ctx.lineWidth = 4;
+                    this.ctx.beginPath();
+                    this.ctx.arc(0, 0, 35, 0, Math.PI*2);
+                    this.ctx.stroke();
+                    this.ctx.restore();
+                }
+
+                // Coins
+                this.coins.forEach(coin => {
+                    if (!coin.collected) {
+                        this.ctx.save();
+                        this.ctx.translate(coin.x, coin.y);
+                        this.ctx.fillStyle = '#ffd700';
+                        this.ctx.shadowColor = '#ffed4a';
+                        this.ctx.shadowBlur = 15;
+                        this.ctx.beginPath();
+                        this.ctx.arc(0, 0, 10, 0, Math.PI*2);
+                        this.ctx.fill();
+                        this.ctx.shadowBlur = 0;
+                        this.ctx.restore();
+                    }
+                });
+
+                // Obstacles
+                this.obstacles.forEach(obs => {
+                    this.ctx.save();
+                    this.ctx.translate(obs.x, 360);
+                    if (obs.type === 'rock') {
+                        this.ctx.fillStyle = '#8B4513';
+                        this.ctx.shadowColor = 'rgba(0,0,0,0.5)';
+                        this.ctx.shadowBlur = 10;
+                        this.ctx.fillRect(-obs.width/2, -obs.height, obs.width, obs.height);
+                    } else {
+                        this.ctx.fillStyle = '#ff4500';
+                        this.ctx.shadowColor = '#ff0000';
+                        this.ctx.shadowBlur = 15;
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(-obs.width/2, -obs.height);
+                        this.ctx.lineTo(obs.width/2, -obs.height);
+                        this.ctx.lineTo(0, 0);
+                        this.ctx.fill();
+                    }
+                    this.ctx.shadowBlur = 0;
+                    this.ctx.restore();
+                });
+
+                // Monkey
+                this.ctx.save();
+                this.ctx.translate(this.monkeyX, 350);
+                this.ctx.fillStyle = '#4a4a4a';
+                this.ctx.fillRect(-30, -20, 60, 50);
+                this.ctx.fillStyle = '#ff6b6b';
+                this.ctx.beginPath();
+                this.ctx.arc(-15, -25, 12, 0, Math.PI*2);
+                this.ctx.arc(15, -25, 12, 0, Math.PI*2);
+                this.ctx.fill();
+                this.ctx.restore();
+
+                if (this.gameOver) {
+                    this.ctx.fillStyle = 'rgba(0,0,0,0.8)';
+                    this.ctx.fillRect(0, 0, 800, 450);
+                    this.ctx.fillStyle = '#fff';
+                    this.ctx.font = 'bold 48px Arial';
+                    this.ctx.textAlign = 'center';
+                    this.ctx.fillText('Game Over!', 400, 200);
+                    this.ctx.font = '32px Arial';
+                    this.ctx.fillText(`Score: ${Math.floor(this.score)}`, 400, 250);
+                    this.ctx.fillText(`Coins: ${this.coinsCollected}`, 400, 290);
+                    this.ctx.textAlign = 'left';
+                }
+            }
+
+            gameLoop() {
+                this.update();
+                this.draw();
+                requestAnimationFrame(() => this.gameLoop());
+            }
+        }
+
+        let game;
+        function updateUI(score, coins) {
+            document.getElementById('score').textContent = Math.floor(score);
+            document.getElementById('coins').textContent = coins;
+        }
+
+        function startGame() {
+            game = new Game();
+        }
+
+        function restartGame() {
+            game.reset();
+            document.getElementById('restart').style.display = 'none';
+        }
+
+        window.addEventListener('load', startGame);
+    </script>
+</body>
 </html>
