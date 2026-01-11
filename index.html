@@ -45,11 +45,12 @@
 <body>
     <div id="message">
         🛠️ <strong>Website Sedang Maintenance</strong> 🛠️<br>
-        <small>Swipe ↑ lompat | ↓ slide | ←→ lane | SPACE/Click lompat</small>
+        <small>Swipe ↑ lompat | ↓ slide | ←→ lane | SPACE lompat</small>
     </div>
     <div id="ui">
         <span>Score: <span id="score">0</span></span>
         <span>Coins: <span id="coins">0</span></span>
+        <span>Speed: <span id="speed">3</span></span>
     </div>
     <canvas id="game"></canvas>
     <button id="restart" onclick="restartGame()">🔄 MAIN LAGI</button>
@@ -62,6 +63,7 @@
                 this.resize();
                 this.reset();
                 this.initControls();
+                this.lastTime = 0;
                 this.loop();
             }
 
@@ -81,19 +83,26 @@
             }
 
             reset() {
-                this.player = { x: 0, y: 320 * this.scale, w: 40 * this.scale, h: 60 * this.scale, 
-                               lane: 1, vy: 0, slide: 0, boost: 0, shield: false, rot: 0 };
-                this.obstacles = []; this.coins = []; this.monkey = -300 * this.scale;
-                this.score = 0; this.coinsC = 0; this.speed = 5; this.gameOver = false;
-                this.spawnT = 0; this.lastTime = 0;
-                updateUI(0, 0);
+                this.player = { 
+                    x: 0, y: 320 * this.scale, w: 40 * this.scale, h: 60 * this.scale, 
+                    lane: 1, vy: 0, slide: 0, boost: 0, shield: false, rot: 0 
+                };
+                this.obstacles = []; 
+                this.coins = []; 
+                this.monkey = -400 * this.scale; // MULAI JAUH
+                this.score = 0; 
+                this.coinsC = 0; 
+                this.speed = 3; // LAMBAT DI AWAL
+                this.gameOver = false;
+                this.spawnT = 0;
+                this.lastTime = 0;
+                updateUI(0, 0, 3);
                 document.getElementById('restart').style.display = 'none';
             }
 
             initControls() {
                 window.addEventListener('resize', () => this.resize());
                 
-                // Keyboard
                 document.addEventListener('keydown', e => {
                     if (this.gameOver) return;
                     e.preventDefault();
@@ -103,13 +112,11 @@
                     else if (e.code === 'ArrowRight' && this.player.lane < 2) this.player.lane++;
                 });
 
-                // Touch
                 let touchStart = { x: 0, y: 0 };
                 this.canvas.addEventListener('touchstart', e => {
                     e.preventDefault();
                     const t = e.touches[0];
                     touchStart = { x: t.clientX, y: t.clientY };
-                    if ('vibrate' in navigator) navigator.vibrate(10);
                 });
                 this.canvas.addEventListener('touchend', e => {
                     e.preventDefault();
@@ -126,16 +133,14 @@
                     } else if (dy < -30) {
                         this.jump();
                     }
-                    if ('vibrate' in navigator) navigator.vibrate(20);
                 });
 
-                // Mouse
                 this.canvas.addEventListener('click', () => !this.gameOver && this.jump());
             }
 
             jump() {
                 if (this.player.y >= 320 * this.scale - 10) {
-                    this.player.vy = -20 * this.scale;
+                    this.player.vy = -18 * this.scale;
                     if ('vibrate' in navigator) navigator.vibrate(30);
                 }
             }
@@ -150,13 +155,13 @@
             update(dt) {
                 if (this.gameOver) return;
 
-                // Player physics
-                this.player.rot += 0.2;
-                this.player.vy += 1 * this.scale;
-                this.player.y += this.player.vy;
+                // Player physics - LAMBAT & SMOOTH
+                this.player.rot += 0.15 * dt;
+                this.player.vy += 0.8 * this.scale * dt; // GRAVITY LAMBAT
+                this.player.y += this.player.vy * dt;
                 if (this.player.y > 320 * this.scale) {
                     this.player.y = 320 * this.scale;
-                    this.player.vy *= 0.7;
+                    this.player.vy *= 0.6;
                 }
 
                 if (this.player.slide > 0) {
@@ -165,26 +170,25 @@
                     this.player.y += 30 * this.scale;
                 } else {
                     this.player.h = 60 * this.scale;
-                    if (this.player.y < 320 * this.scale) this.player.y -= 30 * this.scale;
                 }
 
                 this.player.x = this.lanes[this.player.lane];
 
-                // Game speed
+                // Game progression - LAMBAT DI AWAL
                 this.score += this.speed * dt;
-                this.speed += 0.02 * dt;
-                this.monkey += this.speed * 1.5 * dt;
+                this.speed += 0.008 * dt; // AKSELERASI LAMBAT
+                this.monkey += this.speed * 0.8 * dt; // MONKEY LAMBAT
 
-                // Spawn
+                // Spawn JARANG di awal
                 this.spawnT += this.speed * dt;
-                if (this.spawnT > 120) {
+                if (this.spawnT > 200 - Math.min(this.score * 0.1, 100)) { // 200->100 JARANG
                     this.spawnT = 0;
                     const lane = Math.floor(Math.random() * 3);
-                    if (Math.random() < 0.7) {
+                    if (Math.random() < 0.5) { // 50% OBSTACLE
                         this.obstacles.push({
                             x: this.lanes[lane], y: 360 * this.scale,
-                            w: (40 + Math.random() * 30) * this.scale,
-                            h: (50 + Math.random() * 30) * this.scale,
+                            w: (35 + Math.random() * 25) * this.scale,
+                            h: (45 + Math.random() * 25) * this.scale,
                             type: Math.random() < 0.5 ? 'rock' : 'fire'
                         });
                     } else {
@@ -203,37 +207,33 @@
                 });
                 this.coins.forEach((c, i) => {
                     c.x -= this.speed * dt;
-                    c.spin += 0.2;
+                    c.spin += 0.15 * dt;
                     if (c.x < -50 * this.scale) this.coins.splice(i, 1);
                 });
 
-                // Collisions
+                // Collision detection
                 const px = this.player.x, py = this.player.y;
                 this.obstacles.forEach(o => {
-                    if (Math.hypot(px - o.x, py - (360 * this.scale - o.h)) < 40 * this.scale) {
-                        if (this.player.shield) this.player.shield = false;
-                        else {
-                            this.gameOver = true;
-                            if ('vibrate' in navigator) navigator.vibrate(200);
-                            document.getElementById('restart').style.display = 'block';
-                        }
+                    if (Math.hypot(px - o.x, py - (360 * this.scale - o.h)) < 35 * this.scale) {
+                        this.gameOver = true;
+                        if ('vibrate' in navigator) navigator.vibrate(200);
+                        document.getElementById('restart').style.display = 'block';
                     }
                 });
                 this.coins.forEach((c, i) => {
                     if (Math.hypot(px - c.x, py - c.y) < 25 * this.scale) {
                         this.coins.splice(i, 1);
                         this.coinsC++;
-                        updateUI(Math.floor(this.score), this.coinsC);
                         if ('vibrate' in navigator) navigator.vibrate(50);
                     }
                 });
 
-                if (this.monkey > px - 50 * this.scale) {
+                if (this.monkey > px - 80 * this.scale) {
                     this.gameOver = true;
                     document.getElementById('restart').style.display = 'block';
                 }
 
-                updateUI(Math.floor(this.score), this.coinsC);
+                updateUI(Math.floor(this.score), this.coinsC, Math.floor(this.speed));
             }
 
             draw() {
@@ -243,13 +243,16 @@
 
                 // Background
                 const grad = ctx.createLinearGradient(0, 0, 0, h);
-                grad.addColorStop(0, '#87CEEB'); grad.addColorStop(0.6, '#98D8C8'); grad.addColorStop(1, '#74C69D');
-                ctx.fillStyle = grad; ctx.fillRect(0, 0, w, h);
+                grad.addColorStop(0, '#87CEEB'); 
+                grad.addColorStop(0.6, '#98D8C8'); 
+                grad.addColorStop(1, '#74C69D');
+                ctx.fillStyle = grad; 
+                ctx.fillRect(0, 0, w, h);
 
                 // Clouds
                 ctx.fillStyle = 'rgba(255,255,255,0.85)';
                 for (let i = 0; i < 5; i++) {
-                    const x = ((this.score * 0.1 + i * 200) % 800) * this.scale;
+                    const x = ((this.score * 0.08 + i * 200) % 800) * this.scale;
                     ctx.beginPath();
                     ctx.arc(x, 60 * this.scale, 25 * this.scale, 0, Math.PI * 2);
                     ctx.arc(x + 20 * this.scale, 60 * this.scale, 30 * this.scale, 0, Math.PI * 2);
@@ -257,73 +260,108 @@
                 }
 
                 // Ground
-                ctx.fillStyle = '#27ae60'; ctx.fillRect(0, 370 * this.scale, w, 80 * this.scale);
+                ctx.fillStyle = '#27ae60'; 
+                ctx.fillRect(0, 370 * this.scale, w, 80 * this.scale);
                 ctx.fillStyle = '#2ecc71';
                 for (let i = 0; i < 30; i++) {
-                    const x = ((this.score * 3 + i * 35) % 800) * this.scale;
+                    const x = ((this.score * 2.5 + i * 35) % 800) * this.scale;
                     ctx.fillRect(x, 385 * this.scale, 30 * this.scale, 8 * this.scale);
                 }
 
                 // Player
-                ctx.save(); ctx.translate(this.player.x, this.player.y);
-                ctx.shadowColor = 'rgba(0,0,0,0.3)'; ctx.shadowBlur = 10 * this.scale;
+                ctx.save(); 
+                ctx.translate(this.player.x, this.player.y);
+                ctx.shadowColor = 'rgba(0,0,0,0.3)'; 
+                ctx.shadowBlur = 8 * this.scale;
                 
-                if (this.player.slide) {
-                    ctx.fillStyle = '#3498db'; ctx.fillRect(-20 * this.scale, 0, 40 * this.scale, 25 * this.scale);
-                    ctx.fillStyle = '#f1c40f'; ctx.beginPath();
-                    ctx.arc(0, -15 * this.scale, 12 * this.scale, 0, Math.PI * 2); ctx.fill();
+                if (this.player.slide > 0) {
+                    ctx.fillStyle = '#3498db'; 
+                    ctx.fillRect(-20 * this.scale, 0, 40 * this.scale, 25 * this.scale);
+                    ctx.fillStyle = '#f1c40f'; 
+                    ctx.beginPath();
+                    ctx.arc(0, -15 * this.scale, 12 * this.scale, 0, Math.PI * 2); 
+                    ctx.fill();
                 } else {
                     ctx.fillStyle = '#34495e';
                     ctx.fillRect(-12 * this.scale, 15 * this.scale, 8 * this.scale, 25 * this.scale);
                     ctx.fillRect(4 * this.scale, 15 * this.scale - Math.sin(this.player.rot) * 8 * this.scale, 8 * this.scale, 25 * this.scale);
-                    ctx.fillStyle = '#3498db'; ctx.fillRect(-18 * this.scale, -5 * this.scale, 36 * this.scale, 30 * this.scale);
-                    ctx.fillStyle = '#f1c40f'; ctx.beginPath();
-                    ctx.arc(0, -25 * this.scale, 15 * this.scale, 0, Math.PI * 2); ctx.fill();
+                    ctx.fillStyle = '#3498db'; 
+                    ctx.fillRect(-18 * this.scale, -5 * this.scale, 36 * this.scale, 30 * this.scale);
+                    ctx.fillStyle = '#f1c40f'; 
+                    ctx.beginPath();
+                    ctx.arc(0, -25 * this.scale, 15 * this.scale, 0, Math.PI * 2); 
+                    ctx.fill();
                 }
-                ctx.shadowBlur = 0; ctx.restore();
+                ctx.shadowBlur = 0; 
+                ctx.restore();
 
                 // Coins
-                ctx.save(); ctx.shadowColor = '#ffd700'; ctx.shadowBlur = 15 * this.scale;
+                ctx.save(); 
+                ctx.shadowColor = '#ffd700'; 
+                ctx.shadowBlur = 12 * this.scale;
                 this.coins.forEach(c => {
-                    ctx.save(); ctx.translate(c.x, c.y); ctx.rotate(c.spin);
-                    ctx.fillStyle = '#ffd700'; ctx.beginPath();
-                    ctx.arc(0, 0, 12 * this.scale, 0, Math.PI * 2); ctx.fill();
+                    ctx.save(); 
+                    ctx.translate(c.x, c.y); 
+                    ctx.rotate(c.spin);
+                    ctx.fillStyle = '#ffd700'; 
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 12 * this.scale, 0, Math.PI * 2); 
+                    ctx.fill();
                     ctx.restore();
                 });
-                ctx.shadowBlur = 0; ctx.restore();
+                ctx.shadowBlur = 0; 
+                ctx.restore();
 
                 // Obstacles
                 this.obstacles.forEach(o => {
-                    ctx.save(); ctx.translate(o.x, 360 * this.scale);
-                    ctx.shadowColor = o.type === 'rock' ? '#654321' : '#ff4500'; ctx.shadowBlur = 12 * this.scale;
+                    ctx.save(); 
+                    ctx.translate(o.x, 360 * this.scale);
+                    ctx.shadowColor = o.type === 'rock' ? '#654321' : '#ff4500'; 
+                    ctx.shadowBlur = 10 * this.scale;
                     if (o.type === 'rock') {
-                        ctx.fillStyle = '#8B4513'; ctx.fillRect(-o.w/2, -o.h, o.w, o.h);
+                        ctx.fillStyle = '#8B4513'; 
+                        ctx.fillRect(-o.w/2, -o.h, o.w, o.h);
                     } else {
-                        ctx.fillStyle = '#ff4500'; ctx.beginPath();
-                        ctx.moveTo(-o.w/2, -o.h); ctx.lineTo(o.w/2, -o.h); ctx.lineTo(0, 0); ctx.fill();
+                        ctx.fillStyle = '#ff4500'; 
+                        ctx.beginPath();
+                        ctx.moveTo(-o.w/2, -o.h); 
+                        ctx.lineTo(o.w/2, -o.h); 
+                        ctx.lineTo(0, 0); 
+                        ctx.fill();
                     }
-                    ctx.shadowBlur = 0; ctx.restore();
+                    ctx.shadowBlur = 0; 
+                    ctx.restore();
                 });
 
-                // Monkey
-                ctx.save(); ctx.translate(this.monkey, 380 * this.scale);
-                ctx.fillStyle = '#4a4a4a'; ctx.fillRect(-25 * this.scale, -15 * this.scale, 50 * this.scale, 40 * this.scale);
-                ctx.fillStyle = '#ff6b6b'; ctx.beginPath();
+                // Monkey (JAUH DI BELAKANG)
+                ctx.save(); 
+                ctx.translate(this.monkey, 380 * this.scale);
+                ctx.fillStyle = '#4a4a4a'; 
+                ctx.fillRect(-25 * this.scale, -15 * this.scale, 50 * this.scale, 40 * this.scale);
+                ctx.fillStyle = '#ff6b6b'; 
+                ctx.beginPath();
                 ctx.arc(-10 * this.scale, -20 * this.scale, 8 * this.scale, 0, Math.PI * 2);
-                ctx.arc(10 * this.scale, -20 * this.scale, 8 * this.scale, 0, Math.PI * 2); ctx.fill();
+                ctx.arc(10 * this.scale, -20 * this.scale, 8 * this.scale, 0, Math.PI * 2); 
+                ctx.fill();
                 ctx.restore();
 
                 if (this.gameOver) {
-                    ctx.fillStyle = 'rgba(0,0,0,0.85)'; ctx.fillRect(0, 0, w, h);
-                    ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-                    ctx.font = `bold ${48 * this.scale}px Arial`; ctx.fillText('GAME OVER', 400 * this.scale, 225 * this.scale);
-                    ctx.font = `${32 * this.scale}px Arial`; ctx.fillText(`Score: ${Math.floor(this.score)}`, 400 * this.scale, 270 * this.scale);
+                    ctx.fillStyle = 'rgba(0,0,0,0.85)'; 
+                    ctx.fillRect(0, 0, w, h);
+                    ctx.fillStyle = '#fff'; 
+                    ctx.textAlign = 'center'; 
+                    ctx.textBaseline = 'middle';
+                    ctx.font = `bold ${48 * this.scale}px Arial`; 
+                    ctx.fillText('GAME OVER', 400 * this.scale, 225 * this.scale);
+                    ctx.font = `${32 * this.scale}px Arial`; 
+                    ctx.fillText(`Score: ${Math.floor(this.score)}`, 400 * this.scale, 270 * this.scale);
+                    ctx.fillText(`Speed: ${Math.floor(this.speed)}`, 400 * this.scale, 310 * this.scale);
                     ctx.textAlign = 'left';
                 }
             }
 
             loop(time = 0) {
-                const dt = Math.min((time - this.lastTime) / 16.67, 3);
+                const dt = Math.min((time - this.lastTime) / 16.67, 2); // 60FPS STABIL
                 this.lastTime = time;
                 this.update(dt);
                 this.draw();
@@ -332,9 +370,10 @@
         }
 
         const game = new TempleRun();
-        function updateUI(score, coins) {
+        function updateUI(score, coins, speed) {
             document.getElementById('score').textContent = score;
             document.getElementById('coins').textContent = coins;
+            document.getElementById('speed').textContent = Math.floor(speed);
         }
         function restartGame() { game.reset(); }
     </script>
