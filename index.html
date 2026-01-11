@@ -66,16 +66,16 @@
     <div>🏆 <span id="highScore">0</span></div>
   </div>  <div class="container">
     <h1>🚧 Under Maintenance</h1>
-    <p>Sambil nunggu web online lagi,<br>main game buah jatuh dulu 🍉</p>
+    <p>Sambil nunggu web online lagi,<br>pencet serangga yang jatuh 🦋🐞</p>
     <div class="footer">Hati-hati sama 💣</div>
   </div>  <script>
-    const fruitSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAAA/////wAAAP//AAD///8AAP///wAA');
+    const bugSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAAA/////wAAAP//AAD///8AAP///wAA');
     const bombSound = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAAAAP//AAD//wAA');
     const bgMusic = new Audio('data:audio/wav;base64,UklGRkAAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAAA');
     bgMusic.loop = true;
     bgMusic.volume = 0.3;
-    window.addEventListener('click', () => bgMusic.play(), { once: true });base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAAA/////wAAAP//AAD///8AAP///wAA');
-    const fruits = ['🍎','🍌','🍉','🍇','🍊','🍓','🍍','🥭','🍒'];
+    window.addEventListener('click', () => bgMusic.play(), { once: true });('click', () => bgMusic.play(), { once: true });base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAAA/////wAAAP//AAD///8AAP///wAA');
+    const fruits = ['🦋','🐞','🪲','🦟','🪰','🕷️','🐝'];
     const bomb = '💣';
     const playArea = document.getElementById('playArea');
     const scoreEl = document.getElementById('score');
@@ -106,8 +106,8 @@
           bombSound.play();
           score = 0;
         } else {
-          fruitSound.currentTime = 0;
-          fruitSound.play();
+          bugSound.currentTime = 0;
+          bugSound.play();
           score++;
         }
         scoreEl.textContent = score;
