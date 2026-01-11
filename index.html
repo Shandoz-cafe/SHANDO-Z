@@ -12,6 +12,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
     .container {
       background: #fff;
@@ -21,74 +22,123 @@
       border-radius: 16px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       text-align: center;
+      position: relative;
+      z-index: 2;
     }
-    h1 {
-      margin-top: 0;
-      font-size: 24px;
-    }
-    p {
-      color: #555;
-    }
-    .score {
+    h1 { margin-top: 0; font-size: 24px; }
+    p { color: #555; }
+    .stats {
+      display: flex;
+      justify-content: space-between;
       font-weight: bold;
       margin: 12px 0;
-      font-size: 18px;
     }
-    .game {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 16px;
+    .play-area {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 1;
     }
     .fruit {
-      font-size: 40px;
+      position: absolute;
+      top: -50px;
+      font-size: 36px;
       cursor: pointer;
-      background: #f7f7f7;
-      border-radius: 12px;
-      padding: 16px 0;
-      transition: transform 0.1s ease, background 0.1s ease;
       user-select: none;
+      animation: fall linear forwards;
     }
-    .fruit:active {
-      transform: scale(0.9);
-      background: #ffe0b2;
+    @keyframes fall {
+      to { transform: translateY(110vh); }
     }
-    .footer {
-      margin-top: 20px;
-      font-size: 12px;
-      color: #999;
-    }
+    .footer { margin-top: 20px; font-size: 12px; color: #999; }
   </style>
 </head>
-<body>
-  <div class="container">
+<body>  <div class="play-area" id="playArea"></div>  <div class="container">
     <h1>🚧 Under Maintenance</h1>
-    <p>Website kami sedang diperbaiki.<br>Sambil nunggu, main game pencet buah dulu 🍉🍌🍎</p><div class="score">Skor: <span id="score">0</span></div>
-
-<div class="game">
-  <div class="fruit">🍎</div>
-  <div class="fruit">🍌</div>
-  <div class="fruit">🍉</div>
-  <div class="fruit">🍇</div>
-  <div class="fruit">🍊</div>
-  <div class="fruit">🍓</div>
-  <div class="fruit">🍍</div>
-  <div class="fruit">🥭</div>
-  <div class="fruit">🍒</div>
+    <p>Sambil nunggu web online lagi,<br>main game buah jatuh dulu 🍉</p><div class="stats">
+  <div>Skor: <span id="score">0</span></div>
+  <div>⏱ <span id="time">30</span>s</div>
 </div>
 
-<div class="footer">Terima kasih sudah mampir 🙏</div>
+<div>🏆 High Score: <span id="highScore">0</span></div>
+
+<div class="footer">Hati-hati sama 💣</div>
 
   </div>  <script>
-    let score = 0;
+    const fruits = ['🍎','🍌','🍉','🍇','🍊','🍓','🍍','🥭','🍒'];
+    const bomb = '💣';
+    const playArea = document.getElementById('playArea');
     const scoreEl = document.getElementById('score');
-    const fruits = document.querySelectorAll('.fruit');
+    const timeEl = document.getElementById('time');
+    const highScoreEl = document.getElementById('highScore');
 
-    fruits.forEach(fruit => {
-      fruit.addEventListener('click', () => {
-        score++;
+    let score = 0;
+    let timeLeft = 30;
+    let gameInterval;
+    let spawnInterval;
+
+    let highScore = localStorage.getItem('fruitHighScore') || 0;
+    highScoreEl.textContent = highScore;
+
+    function spawnItem() {
+      const item = document.createElement('div');
+      item.className = 'fruit';
+
+      const isBomb = Math.random() < 0.2;
+      item.textContent = isBomb ? bomb : fruits[Math.floor(Math.random() * fruits.length)];
+
+      item.style.left = Math.random() * (window.innerWidth - 40) + 'px';
+      item.style.animationDuration = (3000 + Math.random() * 2000) + 'ms';
+
+      item.addEventListener('click', () => {
+        if (isBomb) {
+          score = 0;
+        } else {
+          score++;
+        }
         scoreEl.textContent = score;
+        item.remove();
       });
-    });
+
+      item.addEventListener('animationend', () => item.remove());
+      playArea.appendChild(item);
+    }
+
+    function startGame() {
+      spawnInterval = setInterval(spawnItem, 700);
+      gameInterval = setInterval(() => {
+        timeLeft--;
+        timeEl.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+          endGame();
+        }
+      }, 1000);
+    }
+
+    function endGame() {
+      clearInterval(spawnInterval);
+      clearInterval(gameInterval);
+      playArea.innerHTML = '';
+
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('fruitHighScore', highScore);
+        highScoreEl.textContent = highScore;
+      }
+
+      alert('Waktu habis! Skor kamu: ' + score);
+      resetGame();
+    }
+
+    function resetGame() {
+      score = 0;
+      timeLeft = 30;
+      scoreEl.textContent = 0;
+      timeEl.textContent = 30;
+      startGame();
+    }
+
+    startGame();
   </script></body>
 </html>
