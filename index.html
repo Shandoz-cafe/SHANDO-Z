@@ -4,12 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>FlappyBird</title>
-    <link rel="stylesheet" href="style.css" > 
+    <title>FlappyBird - Under Maintenance</title>
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Squada+One&display=swap" rel="stylesheet">
+    <style>
+        .maintenance-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 9999; color: white; font-family: 'Squada One', cursive; text-align: center;
+            cursor: pointer;
+        }
+        #logo { width: 180px; height: 180px; border-radius: 50%; border: 6px solid rgba(255,255,255,0.4);
+            margin-bottom: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); object-fit: cover; transition: transform 0.3s ease; }
+        #logo:hover { transform: scale(1.05); }
+        h1 { font-size: 42px; margin-bottom: 20px; text-shadow: 3px 3px 0px rgba(0,0,0,0.7); animation: glow 2s ease-in-out infinite alternate; }
+        .status { font-size: 24px; padding: 20px 30px; background: rgba(255,255,255,0.15); border-radius: 25px;
+            border: 3px solid rgba(255,215,0,0.5); backdrop-filter: blur(15px); margin: 20px 0; animation: pulse 2s infinite; }
+        .coming-soon { font-size: 18px; opacity: 0.9; }
+        @keyframes glow { from { text-shadow: 3px 3px 0px rgba(0,0,0,0.7), 0 0 20px rgba(255,255,255,0.5); } to { text-shadow: 3px 3px 0px rgba(0,0,0,0.7), 0 0 30px rgba(255,215,0,0.8); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+    </style>
 </head>
 <body>
+    <!-- AUDIO BACKGROUND -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="cozycoffeehouse.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- GAME CANVAS -->
     <canvas id="canvas" width="276" height="414"></canvas>
+    
+    <!-- MAINTENANCE OVERLAY -->
+    <div class="maintenance-overlay" onclick="hideMaintenance()">
+        <img id="logo" src="logo.png" alt="Your Logo">
+        <h1>FLAPPY BIRD</h1>
+        <div class="status">
+            🔧 UNDER MAINTENANCE 🔧<br>
+            <small>Game akan segera rilis!</small>
+        </div>
+        <div class="coming-soon">
+            Made by [NAMA LO] © 2026
+        </div>
+    </div>
+
     <script src="game.js"></script>
+    <script>
+        // BACKGROUND MUSIC
+        const bgMusic = document.getElementById('bgMusic');
+        
+        // AUTO PLAY (klik pertama user interaction)
+        document.addEventListener('click', function playMusic() {
+            bgMusic.volume = 0.3;  // Volume 30%
+            bgMusic.play().catch(e => console.log('Autoplay blocked'));
+            document.removeEventListener('click', playMusic);
+        }, { once: true });
+        
+        // LOOP FOREVER
+        bgMusic.addEventListener('ended', () => {
+            bgMusic.currentTime = 0;
+            bgMusic.play();
+        });
+        
+        // HIDE MAINTENANCE
+        function hideMaintenance() {
+            document.querySelector('.maintenance-overlay').style.display = 'none';
+        }
+        
+        // SPASI KEYBOARD
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                hideMaintenance();
+            }
+        });
+    </script>
 </body>
 </html>
