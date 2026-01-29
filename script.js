@@ -40,30 +40,54 @@ window.addEventListener('load', () => {
 })();
 
 /* =====================================================
-   PROMO COUNTDOWN
+   PROMO COUNTDOWN (MINGGUAN)
 ===================================================== */
 (function promoCountdown(){
   const el = qs('#promoCountdown');
   if(!el) return;
-  const year = new Date().getFullYear();
-  const end = new Date(year, 11, 31, 23, 59, 59);
+
+  function getEndOfWeek(){
+    const now = new Date();
+    const day = now.getDay(); // 0 = Minggu
+    const diff = 7 - day;
+    const end = new Date(now);
+    end.setDate(now.getDate() + diff);
+    end.setHours(23, 59, 59, 999);
+    return end;
+  }
+
+  let end = localStorage.getItem('promoEnd');
+  if(!end || Date.now() > new Date(end)){
+    end = getEndOfWeek();
+    localStorage.setItem('promoEnd', end);
+  } else {
+    end = new Date(end);
+  }
 
   function upd(){
     const diff = end - Date.now();
-    if(diff<=0){ el.textContent = 'Promo telah berakhir'; return; }
+    if(diff<=0){
+      localStorage.removeItem('promoEnd');
+      end = getEndOfWeek();
+      localStorage.setItem('promoEnd', end);
+      return;
+    }
+
     const d = Math.floor(diff/(1000*60*60*24));
-    const h = Math.floor((diff/ (1000*60*60)) % 24);
-    const m = Math.floor((diff/ (1000*60)) % 60);
+    const h = Math.floor((diff/(1000*60*60)) % 24);
+    const m = Math.floor((diff/(1000*60)) % 60);
     const s = Math.floor((diff/1000) % 60);
+
     el.textContent =
-      `${String(d).padStart(2,'0')}d ${String(h).padStart(2,'0')}:`+
-      `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      `${String(d).padStart(2,'0')}h ` +
+      `${String(h).padStart(2,'0')}:` +
+      `${String(m).padStart(2,'0')}:` +
+      `${String(s).padStart(2,'0')}`;
   }
 
   upd();
   setInterval(upd,1000);
 })();
-
 /* =====================================================
    DOWNLOAD COUPON → CANVAS PNG
 ===================================================== */
