@@ -118,7 +118,7 @@ window.addEventListener('load', () => {
     ctx.font='bold 34px sans-serif';
     ctx.fillText("SHANDO'Z HOLIDAY COUPON",40,100);
 
-    const code='SHANDOZ2025';
+    const code='SHANDOZ2026';
     ctx.fillStyle='#f5d48b';
     ctx.font='700 28px sans-serif';
     ctx.fillText("Kode: " + code, 40, 170);
