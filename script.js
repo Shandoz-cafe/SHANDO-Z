@@ -96,45 +96,28 @@ window.addEventListener('load', () => {
   if(!btn) return;
 
   btn.addEventListener('click', ()=>{
-    const w=900,h=500;
-    const c=document.createElement('canvas'); 
-    c.width=w; c.height=h;
-    const ctx=c.getContext('2d');
 
-    ctx.fillStyle='#2a221e';
-    ctx.fillRect(0,0,w,h);
+    // animasi sukses
+    spawnSparkles(document.querySelector('.promo-card'), 12);
 
-    // glow background
-    ctx.fillStyle='#fff';
-    ctx.globalAlpha=0.06;
-    for(let i=0;i<80;i++){
-      ctx.beginPath();
-      ctx.arc(Math.random()*w, Math.random()*h, Math.random()*40,0,Math.PI*2);
-      ctx.fill();
+    // buka Qpon merchant
+    window.open(
+      "https://qpon.id/platform/merchant?channel_id=1&linkType=app&poiId=1111545621883453648&shareType=COPY_LINK&source_tag=Share",
+      "_blank"
+    );
+
+    // tutup popup
+    const modal = qs('#promoModal');
+    modal.classList.remove('show');
+    modal.setAttribute("aria-hidden","true");
+
+    // nyalakan musik jika ada
+    const bgm = qs('#bgm');
+    if(bgm){
+      bgm.muted = false;
+      bgm.play().catch(()=>{});
     }
 
-    ctx.globalAlpha=1;
-    ctx.fillStyle='#fff';
-    ctx.font='bold 34px sans-serif';
-    ctx.fillText("SHANDO'Z HOLIDAY COUPON",40,100);
-
-    const code='SHANDOZ2026';
-    ctx.fillStyle='#f5d48b';
-    ctx.font='700 28px sans-serif';
-    ctx.fillText("Kode: " + code, 40, 170);
-
-    ctx.fillStyle='#fff';
-    ctx.font='18px sans-serif';
-    ctx.fillText("Tunjukkan kode ini untuk klaim promo PAKET KENYANG di Shando'z Café.",40,220);
-
-    ctx.fillStyle='#dcdcdc';
-    ctx.font='16px sans-serif';
-    ctx.fillText('Berlaku sampai: 31 Dec (www.shandozcafe.site) ' + (new Date().getFullYear()), 40, 280);
-
-    const url=c.toDataURL('image/png');
-    const a=document.createElement('a');
-    a.href=url; a.download='shandoz_coupon.png'; 
-    a.click();
   });
 })();
 
