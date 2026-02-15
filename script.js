@@ -329,6 +329,21 @@ function spawnSparkles(parent, count=6){
 const hamburgerBtn = qs("#hamburgerBtn");
 const mobileMenu = qs("#mobileMenu");
 
-hamburgerBtn?.addEventListener("click", () => {
+hamburgerBtn?.addEventListener("click", (e) => {
+  e.stopPropagation(); // biar tidak langsung tertutup
   mobileMenu.classList.toggle("show");
+});
+
+/* klik link menu → tutup */
+qsa("#mobileMenu a").forEach(link => {
+  link.addEventListener("click", () => {
+    mobileMenu.classList.remove("show");
+  });
+});
+
+/* klik di luar navbar → tutup */
+document.addEventListener("click", (e) => {
+  if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+    mobileMenu.classList.remove("show");
+  }
 });
