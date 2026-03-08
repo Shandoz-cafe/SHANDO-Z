@@ -1,496 +1,205 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>GANKETI | Authentic Streetwear</title>
-    <meta name="description" content="GANKETI represents modern elegance, authentic fashion, and timeless style">
-    <link rel="icon" href="ganketiweb.png" type="image/png">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://shandoz-cafe.github.io/GANKETI/">
-    <meta property="og:title" content="GANKETI | Authentic Streetwear">
-    <meta property="og:description" content="GANKETI represents modern elegance, authentic fashion, and timeless style">
-    <meta property="og:image" content="https://shandoz-cafe.github.io/GANKETI/ganketiweb.png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="GANKETI | Authentic Streetwear">
-    <meta name="twitter:description" content="GANKETI represents modern elegance, authentic fashion, and timeless style">
-    <meta name="twitter:image" content="https://shandoz-cafe.github.io/GANKETI/ganketiweb.png">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg: #050505; --surface: #121212; --primary: #ffffff; --text: #e5e5e5; --text-dim: #888888; --border: #262626; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden;}
+  <title>Shando'z Café & Coffee Bar</title>
+  <meta name="description" content="Shando'z Café & Coffee Bar – Menu spesial, minuman segar, dan promo menarik setiap hari ">
 
-        /* HEADER & SEARCH BAR */
-        header { background: rgba(5,5,5,0.95); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
-        .head-top { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
-        .logo { font-family: 'Oswald', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: 2px; color: var(--primary); cursor: pointer; text-transform: uppercase; user-select: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; display: flex; align-items: center;}
-        .logo img { max-height: 35px; object-fit: contain; }
-        
-        .nav-icons { display: flex; gap: 15px; align-items: center; }
-        .icon-btn { background: none; border: none; color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; }
-        .cart-badge { background: var(--primary); color: var(--bg); font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 20px; }
-        
-        .search-container { padding: 0 20px 15px 20px; }
-        .search-box { width: 100%; padding: 10px 15px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: white; outline: none; font-family: 'Inter'; font-size: 13px; }
-        .search-box:focus { border-color: var(--primary); }
+  <!-- OPEN GRAPH -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shandozcafe.site/">
+  <meta property="og:title" content="Shando'z Café & Coffee Bar">
+  <meta property="og:description" content="Menu spesial, minuman segar, dan promo menarik setiap hari">
+  <meta property="og:image" content="https://shandozcafe.site/preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
-        /* BUBBLE CATEGORY UI */
-        .icon-nav-container { display: flex; gap: 15px; padding: 15px 20px; overflow-x: auto; scrollbar-width: none; background: var(--bg); border-bottom: 1px solid var(--border); }
-        .icon-nav-container::-webkit-scrollbar { display: none; }
-        .icon-item { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 60px; cursor: pointer; }
-        .icon-circle { width: 50px; height: 50px; border-radius: 50%; background: #1a1a1a; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 1px solid #333; transition: 0.3s; }
-        .icon-circle img { width: 100%; height: 100%; object-fit: cover; }
-        .icon-item:hover .icon-circle { border-color: var(--primary); transform: scale(1.05); }
-        .icon-text { font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--text-dim); text-align: center; }
-        .icon-item.active .icon-circle { border-color: var(--primary); }
-        .icon-item.active .icon-text { color: var(--primary); }
+  <!-- TWITTER / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shando'z Café & Coffee Bar">
+  <meta name="twitter:description" content="Menu spesial, minuman segar, dan promo menarik setiap hari">
+  <meta name="twitter:image" content="https://shandozcafe.site/preview.jpg">
 
-        /* AUTO-SLIDE BANNER UI */
-        .promo-carousel { position: relative; width: 100%; height: 30vh; overflow: hidden; background: #111; }
-        .carousel-track { display: flex; height: 100%; transition: transform 0.5s ease-in-out; }
-        .carousel-slide { min-width: 100%; height: 100%; position: relative; }
-        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
-        .carousel-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); pointer-events: none; }
-        .carousel-dots { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); transition: 0.3s; }
-        .dot.active { background: white; width: 20px; border-radius: 4px; }
-
-        /* PRODUCT GRID */
-        .container { padding: 30px 20px; max-width: 1200px; margin: 0 auto; min-height: 50vh; }
-        .section-title { font-family: 'Oswald', sans-serif; font-size: 20px; letter-spacing: 1px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; display:flex; justify-content: space-between; align-items:center;}
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
-        .card { background: var(--surface); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; }
-        .card:hover { border-color: #555; transform: translateY(-3px); }
-        .img-box { width: 100%; aspect-ratio: 1 / 1; background: #1a1a1a; position: relative; overflow: hidden; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .card:hover .img-box img { transform: scale(1.05); }
-        .badge { position: absolute; top: 10px; left: 10px; background: var(--primary); color: var(--bg); font-size: 10px; font-weight: 800; padding: 4px 8px; text-transform: uppercase; border-radius: 2px;}
-        .info { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
-        .cat { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: 600; }
-        .name { font-size: 14px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; color: var(--primary); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .price { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 16px; margin-top: auto; color: var(--primary); display: flex; flex-direction: column; }
-        .price-strike { font-family: 'Inter', sans-serif; font-size: 11px; text-decoration: line-through; color: #ef4444; font-weight: 400; margin-bottom: 2px;}
-
-        /* MODALS & FORMS */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: flex-end; backdrop-filter: blur(5px); }
-        @media (min-width: 768px) { .modal { align-items: center; } }
-        .modal-box { background: var(--surface); width: 100%; max-width: 500px; border-radius: 20px 20px 0 0; border: 1px solid var(--border); border-bottom: none; padding: 25px; max-height: 90vh; overflow-y: auto; display: flex; flex-direction: column; animation: slideUp 0.3s ease-out; }
-        @media (min-width: 768px) { .modal-box { border-radius: 12px; border-bottom: 1px solid var(--border); animation: popIn 0.3s ease-out; } }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 20px; }
-        .modal-title { font-family: 'Oswald', sans-serif; font-size: 18px; letter-spacing: 1px; text-transform: uppercase; }
-        .close-btn { color: var(--text-dim); font-size: 24px; cursor: pointer; line-height: 1; }
-        .preview-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 15px; aspect-ratio: 1/1;}
-        .preview-slider::-webkit-scrollbar { display: none; }
-        .preview-slider img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; scroll-snap-align: start; }
-        .stock-warn { font-size: 12px; font-weight: 600; padding: 8px; background: rgba(245, 158, 11, 0.1); color: #f59e0b; border-radius: 6px; margin-bottom: 15px; border: 1px solid rgba(245, 158, 11, 0.2);}
-        
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 12px; color: var(--text-dim); margin-bottom: 5px; font-weight: 500;}
-        .form-group input, .form-group select { width: 100%; padding: 12px; background: #0a0a0a; border: 1px solid var(--border); color: white; font-family: 'Inter', sans-serif; font-size: 14px; border-radius: 8px; box-sizing: border-box; outline: none;}
-        .form-group input:focus, .form-group select:focus { border-color: var(--primary); }
-        .form-group input:disabled, .form-group input:read-only { background: #1a1a1a; color: #555; cursor: not-allowed; border-color: #222; }
-        .btn-main { background: var(--primary); color: var(--bg); width: 100%; padding: 15px; border: none; font-weight: 700; font-family: 'Inter', sans-serif; font-size: 14px; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;}
-        .btn-main:disabled { background: #333; color: #666; cursor: not-allowed; }
-        
-        .list-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px dashed var(--border); }
-        .list-item:last-child { border-bottom: none; }
-        
-        /* KARTU INVOICE HISTORY */
-        .invoice-card { background: #1a1a1a; border: 1px solid var(--border); padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        .status-badge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
-        .status-UNPAID { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid #ef4444; }
-        .status-PAID { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid #f59e0b; }
-        .status-SHIPPED { background: rgba(74, 222, 128, 0.2); color: #4ade80; border: 1px solid #4ade80; }
-        
-        .item-row { display: flex; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid #222; }
-        .item-row:last-child { border-bottom: none; }
-        .item-img { width: 45px; height: 45px; object-fit: cover; border-radius: 6px; border: 1px solid #333; }
-
-        .receipt { background: #fff; color: #000; padding: 20px; font-family: monospace; font-size: 13px; border-radius: 8px; margin-top: 15px; border-top: 5px solid #000; box-shadow: 0 4px 6px rgba(0,0,0,0.3);}
-        
-        .toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 99999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; width: 90%; max-width: 400px; }
-        .modern-toast { background: var(--surface); border: 1px solid var(--border); color: white; padding: 16px 20px; border-radius: 12px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); animation: toastSlideDown 0.4s forwards; }
-        .modern-toast.success { border-left: 4px solid #4ade80; } .modern-toast.error { border-left: 4px solid #ef4444; } .modern-toast.warning { border-left: 4px solid #f59e0b; }
-        @keyframes toastSlideDown { from { transform: translateY(-50px) scale(0.9); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
-        @keyframes toastFadeOut { from { transform: translateY(0) scale(1); opacity: 1; } to { transform: translateY(-20px) scale(0.9); opacity: 0; } }
-    </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-    <div id="toast-container" class="toast-container"></div>
 
-    <header>
-        <div class="head-top">
-            <div class="logo" id="mainLogo" onclick="secretAdminLogin()">GANKETI</div>
-            <div class="nav-icons">
-                <button class="icon-btn" id="loginBtn" onclick="handleAuth()">👤 LOGIN</button>
-                <button class="icon-btn" onclick="openMyOrders()">📝 PESANAN</button>
-                <button class="icon-btn" onclick="openCart()">🛒 <span class="cart-badge" id="cartCount">0</span></button>
-            </div>
+  <!-- NETFLIX LOADER -->
+  <div id="netflixLoader" class="netflix-loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-text">SHANDO'Z</div>
+      <div class="loader-sub">Cafe & Coffee Bar</div>
+    </div>
+  </div>
+
+
+  <!-- PROMO MODAL -->
+  <div id="promoModal" class="promo-modal" aria-hidden="true">
+    <div class="promo-card">
+      <button class="promo-close">✕</button>
+      <div class="promo-hero">
+        <img src="qpon-card.png" class="promo-img" alt="Promo">
+        <div class="promo-label">Shando'z Cafe & Cofee Bar</div>
+      </div>
+      <div class="promo-body">
+        <h3>Special Promo</h3>
+        <p>Dapatkan diskon spesial & Promo Paket Kenyang.</p>
+        <div class="promo-timer">
+          <div class="timer-label">Berakhir dalam</div>
+          <div id="promoCountdown" class="timer-count">00d 00:00:00</div>
         </div>
-        <div class="search-container">
-            <input type="search" class="search-box" id="searchInput" placeholder="Cari hoodie, t-shirt, jacket..." onkeyup="searchProducts()">
+        <<div class="promo-actions">
+  <button id="downloadCoupon" class="btn">
+    Ambil Promo
+  </button>
+
+  <a href="https://spf.shopee.co.id/3qHfiyoWs0"
+     target="_blank"
+     class="btn">
+     ShopeeFood
+  </a>
+
+  <a href="https://gofood.link/YOUR_LINK"
+     target="_blank"
+     class="btn ghost">
+     GoFood
+  </a>
+</div>
         </div>
-    </header>
-
-    <div class="icon-nav-container" id="categoryIconNav">
-        <div class="icon-item active" onclick="filterCategory('ALL')"><div class="icon-circle" style="background:#fff; color:black; font-weight:bold;">ALL</div><div class="icon-text">Semua</div></div>
+        <p class="promo-small">Gunakan Promo Paket Kenyang ini Segera!</p>
+      </div>
     </div>
+  </div>
 
-    <div class="promo-carousel" id="promoSliderSec" style="display:none;">
-        <div class="carousel-track" id="carouselTrack"></div>
-        <div class="carousel-overlay"></div>
-        <div class="carousel-dots" id="carouselDots"></div>
+  <!-- NAVBAR FINAL -->
+  <header class="navbar">
+    <div class="nav-inner container">
+
+      <!-- LOGO -->
+<div class="logo">
+  <a href="index.html">
+    <img src="logoshan.png" alt="Shando'z Café & Coffee Bar">
+  </a>
+</div>
+
+      <!-- HAMBURGER -->
+      <button id="hamburgerBtn" class="hamburger" aria-label="Menu">☰</button>
+
+      <!-- NAV LINKS -->
+      <nav id="mobileMenu" class="nav-links">
+        <a href="#home">Home</a>
+        <a href="about.html">About</a>
+        <a href="#promo">Promo</a>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="contact.html">Contact</a>
+        <a href="#game">Game</a>
+        <a href="https://qpon.id/platform/merchant?channel_id=1&linkType=app&poiId=1111545621883453648&shareType=COPY_LINK&source_tag=Share" target="_blank">Qpon</a>
+        <a href="https://spf.shopee.co.id/3qHfiyoWs0" target="_blank">ShopeeFood</a>
+        <a href="https://gofood.link/YOUR_LINK" target="_blank">GoFood</a>
+      </nav>
+
     </div>
+  </header>
 
-    <div class="container" id="popularContainer" style="display:none; padding-bottom: 0; min-height: auto;">
-        <h2 class="section-title" style="color: #f59e0b; border-color: #333;">🔥 SEDANG TREN</h2>
-        <div class="grid" id="popularGrid"></div>
-    </div>
+  <!-- HERO -->
+  <main>
+    <section id="home" class="hero">
+      <video class="hero-video" autoplay muted loop playsinline poster="hero-poster.jpg" aria-hidden="true">
+        <source src="iftarpromo.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <h1 class="hero-title"> </h1>
+        <p class="hero-sub"> </p>
+        <a class="btn-cta" href="#menu" id="exploreMenuBtn">Explore Menu</a>
+      </div>
+    </section>
 
-    <div class="container">
-        <h2 class="section-title" id="secTitle">LATEST DROP</h2>
-        <div class="grid" id="productGrid"><p style="text-align: center; width: 100%; color: var(--text-dim);">Memuat etalase...</p></div>
-    </div>
-
-    <div class="modal" id="mainModal">
-        <div class="modal-box">
-            <div class="modal-header"><div class="modal-title" id="modalTitle">MODAL</div><div class="close-btn" onclick="closeModal()">×</div></div>
-            
-            <div id="previewArea" style="display:none;"></div>
-            <div id="cartArea" style="display:none;">
-                <div id="cartItemsList"></div>
-                <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; margin: 20px 0; border-top: 1px solid var(--border); padding-top: 15px;"><span>SUBTOTAL</span><span id="cartTotalDisplay" style="color: var(--primary);">Rp 0</span></div>
-                <button class="btn-main" onclick="goToShipping()">PROCEED TO CHECKOUT ➔</button>
-            </div>
-
-            <div id="shippingArea" style="display:none;">
-                <p style="font-size: 12px; color: #4ade80; margin-bottom: 15px;">✅ Akun tertaut. Mohon lengkapi alamat di bawah ini.</p>
-                <div class="form-group"><label>Email Akun</label><input type="email" id="cEmail" readonly></div>
-                <div class="form-group"><label>Nama Penerima</label><input type="text" id="cName" placeholder="Nama Lengkap"></div>
-                <div class="form-group"><label>No. WhatsApp Aktif</label><input type="number" id="cPhone" placeholder="08..."></div>
-                <div style="border-top: 1px solid var(--border); margin: 20px 0; padding-top: 15px;"></div>
-                <h3 style="font-size: 14px; margin-bottom: 15px; color: var(--primary);">Detail Alamat</h3>
-                <div class="form-group"><label>Jalan, Gedung, Nomor Rumah</label><input type="text" id="cStreet" placeholder="Contoh: Jl. Sudirman No. 10, Gedung A"></div>
-                <div style="display: flex; gap: 10px;"><div class="form-group" style="flex:1;"><label>RT</label><input type="number" id="cRT" placeholder="001"></div><div class="form-group" style="flex:1;"><label>RW</label><input type="number" id="cRW" placeholder="002"></div></div>
-                <div class="form-group"><label>Provinsi</label><input type="text" id="cProv" list="provList" placeholder="Memuat data..." oninput="checkProv()" autocomplete="off"><datalist id="provList"></datalist></div>
-                <div class="form-group"><label>Kota / Kabupaten</label><input type="text" id="cCity" list="cityList" placeholder="Pilih Provinsi Dahulu" oninput="checkCity()" autocomplete="off" disabled><datalist id="cityList"></datalist></div>
-                <div class="form-group"><label>Kecamatan</label><input type="text" id="cDist" list="distList" placeholder="Pilih Kota Dahulu" oninput="checkDist()" autocomplete="off" disabled><datalist id="distList"></datalist></div>
-                <div class="form-group"><label>Kelurahan / Desa</label><input type="text" id="cVill" list="villList" placeholder="Pilih Kecamatan Dahulu" oninput="checkVill()" autocomplete="off" disabled><datalist id="villList"></datalist></div>
-                <div class="form-group"><label>Kode Pos</label><input type="number" id="cZip" placeholder="12345"></div>
-                <button class="btn-main" onclick="buatPesananSekarang()" style="margin-top: 10px;">PLACE SECURE ORDER 🔒</button>
-            </div>
-
-            <div id="invoiceArea" style="display:none;">
-                <p style="text-align:center; color:#4ade80; font-weight:bold; margin-bottom:5px;">✅ PESANAN BERHASIL DIBUAT!</p>
-                <p style="text-align:center; font-size:12px; color:var(--text-dim);">Aman! Invoice tersimpan di akun Anda (Menu Pesanan).</p>
-                <div class="receipt" id="invoicePaper"></div>
-                <button class="btn-main" style="margin-top: 15px; background: #25D366; color: white;" onclick="closeModal()">SELESAI</button>
-            </div>
-            
-            <div id="historyArea" style="display:none;"><div id="historyList"></div></div>
-            <div id="logoutConfirmArea" style="display:none; text-align:center;"><h3 style="font-size: 16px; margin-bottom: 10px;">Keluar dari Akun?</h3><div style="display:flex; gap:10px;"><button class="btn-main" style="background:#333; color:white;" onclick="closeModal()">BATAL</button><button class="btn-main" style="background:#ef4444;" onclick="executeLogout()">YA, KELUAR</button></div></div>
+    <!-- PROMO -->
+    <section id="promo" class="promo-section">
+      <div class="container">
+        <h2 class="section-title">Special Promo</h2>
+        <div class="promo-grid">
+          <div class="promo-card"><img src="promo1.jpg" alt="Promo 1"></div>
+          <div class="promo-card"><img src="promo2.jpg" alt="Promo 2"></div>
+          <div class="promo-card"><img src="promo3.jpg" alt="Promo 3"></div>
+          <div class="promo-card"><img src="promo4.jpg" alt="Promo 4"></div>
+          <div class="promo-card"><img src="promo5.jpg" alt="Promo 5"></div>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    <script>
-        const firebaseConfig = { apiKey: "AIzaSyDoh1VBH6YEicKHPyViPi0NUsnILaTin8g", authDomain: "ganketi.firebaseapp.com", databaseURL: "https://ganketi-default-rtdb.firebaseio.com", projectId: "ganketi", storageBucket: "ganketi.firebasestorage.app", messagingSenderId: "61078873925", appId: "1:61078873925:web:c5bf3bdf7cc18f11d6002c" };
-        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth(); const db = firebase.database();
+    <!-- MENU -->
+    <section id="menu" class="menu-section">
+      <div class="container">
+        <h2 class="section-title">Our Menu</h2>
 
-        let globalProducts = []; let activeCategory = 'ALL'; 
-        let cart = JSON.parse(localStorage.getItem('ganketiCart') || '[]');
-        let currentUser = null; let currentSlide = 0; let slideInterval;
-        let apiRegionData = { prov: [], city: [], dist: [], vill: [] }; 
-        updateCartCount();
+        <div class="menu-carousel">
+          <button class="carousel-btn prev" aria-label="Previous slide">‹</button>
+          <div class="carousel-track" id="carouselTrack" role="list">
+            <div class="carousel-slide" role="listitem"><img src="menu1.jpg" alt="Menu 1"></div>
+            <div class="carousel-slide" role="listitem"><img src="menu2.jpg" alt="Menu 2"></div>
+            <div class="carousel-slide" role="listitem"><img src="menu3.jpg" alt="Menu 3"></div>
+            <div class="carousel-slide" role="listitem"><img src="menu4.jpg" alt="Menu 4"></div>
+            <div class="carousel-slide" role="listitem"><img src="menu5.jpg" alt="Menu 5"></div>
+            <div class="carousel-slide" role="listitem"><img src="menu6.jpg" alt="Menu 6"></div>
+            <div class="carousel-slide" role="listitem"><img src="menu7.jpg" alt="Menu 7"></div>
+          </div>
+          <button class="carousel-btn next" aria-label="Next slide">›</button>
+        </div>
 
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toast-container'); const toast = document.createElement('div');
-            toast.className = `modern-toast ${type}`; let icon = type === 'success' ? '✅' : type === 'error' ? '❌' : '💡';
-            toast.innerHTML = `<span class="toast-icon">${icon}</span> <div>${message}</div>`; container.appendChild(toast);
-            setTimeout(() => { toast.style.animation = 'toastFadeOut 0.4s forwards'; setTimeout(() => toast.remove(), 400); }, 3500);
-        }
+        <div id="carouselDots" class="carousel-dots" role="tablist"></div>
 
-        auth.onAuthStateChanged(user => {
-            if (user) { currentUser = user; document.getElementById('loginBtn').innerHTML = `👤 ${user.displayName.split(' ')[0].toUpperCase()}`; } 
-            else { currentUser = null; document.getElementById('loginBtn').innerHTML = `👤 LOGIN`; }
-        });
+      </div>
+    </section>
 
-        function handleAuth() {
-            if(currentUser) { hideAllAreas(); document.getElementById('modalTitle').innerText = "AKUN SAYA"; document.getElementById('logoutConfirmArea').style.display = 'block'; document.getElementById('mainModal').style.display = 'flex'; } 
-            else { const provider = new firebase.auth.GoogleAuthProvider(); auth.signInWithPopup(provider).then((result) => { showToast(`Selamat datang, ${result.user.displayName}!`, 'success'); }).catch(err => { showToast("Gagal Login: " + err.message, 'error'); }); }
-        }
-        function executeLogout() { auth.signOut().then(() => { closeModal(); showToast("Berhasil keluar.", 'info'); }); }
+    <!-- GALLERY -->
+    <section id="gallery" class="gallery-section">
+      <div class="container">
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery-grid">
+          <img class="lightbox-trigger" src="gal1.jpg" data-full="gal1.jpg" alt="Gallery 1">
+          <img class="lightbox-trigger" src="gal2.jpg" data-full="gal2.jpg" alt="Gallery 2">
+          <img class="lightbox-trigger" src="gal3.jpg" data-full="gal3.jpg" alt="Gallery 3">
+          <img class="lightbox-trigger" src="gal4.jpg" data-full="gal4.jpg" alt="Gallery 4">
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- GAME SECTION -->
+<section id="game" class="game-section">
+  <div class="container">
+    <h2 class="section-title">Tap Fly Game</h2>
 
-        let clickCount = 0; let lastClickTime = 0;
-        function secretAdminLogin() {
-            const now = Date.now(); if (now - lastClickTime > 3000) clickCount = 0; lastClickTime = now; clickCount++;
-            if (clickCount >= 5) { showToast("Sistem rahasia terbuka... 🚀", 'success'); setTimeout(() => { window.location.assign('https://shandoz-cafe.github.io/GANKETI/admin.html?v=' + Date.now()); }, 800); }
-        }
+    <iframe 
+      src="game.html"
+      width="100%"
+      height="720"
+      style="border:0;max-width:420px;display:block;margin:auto;border-radius:18px;"
+      loading="lazy"
+      title="Shando'z Game">
+    </iframe>
 
-        db.ref('ui_banners').on('value', snap => {
-            const data = snap.val(); const sec = document.getElementById('promoSliderSec'); const track = document.getElementById('carouselTrack'); const dots = document.getElementById('carouselDots');
-            if(!data) { sec.style.display = 'none'; clearInterval(slideInterval); return; }
-            sec.style.display = 'block'; let banners = Object.keys(data).map(k => data[k]).sort((a,b) => a.timestamp - b.timestamp);
-            track.innerHTML = banners.map(b => `<div class="carousel-slide"><img src="${b.image}"></div>`).join('');
-            dots.innerHTML = banners.map((b, i) => `<div class="dot ${i===0?'active':''}"></div>`).join('');
-            clearInterval(slideInterval);
-            if(banners.length > 1) { slideInterval = setInterval(() => { currentSlide = (currentSlide + 1) % banners.length; track.style.transform = `translateX(-${currentSlide * 100}%)`; Array.from(dots.children).forEach((d, i) => d.className = i === currentSlide ? 'dot active' : 'dot'); }, 4000); }
-        });
+  </div>
+</section>
 
-        db.ref('ui_categories').on('value', snap => {
-            const data = snap.val(); const nav = document.getElementById('categoryIconNav');
-            let baseHtml = `<div class="icon-item ${activeCategory === 'ALL' ? 'active' : ''}" onclick="filterCategory('ALL')"><div class="icon-circle" style="background:#fff; color:black; font-weight:bold; font-size:12px;">ALL</div><div class="icon-text">Semua</div></div>`;
-            if(data) {
-                let cats = Object.keys(data).map(k => data[k]).sort((a,b) => a.timestamp - b.timestamp);
-                cats.forEach(c => { baseHtml += `<div class="icon-item ${activeCategory === c.name ? 'active' : ''}" onclick="filterCategory('${c.name}')"><div class="icon-circle"><img src="${c.icon}"></div><div class="icon-text">${c.name.substring(0,8)}</div></div>`; });
-            }
-            nav.innerHTML = baseHtml;
-        });
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button id="lightbox-close" class="lightbox-close" aria-label="Close">✕</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
 
-        db.ref('ui_settings').on('value', snap => {
-            const s = snap.val();
-            if(s) {
-                const logoEl = document.getElementById('mainLogo');
-                if(s.logoImg) { logoEl.innerHTML = `<img src="${s.logoImg}">`; } else { logoEl.innerText = s.logoText || 'GANKETI'; }
-                if(s.heroImg) document.getElementById('heroSec').style.backgroundImage = `url('${s.heroImg}')`;
-                if(s.heroTitle) document.getElementById('heroTitle').innerText = s.heroTitle;
-                if(s.heroSub) document.getElementById('heroSub').innerText = s.heroSub;
-            }
-        });
+  <!-- FLOATING -->
+  <audio id="bgm" src="shandozlofi.mp3" loop preload="auto"></audio>
+  <button id="music-toggle" class="wa-btn" aria-label="Toggle music">🔇</button>
+  <a href="https://wa.me/6285706370841" class="wa-floating" target="_blank" aria-label="WhatsApp">💬</a>
+  <button id="shareBtn" class="share-button" aria-label="Share">🔗</button>
 
-        db.ref('products').on('value', (snapshot) => {
-            const data = snapshot.val(); const grid = document.getElementById('productGrid');
-            if(!data) { grid.innerHTML = '<p style="text-align:center; width:100%; color:var(--text-dim);">Belum ada koleksi yang dirilis.</p>'; return; }
-            globalProducts = Object.keys(data).map(key => ({ id: key, ...data[key] })).sort((a, b) => b.timestamp - a.timestamp);
-            renderProducts();
-        });
-
-        function filterCategory(cat) { 
-            activeCategory = cat; document.getElementById('secTitle').innerText = cat === 'ALL' ? 'LATEST DROP' : cat; document.getElementById('searchInput').value = ''; 
-            document.querySelectorAll('.icon-item').forEach(el => { el.classList.remove('active'); if(el.innerText.trim().toUpperCase() === cat.toUpperCase() || (cat === 'ALL' && el.innerText.trim().toUpperCase() === 'SEMUA')) { el.classList.add('active'); } });
-            renderProducts(); 
-        }
-
-        function searchProducts() {
-            const keyword = document.getElementById('searchInput').value.toLowerCase(); activeCategory = 'ALL'; 
-            document.querySelectorAll('.icon-item').forEach(el => el.classList.remove('active')); document.querySelector('.icon-item').classList.add('active'); 
-            let filtered = globalProducts.filter(p => p.name.toLowerCase().includes(keyword));
-            document.getElementById('popularContainer').style.display = 'none'; document.getElementById('secTitle').innerText = keyword ? `HASIL: ${keyword.toUpperCase()}` : 'LATEST DROP';
-            const grid = document.getElementById('productGrid');
-            if(filtered.length === 0) grid.innerHTML = '<p style="text-align:center; width:100%; color:var(--text-dim);">Produk tidak ditemukan.</p>';
-            else grid.innerHTML = filtered.map(p => createProductCard(p)).join('');
-        }
-
-        function createProductCard(p) {
-            let imgThumb = p.images ? p.images[0] : p.image; let isHabis = (!p.stock || p.stock <= 0);
-            let priceHtml = p.originalPrice ? `<span class="price-strike">Rp ${p.originalPrice.toLocaleString('id-ID')}</span>Rp ${p.price.toLocaleString('id-ID')}` : `Rp ${p.price.toLocaleString('id-ID')}`;
-            return `<div class="card" onclick="openPreview('${p.id}')"><div class="img-box"><div class="badge" style="background: ${isHabis ? '#ef4444' : 'var(--primary)'}; color: ${isHabis ? 'white' : 'black'};">${isHabis ? 'SOLD OUT' : 'ORIGINAL'}</div><img src="${imgThumb}" style="${isHabis ? 'filter: grayscale(100%); opacity: 0.5;' : ''}"></div><div class="info"><div class="cat">${p.category}</div><div class="name">${p.name}</div><div class="price">${priceHtml}</div></div></div>`;
-        }
-
-        function renderProducts() {
-            const keyword = document.getElementById('searchInput').value; if(keyword) return searchProducts(); 
-            const popProds = globalProducts.filter(p => p.isPopular); const popContainer = document.getElementById('popularContainer');
-            if(popProds.length > 0 && activeCategory === 'ALL') { popContainer.style.display = 'block'; document.getElementById('popularGrid').innerHTML = popProds.map(p => createProductCard(p)).join(''); } else { popContainer.style.display = 'none'; }
-            const grid = document.getElementById('productGrid'); let filteredProducts = activeCategory === 'ALL' ? globalProducts : globalProducts.filter(p => p.category === activeCategory);
-            if(filteredProducts.length === 0) return grid.innerHTML = '<p style="text-align:center; width:100%; color:var(--text-dim);">Kategori kosong.</p>';
-            grid.innerHTML = filteredProducts.map(p => createProductCard(p)).join('');
-        }
-
-        function closeModal() { document.getElementById('mainModal').style.display = 'none'; }
-        function hideAllAreas() { ['previewArea', 'cartArea', 'shippingArea', 'invoiceArea', 'historyArea', 'logoutConfirmArea'].forEach(id => document.getElementById(id).style.display = 'none'); }
-
-        function openPreview(id) {
-            hideAllAreas(); const p = globalProducts.find(x => x.id === id); if(!p) return;
-            document.getElementById('modalTitle').innerText = p.category; const previewBox = document.getElementById('previewArea');
-            let imgArray = p.images ? p.images : [p.image]; let isHabis = (!p.stock || p.stock <= 0);
-            let sliderHtml = `<div class="preview-slider">`; imgArray.forEach(img => { sliderHtml += `<img src="${img}" style="${isHabis ? 'filter: grayscale(100%); opacity: 0.5;' : ''}">`; }); sliderHtml += `</div>`;
-            if(imgArray.length > 1) sliderHtml += `<div style="text-align:center; font-size:10px; color:var(--text-dim); margin-top:-10px; margin-bottom:15px;">⟵ Geser Gambar ⟶</div>`;
-            let sizeHtml = p.category !== 'Accessories' ? `<div class="form-group"><label>Pilih Ukuran</label><select id="previewSize"><option value="S">Size: S</option><option value="M" selected>Size: M</option><option value="L">Size: L</option><option value="XL">Size: XL</option><option value="XXL">Size: XXL</option></select></div>` : `<input type="hidden" id="previewSize" value="All Size"><div style="font-size:12px; color:var(--text-dim); margin-bottom:15px;">Ukuran: All Size</div>`;
-            let stockHtml = isHabis ? `<div class="stock-warn" style="color:#ef4444; border-color:rgba(239,68,68,0.2); background:rgba(239,68,68,0.1);">Stok Habis Terjual!</div>` : `<div class="stock-warn">🔥 Tersisa ${p.stock} pcs lagi di gudang.</div>`;
-            let btnHtml = isHabis ? `<button class="btn-main" disabled>SOLD OUT</button>` : `<button class="btn-main" onclick="addToCart('${p.id}')">ADD TO CART - Rp ${p.price.toLocaleString('id-ID')}</button>`;
-            let priceHtml = p.originalPrice ? `<span style="font-size:12px; text-decoration:line-through; color:#ef4444; margin-right:8px; font-family:'Inter';">Rp ${p.originalPrice.toLocaleString('id-ID')}</span>Rp ${p.price.toLocaleString('id-ID')}` : `Rp ${p.price.toLocaleString('id-ID')}`;
-            previewBox.innerHTML = `${sliderHtml}<h3 style="font-size: 18px; color: white; margin-bottom: 5px; line-height: 1.3;">${p.name}</h3><p style="font-size: 16px; font-weight: bold; color: var(--primary); margin-bottom: 15px; font-family: 'Oswald';">${priceHtml}</p>${stockHtml}${sizeHtml}${btnHtml}`;
-            previewBox.style.display = 'block'; document.getElementById('mainModal').style.display = 'flex';
-        }
-
-        function addToCart(id) {
-            const product = globalProducts.find(p => p.id === id); const selectedSize = document.getElementById('previewSize').value; const cartItemId = id + '-' + selectedSize;
-            const totalQtyInCart = cart.filter(c => c.id === id).reduce((sum, item) => sum + item.qty, 0);
-            if (totalQtyInCart + 1 > product.stock) { showToast(`Batas stok tercapai.`, 'warning'); return; }
-            const existing = cart.find(c => c.cartItemId === cartItemId);
-            if(existing) { existing.qty += 1; } else { cart.push({ ...product, cartItemId: cartItemId, name: `${product.name} (${selectedSize})`, qty: 1 }); }
-            localStorage.setItem('ganketiCart', JSON.stringify(cart)); updateCartCount(); closeModal(); showToast('Barang dimasukkan ke keranjang! 🛒', 'success');
-        }
-
-        function updateCartCount() { document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.qty, 0); }
-
-        function openCart() {
-            hideAllAreas(); document.getElementById('modalTitle').innerText = "YOUR CART";
-            document.getElementById('cartArea').style.display = 'block'; document.getElementById('mainModal').style.display = 'flex';
-            const list = document.getElementById('cartItemsList'); let total = 0;
-            if (cart.length === 0) { list.innerHTML = '<p style="color:var(--text-dim); text-align:center; padding: 20px 0;">Keranjang kosong.</p>'; } 
-            else {
-                list.innerHTML = cart.map((item, index) => {
-                    total += (item.price * item.qty);
-                    return `<div class="list-item"><div style="flex-grow:1; padding-right:15px;"><b style="color:white; font-size:14px;">${item.name}</b><br><span style="color:var(--text-dim); font-size:12px;">${item.qty} x Rp ${item.price.toLocaleString('id-ID')}</span></div><div style="text-align:right;"><b style="color:var(--primary); font-size:14px;">Rp ${(item.price * item.qty).toLocaleString('id-ID')}</b><br><span style="color:#ef4444; font-size:11px; cursor:pointer; font-weight:bold;" onclick="removeItem(${index})">REMOVE</span></div></div>`;
-                }).join('');
-            }
-            document.getElementById('cartTotalDisplay').innerText = `Rp ${total.toLocaleString('id-ID')}`;
-        }
-        function removeItem(index) { cart.splice(index, 1); localStorage.setItem('ganketiCart', JSON.stringify(cart)); updateCartCount(); openCart(); }
-
-        async function loadRegionAPI(level, parentId = null) {
-            let url = '';
-            if (level === 'prov') url = 'https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json';
-            else if (level === 'city') url = `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${parentId}.json`;
-            else if (level === 'dist') url = `https://www.emsifa.com/api-wilayah-indonesia/api/districts/${parentId}.json`;
-            else if (level === 'vill') url = `https://www.emsifa.com/api-wilayah-indonesia/api/villages/${parentId}.json`;
-
-            try {
-                const res = await fetch(url); const data = await res.json();
-                apiRegionData[level] = data; 
-                const datalist = document.getElementById(level + 'List');
-                datalist.innerHTML = data.map(item => `<option value="${item.name}">`).join('');
-                const inputEl = document.getElementById('c' + level.charAt(0).toUpperCase() + level.slice(1));
-                inputEl.placeholder = "Ketik atau pilih dari daftar...";
-                inputEl.disabled = false;
-            } catch(e) { showToast("Gagal memuat data dari server pusat.", "error"); }
-        }
-
-        function resetDownstream(fromLevel) {
-            if(fromLevel === 'prov') { resetField('cCity', 'Pilih Provinsi Dahulu'); resetField('cDist', 'Pilih Kota Dahulu'); resetField('cVill', 'Pilih Kecamatan Dahulu'); }
-            else if(fromLevel === 'city') { resetField('cDist', 'Pilih Kota Dahulu'); resetField('cVill', 'Pilih Kecamatan Dahulu'); }
-            else if(fromLevel === 'dist') { resetField('cVill', 'Pilih Kecamatan Dahulu'); }
-        }
-
-        function resetField(id, placeholderText) {
-            const el = document.getElementById(id); el.value = ''; el.disabled = true; el.placeholder = placeholderText; document.getElementById(id.replace('c', '').toLowerCase() + 'List').innerHTML = '';
-        }
-
-        function checkProv() { const val = document.getElementById('cProv').value.trim().toUpperCase(); const match = apiRegionData.prov.find(x => x.name.toUpperCase() === val); if(match) { document.getElementById('cProv').value = match.name; resetDownstream('prov'); document.getElementById('cCity').placeholder = "Memuat data kota..."; loadRegionAPI('city', match.id); } else { resetDownstream('prov'); } }
-        function checkCity() { const val = document.getElementById('cCity').value.trim().toUpperCase(); const match = apiRegionData.city.find(x => x.name.toUpperCase() === val); if(match) { document.getElementById('cCity').value = match.name; resetDownstream('city'); document.getElementById('cDist').placeholder = "Memuat data kecamatan..."; loadRegionAPI('dist', match.id); } else { resetDownstream('city'); } }
-        function checkDist() { const val = document.getElementById('cDist').value.trim().toUpperCase(); const match = apiRegionData.dist.find(x => x.name.toUpperCase() === val); if(match) { document.getElementById('cDist').value = match.name; resetDownstream('dist'); document.getElementById('cVill').placeholder = "Memuat data kelurahan..."; loadRegionAPI('vill', match.id); } else { resetDownstream('dist'); } }
-        function checkVill() { const val = document.getElementById('cVill').value.trim().toUpperCase(); const match = apiRegionData.vill.find(x => x.name.toUpperCase() === val); if(match) { document.getElementById('cVill').value = match.name; } }
-
-        function goToShipping() { 
-            if(cart.length === 0) { showToast("Keranjangmu masih kosong!", 'warning'); return; }
-            if(!currentUser) { closeModal(); showToast("Wajib Login pakai akun Google dulu ya Kak!", 'warning'); setTimeout(() => handleAuth(), 1500); return; }
-            hideAllAreas(); document.getElementById('modalTitle').innerText = "SHIPPING INFO"; 
-            document.getElementById('cEmail').value = currentUser.email;
-            if(document.getElementById('cName').value === "") document.getElementById('cName').value = currentUser.displayName;
-            document.getElementById('shippingArea').style.display = 'block'; 
-            if(apiRegionData.prov.length === 0) { document.getElementById('cProv').placeholder = "Memuat data provinsi..."; loadRegionAPI('prov'); }
-        }
-
-        function buatPesananSekarang() {
-            const cEmail = document.getElementById('cEmail').value; const cName = document.getElementById('cName').value.trim(); const cPhone = document.getElementById('cPhone').value.trim(); 
-            const cStreet = document.getElementById('cStreet').value.trim(); const cRT = document.getElementById('cRT').value.trim(); const cRW = document.getElementById('cRW').value.trim();
-            const cZip = document.getElementById('cZip').value.trim();
-            const provName = document.getElementById('cProv').value.trim().toUpperCase(); const cityName = document.getElementById('cCity').value.trim().toUpperCase(); const distName = document.getElementById('cDist').value.trim().toUpperCase(); const villName = document.getElementById('cVill').value.trim().toUpperCase();
-
-            if(!cName || !cPhone || !cStreet || !cRT || !cRW || !cZip || !provName || !cityName || !distName || !villName) { showToast("Harap isi seluruh detail alamat!", 'error'); return; }
-            if(!apiRegionData.prov.find(x => x.name.toUpperCase() === provName)) { showToast("Nama Provinsi tidak valid!", 'error'); return; }
-            if(!apiRegionData.city.find(x => x.name.toUpperCase() === cityName)) { showToast("Nama Kota/Kab tidak valid!", 'error'); return; }
-            if(!apiRegionData.dist.find(x => x.name.toUpperCase() === distName)) { showToast("Nama Kecamatan tidak valid!", 'error'); return; }
-            if(!apiRegionData.vill.find(x => x.name.toUpperCase() === villName)) { showToast("Nama Kelurahan tidak valid!", 'error'); return; }
-
-            const cAddress = `${cStreet}, RT ${cRT}/RW ${cRW}, Kel. ${villName}, Kec. ${distName}, ${cityName}, Prov. ${provName} - ${cZip}`;
-            const invoiceNumber = "INV-GKT-" + Date.now(); const orderDate = new Date().toLocaleString('id-ID');
-            let grandTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-            db.ref('orders').push({ invoice_no: invoiceNumber, date: orderDate, customer: { email: cEmail, name: cName, phone: cPhone, address: cAddress }, items: cart, total: grandTotal, status: "UNPAID", timestamp: Date.now() }); 
-            cart.forEach(item => { const prodRef = db.ref('products/' + item.id); prodRef.once('value').then(snap => { const currentData = snap.val(); if(currentData) { prodRef.update({ stock: Math.max(0, (currentData.stock || 0) - item.qty) }); }});});
-            let itemsHtml = cart.map(i => `${i.qty}x ${i.name.substring(0,20)} <span style="float:right;">${(i.price * i.qty).toLocaleString('id-ID')}</span>`).join('<br>');
-            document.getElementById('invoicePaper').innerHTML = `<div style="text-align:center; font-weight:bold; font-size:16px; margin-bottom:10px; border-bottom:2px dashed #000; padding-bottom:10px;">GANKETI OFFICIAL</div>INV NO : <b style="color:blue;">${invoiceNumber}</b><br>DATE   : ${orderDate}<br>NAME   : ${cName}<br><hr style="border-top:1px dashed #000; margin:10px 0;">${itemsHtml}<hr style="border-top:1px dashed #000; margin:10px 0;"><b style="font-size: 14px;">GRAND TOTAL : <span style="float:right;">Rp ${grandTotal.toLocaleString('id-ID')}</span></b><div style="margin-top:20px; text-align:center; font-size:10px; color:#666;">Selesaikan pembayaran sesuai instruksi admin.</div>`;
-            cart = []; localStorage.setItem('ganketiCart', JSON.stringify(cart)); updateCartCount(); hideAllAreas(); document.getElementById('modalTitle').innerText = "ORDER PLACED"; document.getElementById('invoiceArea').style.display = 'block'; showToast("Pesanan sukses dibuat! 🎉", "success");
-        }
-
-        // =========================================================
-        // 🔥 ENGINE RIWAYAT PESANAN (PREVIEW PRODUK PELANGGAN) 🔥
-        // =========================================================
-        function openMyOrders() {
-            if(!currentUser) { showToast("Silakan Login dulu untuk melihat pesanan!", 'warning'); setTimeout(() => handleAuth(), 1500); return; }
-            hideAllAreas(); document.getElementById('modalTitle').innerText = "PESANAN SAYA";
-            const list = document.getElementById('historyList'); list.innerHTML = `<p style="text-align:center; color:var(--text-dim); padding:20px;">Memuat data...</p>`;
-            document.getElementById('historyArea').style.display = 'block'; document.getElementById('mainModal').style.display = 'flex';
-            
-            db.ref('orders').orderByChild('customer/email').equalTo(currentUser.email).once('value').then(snapshot => {
-                const data = snapshot.val();
-                if(!data) { list.innerHTML = `<p style="text-align:center; color:var(--text-dim); padding:20px;">Belum ada pesanan untuk akun ini.</p>`; return; }
-                
-                let historyHtml = ''; const orders = Object.keys(data).map(k => data[k]).sort((a,b) => b.timestamp - a.timestamp);
-                
-                orders.forEach(order => { 
-                    let itemsHtml = order.items.map(i => {
-                        let imgUrl = i.images ? i.images[0] : (i.image ? i.image : 'https://via.placeholder.com/50');
-                        return `
-                        <div class="item-row">
-                            <img src="${imgUrl}" class="item-img">
-                            <div style="flex:1;">
-                                <div style="font-size:12px; font-weight:bold; color:#fff;">${i.name}</div>
-                                <div style="font-size:10px; color:#888;">${i.qty}x @ Rp ${i.price.toLocaleString('id-ID')}</div>
-                            </div>
-                            <div style="font-size:12px; font-weight:bold; color:var(--primary);">
-                                Rp ${(i.price * i.qty).toLocaleString('id-ID')}
-                            </div>
-                        </div>`;
-                    }).join('');
-
-                    let resiHtml = '';
-                    if (order.status === 'SHIPPED' && order.resi) {
-                        resiHtml = `
-                        <div style="margin-top:12px; padding:10px; background:#111; border-radius:6px; border:1px solid #333;">
-                            <span style="font-size:10px; color:#888;">Nomor Resi Pengiriman:</span><br>
-                            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:5px;">
-                                <b style="color:#4ade80; font-size:14px; letter-spacing:1px;">${order.resi}</b>
-                                <div style="display:flex; gap:5px;">
-                                    <button onclick="navigator.clipboard.writeText('${order.resi}'); showToast('Resi disalin!', 'success');" style="background:#3b82f6; color:white; border:none; padding:6px 10px; border-radius:4px; font-size:10px; font-weight:bold; cursor:pointer;">COPY</button>
-                                    <a href="https://cekresi.com/?noresi=${order.resi}" target="_blank" style="background:#f59e0b; color:black; border:none; padding:6px 10px; border-radius:4px; font-size:10px; text-decoration:none; font-weight:bold; text-align:center;">LACAK</a>
-                                </div>
-                            </div>
-                        </div>`;
-                    }
-
-                    historyHtml += `
-                    <div class="invoice-card">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px dashed var(--border); padding-bottom:10px;">
-                            <div>
-                                <b style="color:#3b82f6; font-size:13px;">${order.invoice_no}</b><br>
-                                <span style="font-size:10px; color:#888;">📅 ${order.date}</span>
-                            </div>
-                            <div><span class="status-badge status-${order.status}">${order.status}</span></div>
-                        </div>
-                        
-                        <div style="background:#0a0a0a; padding:10px; border-radius:8px; border:1px solid #222; margin-bottom:10px;">
-                            ${itemsHtml}
-                        </div>
-
-                        <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--text-dim); line-height:1.5;">
-                            <div>
-                                Dikirim ke: <b style="color:#ccc;">${order.customer.name}</b>
-                            </div>
-                            <div style="text-align:right;">
-                                Total Belanja:<br>
-                                <b style="color:#4ade80; font-size:15px;">Rp ${order.total.toLocaleString('id-ID')}</b>
-                            </div>
-                        </div>
-                        ${resiHtml}
-                    </div>`; 
-                });
-                list.innerHTML = historyHtml;
-            });
-        }
-    </script>
+  <script src="snow.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
