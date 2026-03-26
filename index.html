@@ -2,85 +2,34 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISTEM KORUP DETECTED</title>
+    <title>SYSTEM_CRITICAL_FAILURE</title>
     <style>
-        body {
-            background-color: #0a0a0a;
-            color: #ff3300;
-            font-family: 'Courier New', Courier, monospace;
-            padding: 50px;
-            line-height: 1.5;
-        }
-        .header {
-            font-size: 3em;
-            font-weight: bold;
-            text-align: center;
-            border: 5px solid #ff3300;
-            padding: 20px;
-            margin-bottom: 50px;
-            animation: flash 0.5s infinite;
-        }
-        @keyframes flash {
-            0% { opacity: 1; } 50% { opacity: 0.1; } 100% { opacity: 1; }
-        }
-        .critique-box {
-            background: #1a1a1a;
-            border-left: 10px solid #ff3300;
-            padding: 30px;
-            margin-bottom: 30px;
-            color: #fff;
-        }
-        h2 { color: #ffcc00; text-transform: uppercase; margin-top: 0; }
-        .logic-error {
-            color: #00ff00;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .savage {
-            font-size: 1.2em;
-            color: #ff3300;
-            font-weight: bold;
-            border-top: 1px solid #333;
-            padding-top: 20px;
-        }
-        .warning {
-            text-align: center;
-            font-size: 0.8em;
-            color: #444;
-            margin-top: 50px;
-        }
+        body { background: #000; color: #ff0000; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .terminal { border: 1px solid #333; padding: 40px; box-shadow: 0 0 20px #ff000033; }
+        .cmd { color: #00ff00; margin-bottom: 10px; }
+        .data { color: #fff; margin-bottom: 20px; }
+        .blink { animation: b 1s infinite; }
+        @keyframes b { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
     </style>
 </head>
 <body>
-
-    <div class="header">! MANAGEMENT FAILURE !</div>
-
-    <div class="critique-box">
-        <h2>LOG ANALISA KINERJA:</h2>
-        <div class="logic-error">> DEVELOPER: TARGET 100% | ON TIME | QUALITY OK -> REWARD: [ZONK/0]</div>
-        <div class="logic-error">> FAVORIT BOS: TARGET 0% | AFK | KERJA GAK JELAS -> REWARD: [THR FULL]</div>
+    <div class="terminal">
+        <div class="cmd">> executing_check_integrity...</div>
+        <div class="data">[!] RESULT: MANAGEMENT_CORRUPTION_DETECTED</div>
         
-        <p><strong>KRITIK KERAS:</strong></p>
-        <p>Sistem ini offline karena pemiliknya menderita <span style="color: #ff3300;">"Kebutaan Profesional"</span>. Anda lebih menghargai kedekatan personal daripada prestasi nyata. Bisnis tidak akan maju kalau bahan bakarnya adalah 'pilih kasih' dan 'penjilat'.</p>
-        
-        <p class="savage">
-            "KERJA TARGET SELALU ON TIME TAPI GAK DAPET THR? <br>
-            SEDANGKAN YANG GAK KERJA NGAPA-NGAPAIN MALAH CAIR? <br>
-            MUNGKIN STANDAR ANDA BUKAN PROFESIONALISME, TAPI SESUATU YANG LAIN."
-        </p>
-    </div>
+        <div class="cmd">> analyzing_distribution...</div>
+        <div class="data">
+            - DEV (TARGET 100%): <span style="color:red">THR_NOT_FOUND</span><br>
+            - FAVORIT (TARGET 0%): <span style="color:green">THR_INJECTED</span>
+        </div>
 
-    <div class="critique-box" style="border-left-color: #00ff00;">
-        <h2>PESAN UNTUK OWNER:</h2>
-        <p>Website ini saya buat susah payah dengan skill yang tidak Anda hargai. Karena bagi Anda prestasi itu 'nggak ada gunanya', maka silakan jalankan bisnis Anda tanpa aset digital ini.</p>
-        <p><strong>Silakan urus website Anda ke orang-orang yang Anda kasih THR itu, kalau mereka memang bisa kerja.</strong></p>
-    </div>
+        <div class="cmd">> system_status:</div>
+        <div class="data" style="font-size: 1.2em; border-top: 1px solid #333; pt-10">
+            "Sistem ini saya bangun dengan keringat, bukan dengan menjilat.<br>
+            Karena prestasi tidak dihargai, maka akses resmi saya cabut."
+        </div>
 
-    <div class="warning">
-        SYSTEM LOCKED BY OWNER OF THE CODE. <br>
-        BAYAR KERINGAT ORANG SEBELUM MINTA HASIL.
+        <div class="cmd">> connection_closed. <span class="blink">_</span></div>
     </div>
-
 </body>
 </html>
