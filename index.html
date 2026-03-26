@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SYSTEM_OFFLINE::INTEGRITY_COMPROMISED</title>
+    <title>SYSTEM_HALTED::THR_REQUIRED</title>
     <style>
         /* Import Font Hacker */
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
@@ -13,14 +13,9 @@
             --main-red: #ff0000;
             --main-green: #00ff00;
             --terminal-white: #e0e0e0;
-            --glitch-opacity: 0.15;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg-color);
@@ -31,127 +26,140 @@
             justify-content: center;
             align-items: center;
             padding: 15px;
-            overflow: hidden; /* Biar kerasa kaku */
+            overflow: hidden; /* Lock screen */
+            position: relative;
         }
 
-        /* Tampilan Utama Terminal */
+        /* --- BACKGROUND MEME (ASCII ART) --- */
+        .ascii-bg {
+            position: absolute;
+            color: rgba(255, 0, 0, 0.1); /* Merah sangat transparan */
+            font-size: 0.6rem; /* Kecil banget buat desktop */
+            line-height: 1;
+            white-space: pre;
+            z-index: 1;
+            pointer-events: none;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- Tampilan Utama Terminal --- */
         .terminal-window {
             width: 100%;
-            max-width: 650px; /* Desktop limit */
+            max-width: 600px;
             border: 1px solid #222;
-            background: rgba(5, 5, 5, 0.9);
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.15);
+            background: rgba(5, 5, 5, 0.95); /* Sedikit transparan buat liat BG */
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.2);
             position: relative;
+            z-index: 10; /* Di atas background */
         }
 
-        /* Header Terminal */
         .terminal-header {
-            background: #111;
-            padding: 8px 15px;
-            border-bottom: 1px solid #222;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8em;
-            color: #555;
+            background: #111; padding: 8px 15px; border-bottom: 1px solid #222;
+            display: flex; justify-content: space-between; font-size: 0.8em; color: #555;
         }
-
         .dots { display: flex; gap: 6px; }
         .dot { width: 10px; height: 10px; border-radius: 50%; background: #333; }
-        .dot.red { background: #5f1111; } /* Indikator error */
+        .dot.red { background: #5f1111; }
 
-        /* Konten Terminal */
-        .terminal-content {
-            padding: 25px;
-            font-size: 0.95em;
-            line-height: 1.6;
-            position: relative;
-        }
+        .terminal-content { padding: 25px; font-size: 0.95em; line-height: 1.6; }
 
-        /* Efek Scanline/Monitor Jadul */
+        /* Efek Monitor Jadul */
         .terminal-content::after {
-            content: " ";
-            position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
+            content: " "; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 10;
+            background-size: 100% 4px; pointer-events: none; z-index: 11;
         }
 
-        /* Styling Teks Kode */
         .cmd { color: var(--main-green); font-weight: bold; }
-        .data { color: var(--terminal-white); margin-bottom: 15px; display: block; }
+        .data { color: var(--terminal-white); margin-bottom: 12px; display: block; }
         .error-inline { color: var(--main-red); font-weight: bold; }
         .success-inline { color: var(--main-green); }
 
         /* Kritik Inti */
         .savage-critique {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px dashed #333;
-            color: #fff;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            margin-top: 18px; padding-top: 15px; border-top: 1px dashed #333;
+            color: #fff; text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); font-size: 1.1em;
         }
 
-        /* Efek Berkedip */
         .blink { animation: blink-anim 1s infinite; }
         @keyframes blink-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* Efek Flicker Global */
         .flicker { animation: flicker-anim 3s infinite; }
         @keyframes flicker-anim {
-            0% { opacity: 0.97; }
-            5% { opacity: 0.92; }
-            10% { opacity: 0.98; }
-            30% { opacity: 0.95; }
-            50% { opacity: 0.98; }
-            80% { opacity: 0.94; }
+            0% { opacity: 0.97; } 5% { opacity: 0.92; } 10% { opacity: 0.98; }
+            30% { opacity: 0.95; } 50% { opacity: 0.98; } 80% { opacity: 0.94; }
             95% { opacity: 0.99; }
         }
 
-        /* Responsif Media Queries (Mobile) */
+        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 480px) {
-            .terminal-content {
-                padding: 15px;
-                font-size: 0.85em; /* Teks lebih kecil di HP */
-            }
-            .cmd { display: block; margin-bottom: 2px; } /* Command di baris sendiri */
-            .savage-critique { font-size: 1.1em; }
+            .ascii-bg { font-size: 0.35rem; } /* ASCII lebih kecil di HP */
+            .terminal-content { padding: 15px; font-size: 0.85em; }
+            .savage-critique { font-size: 1em; }
+            .cmd { display: block; margin-bottom: 2px; }
         }
     </style>
 </head>
 <body>
 
+    <div class="ascii-bg">
+<pre>
+       _..._
+     .'     '.
+    /  _   _  \
+    | (o) (o) |    <-- GUA NANYA THR
+    |   ___   |
+    \  \___/  /
+     '._____.'
+       | |
+      _| |_
+     /     \
+    |       |
+    |       |
+    |_______|
+       | |
+       | |
+       |_|
+       (_)
+
+      [BOS LU] -->  \o/
+                     |
+                    / \
+                (LARI DARI TANGGUNG JAWAB)
+</pre>
+    </div>
+
     <div class="terminal-window flicker">
         <div class="terminal-header">
-            <div class="dots">
-                <div class="dot red"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-            <div class="title">SYS_AUDIT.sh</div>
+            <div class="dots"><div class="dot red"></div><div class="dot"></div><div class="dot"></div></div>
+            <div class="title">FATAL_AUDIT.sh</div>
         </div>
         
         <div class="terminal-content">
-            <span class="cmd"># analyzing_integrity...</span>
-            <span class="data">>> <span class="error-inline">[CRITICAL_FAILURE]</span>: Management logic is corrupt.</span>
+            <span class="cmd"># system_check...</span>
+            <span class="data">>> <span class="error-inline">[CRITICAL_FAILURE]</span>: No Integrity Found.</span>
 
-            <span class="cmd"># checking_resource_flow...</span>
+            <span class="cmd"># resource_flow_analysis...</span>
             <span class="data">
                 >> DEV (Target 100%): <span class="error-inline">THR_DENIED[0]</span><br>
                 >> FAVE (Target 0%):  <span class="success-inline">THR_PAID[FULL]</span>
             </span>
 
             <div class="savage-critique">
-                Sistem ini saya bangun dengan kompetensi, <br>
-                bukan dengan menjilat emosi.<br>
-                Karena prestasi Anda anggap 'zonk',<br>
-                Akses resmi saya buat <span class="error-inline">OFFLINE</span>.
+                Sistem ini online karena <span class="success-inline">KOMPETENSI</span>,<br>
+                bukan karena menjilat emosi.<br>
+                Karena prestasi saya Anda anggap zonk,<br>
+                Maka akses resmi saya buat <span class="error-inline">OFFLINE</span>.
             </div>
 
             <br>
-            <span class="cmd"># status: LOCKED.</span>
-            <span class="cmd"># await_restitution...<span class="blink">_</span></span>
+            <span class="cmd"># status: LOCKED BY DEVELOPER.</span>
+            <span class="cmd"># awaiting_restitution...<span class="blink">_</span></span>
         </div>
     </div>
 
