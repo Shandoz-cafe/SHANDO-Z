@@ -3,92 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERMINATED BY DEVELOPER</title>
+    <title>SISTEM KORUP DETECTED</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-        
         body {
-            background-color: #050505;
-            color: #ff0033;
-            font-family: 'Share Tech Mono', monospace;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            text-shadow: 0 0 10px #ff0033;
-        }
-
-        .glitch {
-            font-size: 3.5em;
-            font-weight: bold;
-            text-transform: uppercase;
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .matrix-box {
-            border: 2px solid #ff0033;
-            background: rgba(255, 0, 0, 0.05);
-            padding: 30px;
-            max-width: 800px;
-            width: 90%;
-            box-shadow: inset 0 0 20px rgba(255, 0, 51, 0.2), 0 0 30px rgba(255, 0, 51, 0.1);
-        }
-
-        .status-line {
-            font-size: 1.2em;
-            margin: 10px 0;
-            color: #fff;
-        }
-
-        .failed { color: #ff0033; font-weight: bold; animation: blink 0.8s infinite; }
-        .success { color: #00ff41; text-shadow: 0 0 10px #00ff41; }
-
-        .savage-text {
-            border-left: 4px solid #ff0033;
-            padding-left: 15px;
-            margin: 25px 0;
-            color: #ddd;
-            font-style: italic;
+            background-color: #0a0a0a;
+            color: #ff3300;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 50px;
             line-height: 1.5;
         }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+        .header {
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
+            border: 5px solid #ff3300;
+            padding: 20px;
+            margin-bottom: 50px;
+            animation: flash 0.5s infinite;
         }
-
-        .footer {
-            margin-top: 40px;
-            font-size: 0.9em;
+        @keyframes flash {
+            0% { opacity: 1; } 50% { opacity: 0.1; } 100% { opacity: 1; }
+        }
+        .critique-box {
+            background: #1a1a1a;
+            border-left: 10px solid #ff3300;
+            padding: 30px;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+        h2 { color: #ffcc00; text-transform: uppercase; margin-top: 0; }
+        .logic-error {
+            color: #00ff00;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .savage {
+            font-size: 1.2em;
+            color: #ff3300;
+            font-weight: bold;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+        .warning {
+            text-align: center;
+            font-size: 0.8em;
             color: #444;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
 
-    <div class="glitch">> ACCESS DENIED <</div>
+    <div class="header">! MANAGEMENT FAILURE !</div>
 
-    <div class="matrix-box">
-        <div class="status-line">[#] Target: SHANDO'Z CAFE SYSTEM</div>
-        <div class="status-line">[#] Developer Performance: <span class="success">100% ON TARGET</span></div>
-        <div class="status-line">[#] Management Integrity: <span class="failed">NOT FOUND (404)</span></div>
-        <div class="status-line">[#] Resource Distribution: <span class="failed">CRITICAL ERROR (THR=0)</span></div>
+    <div class="critique-box">
+        <h2>LOG ANALISA KINERJA:</h2>
+        <div class="logic-error">> DEVELOPER: TARGET 100% | ON TIME | QUALITY OK -> REWARD: [ZONK/0]</div>
+        <div class="logic-error">> FAVORIT BOS: TARGET 0% | AFK | KERJA GAK JELAS -> REWARD: [THR FULL]</div>
         
-        <div class="savage-text">
-            "Sistem ini mati karena pemiliknya lupa cara menghargai keringat orang. <br>
-            Kerja capek-capek buat banggain bisnis Anda, tapi hak malah dialirkan ke yang 'nggak kerja'. <br>
-            Jangan harap ada prestasi di dunia digital kalau di dunia nyata Anda gagal jadi manusia adil."
-        </div>
-
-        <div class="status-line" style="color: #ffcc00;">[!] WARNING: WEBSITE INI ADALAH MILIK DEVELOPER. SEMUA AKSES DICABUT SAMPAI KEWAJIBAN DIBAYAR LUNAS.</div>
+        <p><strong>KRITIK KERAS:</strong></p>
+        <p>Sistem ini offline karena pemiliknya menderita <span style="color: #ff3300;">"Kebutaan Profesional"</span>. Anda lebih menghargai kedekatan personal daripada prestasi nyata. Bisnis tidak akan maju kalau bahan bakarnya adalah 'pilih kasih' dan 'penjilat'.</p>
+        
+        <p class="savage">
+            "KERJA TARGET SELALU ON TIME TAPI GAK DAPET THR? <br>
+            SEDANGKAN YANG GAK KERJA NGAPA-NGAPAIN MALAH CAIR? <br>
+            MUNGKIN STANDAR ANDA BUKAN PROFESIONALISME, TAPI SESUATU YANG LAIN."
+        </p>
     </div>
 
-    <div class="footer">
-        Connection lost. Retry when you have a conscience.
+    <div class="critique-box" style="border-left-color: #00ff00;">
+        <h2>PESAN UNTUK OWNER:</h2>
+        <p>Website ini saya buat susah payah dengan skill yang tidak Anda hargai. Karena bagi Anda prestasi itu 'nggak ada gunanya', maka silakan jalankan bisnis Anda tanpa aset digital ini.</p>
+        <p><strong>Silakan urus website Anda ke orang-orang yang Anda kasih THR itu, kalau mereka memang bisa kerja.</strong></p>
+    </div>
+
+    <div class="warning">
+        SYSTEM LOCKED BY OWNER OF THE CODE. <br>
+        BAYAR KERINGAT ORANG SEBELUM MINTA HASIL.
     </div>
 
 </body>
