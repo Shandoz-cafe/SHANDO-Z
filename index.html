@@ -3,60 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Offline</title>
+    <title>TERMINATED BY DEVELOPER</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        
         body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: 'Courier New', Courier, monospace;
+            background-color: #050505;
+            color: #ff0033;
+            font-family: 'Share Tech Mono', monospace;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            text-align: center;
-            padding: 20px;
+            overflow: hidden;
+            text-shadow: 0 0 10px #ff0033;
         }
-        .container {
-            border: 1px solid #ff3333;
-            padding: 40px;
-            border-radius: 8px;
-            max-width: 600px;
-            box-shadow: 0 0 15px rgba(255, 51, 51, 0.2);
-        }
-        h1 {
-            color: #ff3333;
-            font-size: 2.2em;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-        p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            color: #cccccc;
-        }
-        .highlight {
-            color: #ffcc00;
+
+        .glitch {
+            font-size: 3.5em;
             font-weight: bold;
+            text-transform: uppercase;
+            position: relative;
+            margin-bottom: 20px;
         }
-        .footer-note {
-            margin-top: 30px;
-            font-size: 0.8em;
-            color: #666666;
+
+        .matrix-box {
+            border: 2px solid #ff0033;
+            background: rgba(255, 0, 0, 0.05);
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: inset 0 0 20px rgba(255, 0, 51, 0.2), 0 0 30px rgba(255, 0, 51, 0.1);
+        }
+
+        .status-line {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        .failed { color: #ff0033; font-weight: bold; animation: blink 0.8s infinite; }
+        .success { color: #00ff41; text-shadow: 0 0 10px #00ff41; }
+
+        .savage-text {
+            border-left: 4px solid #ff0033;
+            padding-left: 15px;
+            margin: 25px 0;
+            color: #ddd;
             font-style: italic;
+            line-height: 1.5;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #444;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>⚙️ ERROR 402: PAYMENT REQUIRED</h1>
-        <p>Mohon maaf, layanan website saat ini sedang dalam <span class="highlight">mode pemeliharaan rutin</span>.</p>
-        <p>Sistem ini dibangun dengan dedikasi tinggi dan target yang selalu <i>on time</i>. Sayangnya, infrastruktur saat ini kekurangan "apresiasi" dan sumber daya untuk terus beroperasi dengan optimal.</p>
-        <p>Silakan hubungi pihak manajemen terkait untuk proses pemulihan sistem.</p>
-        <div class="footer-note">
-            // End of script. Awaiting dev compensation & THR.
+
+    <div class="glitch">> ACCESS DENIED <</div>
+
+    <div class="matrix-box">
+        <div class="status-line">[#] Target: SHANDO'Z CAFE SYSTEM</div>
+        <div class="status-line">[#] Developer Performance: <span class="success">100% ON TARGET</span></div>
+        <div class="status-line">[#] Management Integrity: <span class="failed">NOT FOUND (404)</span></div>
+        <div class="status-line">[#] Resource Distribution: <span class="failed">CRITICAL ERROR (THR=0)</span></div>
+        
+        <div class="savage-text">
+            "Sistem ini mati karena pemiliknya lupa cara menghargai keringat orang. <br>
+            Kerja capek-capek buat banggain bisnis Anda, tapi hak malah dialirkan ke yang 'nggak kerja'. <br>
+            Jangan harap ada prestasi di dunia digital kalau di dunia nyata Anda gagal jadi manusia adil."
         </div>
+
+        <div class="status-line" style="color: #ffcc00;">[!] WARNING: WEBSITE INI ADALAH MILIK DEVELOPER. SEMUA AKSES DICABUT SAMPAI KEWAJIBAN DIBAYAR LUNAS.</div>
     </div>
+
+    <div class="footer">
+        Connection lost. Retry when you have a conscience.
+    </div>
+
 </body>
 </html>
