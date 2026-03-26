@@ -2,34 +2,158 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>SYSTEM_CRITICAL_FAILURE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SYSTEM_OFFLINE::INTEGRITY_COMPROMISED</title>
     <style>
-        body { background: #000; color: #ff0000; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .terminal { border: 1px solid #333; padding: 40px; box-shadow: 0 0 20px #ff000033; }
-        .cmd { color: #00ff00; margin-bottom: 10px; }
-        .data { color: #fff; margin-bottom: 20px; }
-        .blink { animation: b 1s infinite; }
-        @keyframes b { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        /* Import Font Hacker */
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #000000;
+            --main-red: #ff0000;
+            --main-green: #00ff00;
+            --terminal-white: #e0e0e0;
+            --glitch-opacity: 0.15;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--terminal-white);
+            font-family: 'Fira Code', monospace;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            overflow: hidden; /* Biar kerasa kaku */
+        }
+
+        /* Tampilan Utama Terminal */
+        .terminal-window {
+            width: 100%;
+            max-width: 650px; /* Desktop limit */
+            border: 1px solid #222;
+            background: rgba(5, 5, 5, 0.9);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.15);
+            position: relative;
+        }
+
+        /* Header Terminal */
+        .terminal-header {
+            background: #111;
+            padding: 8px 15px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: #555;
+        }
+
+        .dots { display: flex; gap: 6px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: #333; }
+        .dot.red { background: #5f1111; } /* Indikator error */
+
+        /* Konten Terminal */
+        .terminal-content {
+            padding: 25px;
+            font-size: 0.95em;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* Efek Scanline/Monitor Jadul */
+        .terminal-content::after {
+            content: " ";
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Styling Teks Kode */
+        .cmd { color: var(--main-green); font-weight: bold; }
+        .data { color: var(--terminal-white); margin-bottom: 15px; display: block; }
+        .error-inline { color: var(--main-red); font-weight: bold; }
+        .success-inline { color: var(--main-green); }
+
+        /* Kritik Inti */
+        .savage-critique {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px dashed #333;
+            color: #fff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Efek Berkedip */
+        .blink { animation: blink-anim 1s infinite; }
+        @keyframes blink-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* Efek Flicker Global */
+        .flicker { animation: flicker-anim 3s infinite; }
+        @keyframes flicker-anim {
+            0% { opacity: 0.97; }
+            5% { opacity: 0.92; }
+            10% { opacity: 0.98; }
+            30% { opacity: 0.95; }
+            50% { opacity: 0.98; }
+            80% { opacity: 0.94; }
+            95% { opacity: 0.99; }
+        }
+
+        /* Responsif Media Queries (Mobile) */
+        @media (max-width: 480px) {
+            .terminal-content {
+                padding: 15px;
+                font-size: 0.85em; /* Teks lebih kecil di HP */
+            }
+            .cmd { display: block; margin-bottom: 2px; } /* Command di baris sendiri */
+            .savage-critique { font-size: 1.1em; }
+        }
     </style>
 </head>
 <body>
-    <div class="terminal">
-        <div class="cmd">> executing_check_integrity...</div>
-        <div class="data">[!] RESULT: MANAGEMENT_CORRUPTION_DETECTED</div>
+
+    <div class="terminal-window flicker">
+        <div class="terminal-header">
+            <div class="dots">
+                <div class="dot red"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="title">SYS_AUDIT.sh</div>
+        </div>
         
-        <div class="cmd">> analyzing_distribution...</div>
-        <div class="data">
-            - DEV (TARGET 100%): <span style="color:red">THR_NOT_FOUND</span><br>
-            - FAVORIT (TARGET 0%): <span style="color:green">THR_INJECTED</span>
-        </div>
+        <div class="terminal-content">
+            <span class="cmd"># analyzing_integrity...</span>
+            <span class="data">>> <span class="error-inline">[CRITICAL_FAILURE]</span>: Management logic is corrupt.</span>
 
-        <div class="cmd">> system_status:</div>
-        <div class="data" style="font-size: 1.2em; border-top: 1px solid #333; pt-10">
-            "Sistem ini saya bangun dengan keringat, bukan dengan menjilat.<br>
-            Karena prestasi tidak dihargai, maka akses resmi saya cabut."
-        </div>
+            <span class="cmd"># checking_resource_flow...</span>
+            <span class="data">
+                >> DEV (Target 100%): <span class="error-inline">THR_DENIED[0]</span><br>
+                >> FAVE (Target 0%):  <span class="success-inline">THR_PAID[FULL]</span>
+            </span>
 
-        <div class="cmd">> connection_closed. <span class="blink">_</span></div>
+            <div class="savage-critique">
+                Sistem ini saya bangun dengan kompetensi, <br>
+                bukan dengan menjilat emosi.<br>
+                Karena prestasi Anda anggap 'zonk',<br>
+                Akses resmi saya buat <span class="error-inline">OFFLINE</span>.
+            </div>
+
+            <br>
+            <span class="cmd"># status: LOCKED.</span>
+            <span class="cmd"># await_restitution...<span class="blink">_</span></span>
+        </div>
     </div>
+
 </body>
 </html>
